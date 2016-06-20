@@ -1,0 +1,35 @@
+# =============== #
+# Unity generated #
+# =============== #
+release_v1.1.x/Temp/
+release_v1.1.x/Obj/
+release_v1.1.x/UnityGenerated/
+release_v1.1.x/Library/
+release_v1.1.x/Settings/
+release_v1.1.x/Assets/AssetStoreTools*
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+release_v1.1.x/ExportedObj/
+release_v1.1.x/*.svd
+release_v1.1.x/*.userprefs
+release_v1.1.x/*.csproj
+release_v1.1.x/*.pidb
+release_v1.1.x/*.suo
+release_v1.1.x/*.sln
+release_v1.1.x/*.user
+release_v1.1.x/*.unityproj
+release_v1.1.x/*.booproj
+
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
