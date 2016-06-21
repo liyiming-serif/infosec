@@ -5,7 +5,13 @@ using System.Collections;
 
 public class NumberPanel : MonoBehaviour, IUpdateNumbers {
 
-	private Text numberLabel;
+	public enum Status
+	{
+		NotExecuting, Executing, Error
+	};
+
+	private Text numberLabel = null;
+	private int atLabelNo = -1;
 
 	#region IUpdateNumbers implementation
 	void IUpdateNumbers.UpdateNumbers (bool increaseByOne)
@@ -26,9 +32,24 @@ public class NumberPanel : MonoBehaviour, IUpdateNumbers {
 	}
 	#endregion
 
-	// Use this for initialization
-	void Start () {
-		numberLabel = null;
+	public void SetRunningState(int runningCMDNo, Status status){
+		if (atLabelNo > -1) {
+			transform.GetChild(atLabelNo).GetComponent<Text>().color = Color.white;
+		}
+		if (runningCMDNo > -1) {
+			if (status == Status.Executing) {
+				transform.GetChild(runningCMDNo).GetComponent<Text> ().color = Color.green;
+			} else if (status == Status.Error) {
+				transform.GetChild(runningCMDNo).GetComponent<Text> ().color = Color.red;
+			}
+		}
+		atLabelNo = runningCMDNo;
+	}
+
+	public void ResetRunningState(){
+		if (atLabelNo > -1) {
+			SetRunningState (-1, Status.NotExecuting);
+		}
 	}
 }
 

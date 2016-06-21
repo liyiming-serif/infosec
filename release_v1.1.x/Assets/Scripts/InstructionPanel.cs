@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class PlayerInstructionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IHasFinalised {
+public class InstructionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IHasFinalised {
 
 	public static bool acceptingNewCommand;
 	public static bool outsidePanel;
@@ -80,14 +80,12 @@ public class PlayerInstructionPanel : MonoBehaviour, IPointerEnterHandler, IPoin
 	}
 	#endregion
 
-	void Start () {
-		acceptingNewCommand = false;
+	public int GetLength() {
+		return GetComponentsInChildren<TopCommandSlot> ().Length;
+	}
 
-		emptySlot = null;
-		spacing = -50;
-		offset = (int)transform.position.y; // !!! Set Pivot Anchor (x,y) = (0,1)
-		maxCommands = 6;
-
+	public TopCommand GetTopCommandAt (int index){
+		return transform.GetChild (index).GetComponent<TopCommandSlot> ().c;
 	}
 
 	void AdjustEmptySpace(TopCommandSlot moveSlot, TopCommand movingCommand){
@@ -101,6 +99,17 @@ public class PlayerInstructionPanel : MonoBehaviour, IPointerEnterHandler, IPoin
 			moveSlot.transform.SetSiblingIndex (emptySpaceIndex);
 		}
 	}
+
+	void Start () {
+		acceptingNewCommand = false;
+
+		emptySlot = null;
+		spacing = -50;
+		offset = (int)transform.position.y; // !!! Set Pivot Anchor (x,y) = (0,1)
+		maxCommands = 6;
+
+	}
+
 
 	// Update is called once per frame
 	void Update () {

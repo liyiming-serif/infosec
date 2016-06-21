@@ -9,7 +9,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
 	private Canvas codingCanvas;
 	private NumberPanel numberPanel;
-	private PlayerInstructionPanel playerInstructionPanel;
+	private InstructionPanel playerInstructionPanel;
 
 	#region IBeginDragHandler implementation
 	void IBeginDragHandler.OnBeginDrag (PointerEventData eventData)
@@ -32,7 +32,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
 	void IEndDragHandler.OnEndDrag (PointerEventData eventData)
 	{
-		if (PlayerInstructionPanel.outsidePanel) {
+		if (InstructionPanel.outsidePanel) {
 			ExecuteEvents.Execute<IUpdateNumbers> (numberPanel.gameObject, null, (x,y) => x.UpdateNumbers(false));
 		} else {
 			commandBeingDragged.GetComponent<CanvasGroup> ().blocksRaycasts = true;
@@ -43,7 +43,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	#endregion
 
 	void Start(){
-		playerInstructionPanel = GameObject.Find ("PlayerInstructionPanel").GetComponent<PlayerInstructionPanel> ();
+		playerInstructionPanel = GameObject.Find ("InstructionPanel").GetComponent<InstructionPanel> ();
 		numberPanel = GameObject.Find ("NumberPanel").GetComponent<NumberPanel> ();
 		codingCanvas = GameObject.Find("CodingCanvas").GetComponent<Canvas>();
 	}

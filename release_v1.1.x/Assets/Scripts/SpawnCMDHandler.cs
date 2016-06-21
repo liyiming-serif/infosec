@@ -8,7 +8,7 @@ public class SpawnCMDHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 	public static TopCommand commandBeingSpawned;
 
 	[SerializeField] Canvas codingCanvas;
-	[SerializeField] PlayerInstructionPanel targetPanel;
+	[SerializeField] InstructionPanel targetPanel;
 
 	#region IBeginDragHandler implementation
 	void IBeginDragHandler.OnBeginDrag (PointerEventData eventData)
@@ -32,7 +32,7 @@ public class SpawnCMDHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
 	void IEndDragHandler.OnEndDrag (PointerEventData eventData)
 	{
-		if (PlayerInstructionPanel.acceptingNewCommand) {
+		if (InstructionPanel.acceptingNewCommand) {
 			commandBeingSpawned.GetComponent<CanvasGroup> ().blocksRaycasts = true;
 			InstantiateSubCommand ();
 			ExecuteEvents.Execute<IHasFinalised> (targetPanel.gameObject, null, (x, y) => x.HasFinalised());

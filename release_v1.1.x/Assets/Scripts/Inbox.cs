@@ -40,7 +40,7 @@ public class Inbox : MonoBehaviour{
 		EmptyAllData ();
 		if (initialData != null) {
 			for (int i = 0; i < initialData.Length; i++) {
-				initialData[i].transform.SetParent(slotsTransform.GetChild(initialData.Length - 1 - i));
+				initialData[i].transform.SetParent(slotsTransform.GetChild(i));
 			}
 		}
 	}
@@ -56,10 +56,10 @@ public class Inbox : MonoBehaviour{
 		if (GetCount () <= index) {
 			return null;
 		}
-		Data item = slotsTransform.GetChild (GetMaxCapacity () - 1 - index).GetComponent<DataSlot> ().data;
+		Data item = slotsTransform.GetChild (index).GetComponent<DataSlot> ().data;
 		for (int i = index+1; i < GetCount (); i++) {
-			Data moveBox = slotsTransform.GetChild (GetMaxCapacity() - 1 - i).GetComponent<DataSlot>().data;
-			moveBox.transform.SetParent (slotsTransform.GetChild (GetMaxCapacity() - i));
+			Data moveBox = slotsTransform.GetChild (i).GetComponent<DataSlot>().data;
+			moveBox.transform.SetParent (slotsTransform.GetChild (i - 1));
 		}
 		return item;
 	}

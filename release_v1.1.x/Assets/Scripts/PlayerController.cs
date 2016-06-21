@@ -7,15 +7,13 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] Animator animator;
 	[SerializeField] Transform slotTrans;
 
-	public float speed;
-	public int counter;
+	public float speed = 100.0f;
+	public int counter = 0;
 	public Vector2 initPosition;
 	public Vector2 endPosition;
 
 	void Start()
 	{
-		this.speed = 100f;
-		this.counter = 0;
 		animator.enabled = false;
 		initPosition = animator.transform.position;
 		endPosition = initPosition;
@@ -26,10 +24,7 @@ public class PlayerController : MonoBehaviour
 		animator.enabled = false;
 		animator.transform.position = initPosition;
 		endPosition = initPosition;
-		Data holdingData = slotTrans.GetComponent<DataSlot> ().data;
-		if (holdingData) {
-			Destroy (holdingData.gameObject);
-		}
+		slotTrans.GetComponent<DataSlot> ().RemoveData ();
 	}
 
 	public void SetInitPosition(Vector2 newPosition)
