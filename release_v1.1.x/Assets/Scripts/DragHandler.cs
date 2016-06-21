@@ -8,7 +8,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 	public static TopCommand commandBeingDragged;
 
 	private Canvas codingCanvas;
-	private NumberPanel numberPanel;
+	private EnumPanel numberPanel;
 	private InstructionPanel playerInstructionPanel;
 
 	#region IBeginDragHandler implementation
@@ -44,7 +44,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
 	void Start(){
 		playerInstructionPanel = GameObject.Find ("InstructionPanel").GetComponent<InstructionPanel> ();
-		numberPanel = GameObject.Find ("NumberPanel").GetComponent<NumberPanel> ();
+		numberPanel = GameObject.Find ("EnumPanel").GetComponent<EnumPanel> ();
 		codingCanvas = GameObject.Find("CodingCanvas").GetComponent<Canvas>();
 	}
 }

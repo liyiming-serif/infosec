@@ -13,7 +13,7 @@ public class ChallengeOne : MonoBehaviour {
 	[SerializeField] GameObject playerFeedback;
 
 	[SerializeField] InstructionPanel instructionPan;
-	[SerializeField] NumberPanel numberPan;
+	[SerializeField] EnumPanel enumPan;
 	[SerializeField] Button runButton;
 
 	[SerializeField] Inbox playerInbox;
@@ -88,12 +88,12 @@ public class ChallengeOne : MonoBehaviour {
 		playerState = RunningState.NotReady;
 
 		if (playerCMDNo == instructionPan.GetLength ()) {
-			numberPan.ResetRunningState ();
+			enumPan.ResetRunningState ();
 			playerCMDNo = 0;
 			playerState = RunningState.Inactive;
 			return;
 		}
-		numberPan.SetRunningState (playerCMDNo, NumberPanel.Status.Executing);
+		enumPan.SetRunningState (playerCMDNo, EnumPanel.Status.Executing);
 
 		playerOldCounter = player.counter;
 		TopCommand topCommandToRun = instructionPan.GetTopCommandAt (playerCMDNo);
@@ -109,7 +109,7 @@ public class ChallengeOne : MonoBehaviour {
 		playerCMDNo = 0;
 		playerOldCounter = player.counter;
 
-		numberPan.ResetRunningState ();
+		enumPan.ResetRunningState ();
 		player.ResetAnimator ();
 		playerInbox.ResetInbox (InitialInboxGenerator());
 		playerOutbox.EmptyAllData();

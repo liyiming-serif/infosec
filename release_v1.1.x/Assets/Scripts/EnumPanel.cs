@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class NumberPanel : MonoBehaviour, IUpdateNumbers {
+public class EnumPanel : MonoBehaviour, IUpdateNumbers {
 
 	public enum Status
 	{

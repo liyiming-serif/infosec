@@ -7,7 +7,7 @@ public class InstructionPanel : MonoBehaviour, IPointerEnterHandler, IPointerExi
 	public static bool acceptingNewCommand;
 	public static bool outsidePanel;
 
-	[SerializeField] NumberPanel targetPanel;
+	[SerializeField] EnumPanel targetPanel;
 	[SerializeField] int spacing;
 	[SerializeField] int maxCommands;
 
