@@ -30,6 +30,11 @@ public class TopCommandSlot : MonoBehaviour {
 	}
 
 	public void ActivateEventTrigger (bool toActive){
-		c.GetComponent<CanvasGroup> ().blocksRaycasts = toActive;
+		if (c) {
+			c.GetComponent<CanvasGroup> ().blocksRaycasts = toActive;
+			if (c.subCommandRef) {
+				c.subCommandRef.GetComponent<CanvasGroup> ().blocksRaycasts = toActive;
+			}
+		}
 	}
 }
