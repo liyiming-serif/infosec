@@ -9,7 +9,7 @@ public class Outbox : MonoBehaviour{
 	
 	public Vector2 playerPos;
 
-	[SerializeField] Transform slotsTransform;
+	public Transform slotsTransform;
 
 	public void Initialise(Vector2 playerPos){
 		this.playerPos = playerPos;
@@ -47,13 +47,16 @@ public class Outbox : MonoBehaviour{
 			return;
 		}
 		if (GetCapacity () == 0) {
-			slotsTransform.GetChild (GetMaxCapacity () - 1).GetComponent<DataSlot> ().RemoveData ();
+			slotsTransform.GetChild (0).GetComponent<DataSlot> ().RemoveData ();
 		}
-		for (int i = GetCount () - 1; i >= 0; i--) {
+		for (int i = GetCapacity(); i < GetMaxCapacity(); i++) {
 			Data moveData = slotsTransform.GetChild (i).GetComponent<DataSlot> ().data;
-			moveData.transform.SetParent (slotsTransform.GetChild (i+1));
+			moveData.transform.SetParent (slotsTransform.GetChild (i - 1));
 		}
-		newData.transform.SetParent (slotsTransform.GetChild (0));
+		newData.transform.SetParent (slotsTransform.GetChild(GetMaxCapacity() - 1));
 	}
 
+	void Start (){
+		slotsTransform = GetComponentInChildren<RectTransform> ();
+	}
 }
