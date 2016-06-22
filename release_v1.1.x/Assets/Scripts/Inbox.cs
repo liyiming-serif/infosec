@@ -8,7 +8,7 @@ public class Inbox : MonoBehaviour{
 	
 	public Vector2 playerPos;
 
-	[SerializeField] Transform slotsTransform;
+	private Transform slotsTransform;
 
 	public void Initialise(Vector2 playerPos, Data[] initialData = null){
 		this.playerPos = playerPos;
@@ -67,6 +67,10 @@ public class Inbox : MonoBehaviour{
 
 	public Data sendFirstData(){
 		return sendData (0);
+	}
+
+	void Start (){
+		slotsTransform = GetComponentInChildren<RectTransform> ();
 	}
 
 }

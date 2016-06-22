@@ -49,6 +49,9 @@ public class SpawnCMDHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 		case TopCommand.Code.Outbox:
 			commandBeingSpawned.UpdateSubCommand (SubCommand.Code.Boss);
 			break;
+		case TopCommand.Code.Load:
+			commandBeingSpawned.UpdateSubCommand (SubCommand.Code.Zero);
+			break;
 		}
 	}
 
@@ -60,6 +63,9 @@ public class SpawnCMDHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 			break;
 		case TopCommand.Code.Outbox:
 			cloneCommand = Instantiate (Resources.Load ("OutboxPrefab", typeof(TopCommand))) as TopCommand;
+			break;
+		case TopCommand.Code.Load:
+			cloneCommand = Instantiate (Resources.Load ("LoadPrefab", typeof(TopCommand))) as TopCommand;
 			break;
 		}
 		return cloneCommand;

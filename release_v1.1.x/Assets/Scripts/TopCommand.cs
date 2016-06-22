@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 public class TopCommand : MonoBehaviour, IUpdateSubCMDChoice{
 	
-	public enum Code {NoAction, Inbox, Outbox};
+	public enum Code {NoAction, Inbox, Outbox, Load, Store, BossOwns};
 
 	public Code myCode;
 
@@ -36,6 +36,12 @@ public class TopCommand : MonoBehaviour, IUpdateSubCMDChoice{
 			break;
 		case SubCommand.Code.Distrust:
 			subCommandRef = (Instantiate (Resources.Load ("DistrustCMDPrefab", typeof(SubCommand))) as SubCommand);
+			break;
+		case SubCommand.Code.Zero:
+			subCommandRef = (Instantiate (Resources.Load ("ZeroCMDPrefab", typeof(SubCommand))) as SubCommand);
+			break;
+		case SubCommand.Code.One:
+			subCommandRef = (Instantiate (Resources.Load ("OneCMDPrefab", typeof(SubCommand))) as SubCommand);
 			break;
 		}
 		subCommandRef.transform.SetParent (transform);

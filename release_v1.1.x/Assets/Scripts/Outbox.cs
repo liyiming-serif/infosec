@@ -9,7 +9,7 @@ public class Outbox : MonoBehaviour{
 	
 	public Vector2 playerPos;
 
-	public Transform slotsTransform;
+	private Transform slotsTransform;
 
 	public void Initialise(Vector2 playerPos){
 		this.playerPos = playerPos;
