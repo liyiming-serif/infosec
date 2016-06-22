@@ -34,7 +34,9 @@ public class EnumPanel : MonoBehaviour, IUpdateNumbers {
 
 	public void SetRunningState(int runningCMDNo, Status status){
 		if (atLabelNo > -1) {
-			transform.GetChild(atLabelNo).GetComponent<Text>().color = Color.white;
+			if (atLabelNo < transform.childCount) {
+				transform.GetChild(atLabelNo).GetComponent<Text>().color = Color.white;			
+			}
 		}
 		if (runningCMDNo > -1) {
 			if (status == Status.Executing) {
@@ -47,9 +49,7 @@ public class EnumPanel : MonoBehaviour, IUpdateNumbers {
 	}
 
 	public void ResetRunningState(){
-		if (atLabelNo > -1) {
-			SetRunningState (-1, Status.NotExecuting);
-		}
+		SetRunningState (-1, Status.NotExecuting);
 	}
 }
 

@@ -20,7 +20,7 @@ public class CodingChallengeTemplate : MonoBehaviour {
 
 	/*Game State*/
 
-	protected bool isSucceeded;
+	protected int hasSolved;
 
 	protected RunningState playerState;
 	protected int playerCMDNo;
@@ -42,28 +42,44 @@ public class CodingChallengeTemplate : MonoBehaviour {
 
 	protected void FailFeedback(string message, GameObject feedback) {
 		PrepareFeedback (message, feedback, new Color32(235, 46, 44, 212));
+		if (playerCMDNo < instructionPan.GetLength ()) {
+			enumPan.SetRunningState (playerCMDNo, EnumPanel.Status.Error);
+		} else {
+			enumPan.SetRunningState (playerCMDNo - 1, EnumPanel.Status.Error);
+		}
+		playerCMDNo = -1;
+		playerState = RunningState.Inactive;
+		SetCodingModeActive (true);
 	}
 
 	protected void SucceedFeedback(string message, GameObject feedback) {
-		PrepareFeedback (message, feedback, new Color32(90, 174, 122, 212));		
+		PrepareFeedback (message, feedback, new Color32(90, 174, 122, 212));
+		enumPan.ResetRunningState ();
+		playerCMDNo = -1;
+		playerState = RunningState.Inactive;
+		SetCodingModeActive (true);
 	}
 
 	protected void SetCodingModeActive(bool setting){
 		foreach (TopCommandSlot s in GameObject.FindObjectsOfType<TopCommandSlot> ()) {
-			s.ActivateEventTrigger (false);
+			s.ActivateEventTrigger (setting);
 		}
 	}
 
+	virtual protected bool CheckPlayerReady(){
+		return false;
+	}
+
+	virtual protected bool FinishWithoutSucceed(){
+		return true;
+	}
+
+	//Run command without checking the bound
 	protected void RunPlayerCommand() {
-		if (playerState != RunningState.Ready) {
+		if (!CheckPlayerReady ()) {
 			return;
 		}
-		playerState = RunningState.NotReady;
-
-		if (playerCMDNo == instructionPan.GetLength ()) {
-			enumPan.ResetRunningState ();
-			playerCMDNo = 0;
-			playerState = RunningState.Inactive;
+		if (FinishWithoutSucceed ()) {
 			return;
 		}
 		enumPan.SetRunningState (playerCMDNo, EnumPanel.Status.Executing);
@@ -78,8 +94,9 @@ public class CodingChallengeTemplate : MonoBehaviour {
 	}
 
 	 virtual protected void Reset(){
+		hasSolved = 0;
 		playerState = RunningState.Inactive;
-		playerCMDNo = 0;
+		playerCMDNo = -1;
 		playerOldCounter = player.counter;
 
 		enumPan.ResetRunningState ();
@@ -91,7 +108,8 @@ public class CodingChallengeTemplate : MonoBehaviour {
 
 	virtual protected void StartRunning() {
 		Reset ();
-
+		playerCMDNo = 0;
+		SetCodingModeActive (false);
 		playerState = RunningState.Ready;
 		Invoke ("RunPlayerCommand", delaySec);
 	}

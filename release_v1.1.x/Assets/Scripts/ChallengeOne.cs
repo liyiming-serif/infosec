@@ -21,18 +21,32 @@ public class ChallengeOne : CodingChallengeTemplate {
 		return initialInboxData;
 	}
 
-	override protected void Reset ()
+	protected override bool CheckPlayerReady ()
 	{
-		base.Reset ();
+		if (playerState != RunningState.Ready) {
+			return false;
+		}
+		playerState = RunningState.NotReady;
+		return true;
 	}
 
-	override protected void StartRunning ()
+	protected override bool FinishWithoutSucceed ()
 	{
-		base.StartRunning ();
+		if (playerCMDNo == instructionPan.GetLength ()) {
+			switch (hasSolved) {
+			case 0:
+				FailFeedback ("You need to \"Take\" and \"Give\" for every letter. There are 2 sets to be completed.", playerFeedback);
+				break;
+			case 1:
+				FailFeedback ("You are half-way the goal. Maybe redo \"Take\" and \"Give\" again?", playerFeedback);
+				break;
+			}
+			return true;
+		}
+		return false;
 	}
 
 	void Start () {
-		isSucceeded = false;
 		playerInbox.Initialise (new Vector2(-344f, 251f), InitialInboxGenerator());
 		playerOutbox.Initialise (new Vector2(-83f, -171f));
 		runButton.onClick.AddListener (() => StartRunning());
@@ -40,24 +54,46 @@ public class ChallengeOne : CodingChallengeTemplate {
 	}
 
 	void Update () {
+		Data d;
 		if (playerOldCounter != player.counter) {
 			playerOldCounter = player.counter;
 			TopCommand runTopCommand = instructionPan.GetTopCommandAt (playerCMDNo);
 			switch(runTopCommand.myCode){
 			case TopCommand.Code.Inbox:
-				player.PickupData (playerInbox.sendFirstData ());
+				d = playerInbox.sendFirstData ();
+				if (d) {
+					player.PickupData (d);
+					playerCMDNo += 1;
+					playerState = RunningState.Ready;
+					Invoke ("RunPlayerCommand", delaySec);
+				} else {
+					FailFeedback ("There is no data on the line. Try \"Give\" what you had to me.", playerFeedback);
+				}
 				break;
 			case TopCommand.Code.Outbox:
 				if (runTopCommand.subCommandRef.myCode == SubCommand.Code.Boss) {
-					playerOutbox.AcceptData (player.SendData ());
-				} else if (runTopCommand.subCommandRef.myCode == SubCommand.Code.Distrust) {
+					d = player.SendData ();
+					if (d) {
+						playerOutbox.AcceptData (d);
+						if (hasSolved == 0 && d.dataStr == "O") {
+							hasSolved += 1;
+							playerCMDNo += 1;
+							playerState = RunningState.Ready;
+							Invoke ("RunPlayerCommand", delaySec);
+						} else if (hasSolved == 0 && d.dataStr == "K") {
+							FailFeedback ("You have dropped letter \"O\". Please send both letters to me.", playerFeedback);
+						} else if (hasSolved == 1 && d.dataStr == "K") {
+							hasSolved += 1;
+							SucceedFeedback ("Thanks for giving me \"OK\".", playerFeedback);
+						}
+					} else {
+						FailFeedback ("No data can you give to me. Please \"Take\" before \"Giving\" me data.", playerFeedback);
+					}
+				} else {
 					Debug.Log ("Should not reach here @ 1 Update, Challenge One.");
 				}
 				break;
 			}
-			playerCMDNo += 1;
-			playerState = RunningState.Ready;
-			Invoke ("RunPlayerCommand", delaySec);
 		}
 
 	}
