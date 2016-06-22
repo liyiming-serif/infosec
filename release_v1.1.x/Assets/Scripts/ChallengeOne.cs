@@ -33,8 +33,8 @@ public class ChallengeOne : CodingChallengeTemplate {
 
 	void Start () {
 		isSucceeded = false;
-		playerInbox.Initialise (new Vector2(-344f, 236f), InitialInboxGenerator());
-		playerOutbox.Initialise (new Vector2(-117f, -168f));
+		playerInbox.Initialise (new Vector2(-344f, 251f), InitialInboxGenerator());
+		playerOutbox.Initialise (new Vector2(-83f, -171f));
 		runButton.onClick.AddListener (() => StartRunning());
 		Reset ();
 	}
