@@ -3286,7 +3286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d1e4ac5ad51484b97c990489281d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myCode: 3
+  myCode: 1
 --- !u!224 &1221819050 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22450020, guid: b787d16cbc5ff48dc88edb49959ab6fc,
@@ -4121,7 +4121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d1e4ac5ad51484b97c990489281d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myCode: 2
+  myCode: 0
 --- !u!1 &1401267458
 GameObject:
   m_ObjectHideFlags: 0

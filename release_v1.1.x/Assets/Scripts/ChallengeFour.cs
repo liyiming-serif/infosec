@@ -107,7 +107,7 @@ public class ChallengeFour : CodingChallengeTemplate {
 							playerState = RunningState.Ready;
 							Invoke ("RunPlayerCommand", delaySec);
 						} else if (hasSolved == 0 && d.dataStr == "K") {
-							FailFeedback ("I was expecting \"O\" come first. You can \"Store\" \"K\" in a cell first.", playerFeedback);
+							FailFeedback ("I was expecting to receive \"O\" first. You can \"Store\" \"K\" in a cell first.", playerFeedback);
 						}
 						else if (hasSolved == 1 && d.dataStr == "K") {
 							hasSolved = 2;

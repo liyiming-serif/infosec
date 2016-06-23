@@ -46,8 +46,13 @@ public class ChallengeFive : HackingChallengeTemplate {
 
 	protected override bool FinishWithoutSucceed ()
 	{
-		if ((hasSolved != 1) && (distrustCMDNo == enumPan.transform.childCount)) {
-			FailFeedback ("Failed. Details TBA.", playerFeedback);
+		if (distrustCMDNo == enumPan.transform.childCount) {
+			if (hasSolved == 0) {
+				FailFeedback ("You can change \"No Action\" to \"Load\" data from a cell while the adversary is running.", playerFeedback);
+			} else if(hasSolved == 1){
+				FailFeedback ("You are half-way the goal. The final step is to\"Send\" the secerte \"Y\" to me.", playerFeedback);
+			}
+
 			return true;
 		}
 		return false;
@@ -177,7 +182,7 @@ public class ChallengeFive : HackingChallengeTemplate {
 				if (runTopCommand.subCommandRef.myCode == SubCommand.Code.Boss) {
 					if (d) {
 						playerOutbox.AcceptData (d);
-						hasSolved = 1;
+						hasSolved = 2;
 						SucceedFeedback ("Well done!", playerFeedback);
 					} else {
 						FailFeedback ("No data can you give to me. Please \"Take\" before \"Giving\" me data.", playerFeedback);
@@ -196,6 +201,7 @@ public class ChallengeFive : HackingChallengeTemplate {
 				if (d) {
 					d.dataStr = "Y";
 					player.PickupData (d);
+					hasSolved = 1;
 					playerCMDNo += 1;
 					playerState = RunningState.Ready;
 					Invoke ("RunPlayerCommand", delaySec);
