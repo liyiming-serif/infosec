@@ -73,14 +73,13 @@ public class CodingChallengeTemplate : MonoBehaviour {
 	virtual protected bool FinishWithoutSucceed(){
 		return true;
 	}
-
-	//Run command without checking the bound
-	protected void RunPlayerCommand() {
+		
+	virtual protected bool RunPlayerCommand() {
 		if (!CheckPlayerReady ()) {
-			return;
+			return false;
 		}
 		if (FinishWithoutSucceed ()) {
-			return;
+			return false;
 		}
 		enumPan.SetRunningState (playerCMDNo, EnumPanel.Status.Executing);
 
@@ -88,9 +87,12 @@ public class CodingChallengeTemplate : MonoBehaviour {
 		TopCommand topCommandToRun = instructionPan.GetTopCommandAt (playerCMDNo);
 		if (topCommandToRun.myCode == TopCommand.Code.Inbox) {
 			player.SetEndPosition (playerInbox.playerPos);
+		} else if (topCommandToRun.myCode == TopCommand.Code.NoAction) {
+			player.counter += 1;
 		} else if (topCommandToRun.subCommandRef){
 			SetEndPositionBySubCMD (player, topCommandToRun.subCommandRef.myCode);
 		}
+		return true;
 	}
 
 	 virtual protected void Reset(){
@@ -120,6 +122,14 @@ public class CodingChallengeTemplate : MonoBehaviour {
 
 	virtual protected Data[] InitialInboxGenerator (){
 		return null;
+	}
+
+	protected IEnumerator DiminishAfterSec(GameObject feedback, float time)
+	{
+		yield return new WaitForSeconds(time);
+		if (playerState != RunningState.Inactive) {
+			feedback.SetActive (false);
+		}
 	}
 
 }

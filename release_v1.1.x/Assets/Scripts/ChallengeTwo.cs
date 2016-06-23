@@ -122,10 +122,4 @@ public class ChallengeTwo : CodingChallengeTemplate {
 
 	}
 
-	IEnumerator DiminishAfterSec(GameObject feedback, float time)
-	{
-		yield return new WaitForSeconds(time);
-		feedback.SetActive (false);
-	}
-
 }

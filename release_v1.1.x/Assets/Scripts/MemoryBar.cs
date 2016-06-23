@@ -6,11 +6,13 @@ public class MemoryBar : MonoBehaviour
 {
 	public enum ReadOwner {Distrust, Boss};
 
+	public List<Vector2> pickupsPos;
 	public List<ReadOwner> accessControl;
 
 	private Transform slotsTransform;
 
-	public void Initialise(){
+	public void Initialise(Vector2[] pickupsPos){
+		this.pickupsPos = new List<Vector2> (pickupsPos);
 		this.accessControl = new List<ReadOwner> ();
 		for (int i = 0; i < GetCount(); i++) {
 			this.accessControl.Add (ReadOwner.Distrust);
@@ -81,6 +83,14 @@ public class MemoryBar : MonoBehaviour
 		}
 		return boxToReturn;
 	}
+
+	public Vector2 getPickupPos(int index){
+		if (GetCount () <= index) {
+			return Vector2.zero;
+		}
+		return pickupsPos[index];
+	}
+
 	void Start(){
 		slotsTransform = GetComponentInChildren<RectTransform> ();
 	}

@@ -4,7 +4,7 @@ using System.Collections;
 
 public class SubCommand : MonoBehaviour, IPointerClickHandler{
 
-	public enum Code {Boss, Distrust, Zero, One};
+	public enum Code {Zero = 0, One = 1, NoAction, Boss, Distrust};
 
 	public Code myCode;
 

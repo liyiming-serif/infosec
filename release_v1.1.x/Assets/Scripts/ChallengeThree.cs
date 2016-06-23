@@ -42,6 +42,14 @@ public class ChallengeThree : CodingChallengeTemplate {
 		return false;
 	}
 
+	protected Vector2[] InitialMemoryPickupPos() 
+	{
+		Vector2[] initialPickupPos = new Vector2[2];
+		initialPickupPos [0] = new Vector2 (-204f, -43f);
+		initialPickupPos [1] = new Vector2 (-116f, -43f);
+		return initialPickupPos;
+	}
+		
 	protected override void Reset ()
 	{
 		base.Reset ();
@@ -57,7 +65,7 @@ public class ChallengeThree : CodingChallengeTemplate {
 		playerInbox.Initialise (new Vector2(-344f, 251f), InitialInboxGenerator());
 		playerOutbox.Initialise (new Vector2(-83f, -171f));
 		distrustOutbox.Initialise (new Vector2(-83f, 132f));
-		memoryBar.Initialise ();
+		memoryBar.Initialise (InitialMemoryPickupPos());
 		Data initialData = Instantiate (Resources.Load("DataBoard", typeof(Data))) as Data;
 		initialData.dataStr = "O";
 		memoryBar.AcceptDataAt (0, initialData);
@@ -142,14 +150,6 @@ public class ChallengeThree : CodingChallengeTemplate {
 			}
 		}
 
-	}
-
-	IEnumerator DiminishAfterSec(GameObject feedback, float time)
-	{
-		yield return new WaitForSeconds(time);
-		if (playerState != RunningState.Inactive) {
-			feedback.SetActive (false);
-		}
 	}
 
 }
