@@ -9,7 +9,6 @@ public class AttackDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
 	private AttackTopCommandSlot originalSlotHost;
 
 	private Canvas codingCanvas;
-	private AttackInstructionPanel attackInstructPanel;
 
 	#region IBeginDragHandler implementation
 	void IBeginDragHandler.OnBeginDrag (PointerEventData eventData)
@@ -50,7 +49,6 @@ public class AttackDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
 	#endregion
 
 	void Start(){
-		codingCanvas = GameObject.Find("CodingCanvas").GetComponent<Canvas>();
-		attackInstructPanel = GameObject.Find ("AttackInstructionPanel").GetComponent<AttackInstructionPanel> ();
+        codingCanvas = GameObject.Find("CodingCanvas").GetComponent<Canvas>();
 	}
 }

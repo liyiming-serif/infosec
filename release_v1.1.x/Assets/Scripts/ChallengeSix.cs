@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class ChallengeFive : HackingChallengeTemplate {
+public class ChallengeSix : HackingChallengeTemplate {
 
 	 protected override void SetEndPositionBySubCMD(AnimatorController character, SubCommand.Code subCode){
 		switch (subCode) {
@@ -34,9 +34,9 @@ public class ChallengeFive : HackingChallengeTemplate {
 	{
 		if (distrustCMDNo == enumPan.transform.childCount) {
 			if (hasSolved == 0) {
-				FailFeedback ("You can load the actual data of \"?\"", playerFeedback);
+				FailFeedback ("You can steal data from \"Distrust\".", playerFeedback);
 			} else if(hasSolved == 1){
-				FailFeedback ("You are half-way the goal. \"Give\" the value \"Y\" to me.", playerFeedback);
+				FailFeedback ("You are half-way the goal. The final step is to\"Send\" the secerte \"Y\" to me.", playerFeedback);
 			}
 
 			return true;
@@ -44,15 +44,7 @@ public class ChallengeFive : HackingChallengeTemplate {
 		return false;
 	}
 
-    protected override void Reset()
-    {
-        base.Reset();
-        Data d = Instantiate(Resources.Load("DataBoard", typeof(Data))) as Data;
-        d.dataStr = "?";
-        memoryBar.AcceptDataAt(1, d);
-    }
-
-    protected Vector2[] InitialMemoryPickupPos() 
+	protected Vector2[] InitialMemoryPickupPos() 
 	{
 		Vector2[] initialPickupPos = new Vector2[2];
 		initialPickupPos [0] = new Vector2 (-204f, 43f);
@@ -61,12 +53,20 @@ public class ChallengeFive : HackingChallengeTemplate {
 	}
 
 	void Start () {
-		distrustTopCode = new TopCommand.Code[2];
-		distrustSubCode = new SubCommand.Code[2];
-		distrustTopCode [0] = TopCommand.Code.Load;
-		distrustSubCode [0] = SubCommand.Code.One;
-        distrustTopCode[1] = TopCommand.Code.Outbox;
-        distrustSubCode[1] = SubCommand.Code.Distrust;
+		distrustTopCode = new TopCommand.Code[6];
+		distrustSubCode = new SubCommand.Code[6];
+		distrustTopCode [0] = TopCommand.Code.Inbox;
+		distrustSubCode [0] = SubCommand.Code.NoAction;
+		distrustTopCode [1] = TopCommand.Code.Store;
+		distrustSubCode [1] = SubCommand.Code.One;
+		distrustTopCode [2] = TopCommand.Code.Inbox;
+		distrustSubCode [2] = SubCommand.Code.NoAction;
+		distrustTopCode [3] = TopCommand.Code.Outbox;
+		distrustSubCode [3] = SubCommand.Code.Distrust;
+		distrustTopCode [4] = TopCommand.Code.Load;
+		distrustSubCode [4] = SubCommand.Code.One;
+		distrustTopCode [5] = TopCommand.Code.Outbox;
+		distrustSubCode [5] = SubCommand.Code.Distrust;
 
 		playerInbox.Initialise (new Vector2(-344f, 251f), InitialInboxGenerator());
 		playerOutbox.Initialise (new Vector2(-83f, -171f));

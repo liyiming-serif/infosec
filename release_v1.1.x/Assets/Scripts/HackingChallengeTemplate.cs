@@ -4,20 +4,45 @@ using System.Collections;
 
 public class HackingChallengeTemplate : MonoBehaviour {
 
-	[SerializeField] protected AnimatorController player;
-	[SerializeField] protected GameObject playerFeedback;
+	[SerializeField]
+    protected AnimatorController player;
+	[SerializeField]
+    protected Inbox playerInbox;
 
-	[SerializeField] protected Inbox playerInbox;
-	[SerializeField] protected Outbox playerOutbox;
+    [SerializeField]
+    protected GameObject playerFeedback;
+    [SerializeField]
+    protected Outbox playerOutbox;
 
-	[SerializeField] protected AttackInstructionPanel instructionPan;
-	[SerializeField] protected EnumPanel enumPan;
-	[SerializeField] protected Button runButton;
+	[SerializeField]
+    protected AttackInstructionPanel instructionPan;
+	[SerializeField]
+    protected EnumPanel enumPan;
+	[SerializeField]
+    protected Button runButton;
 
-	/*Game State*/
+    [SerializeField]
+    protected AnimatorController distrust;
 
-	protected int hasSolved;
+    [SerializeField]
+    protected GameObject distrustFeedback;
+    [SerializeField]
+    protected Outbox distrustOutbox;
+    [SerializeField]
+    protected MemoryBar memoryBar;
 
+    /*Game Logic*/
+    protected int hasSolved;
+
+    protected Vector2 distrustInboxPos;
+
+    protected TopCommand.Code[] distrustTopCode;
+    protected SubCommand.Code[] distrustSubCode;
+
+    protected RunningState distrustPlayerState;
+    protected int distrustCMDNo;
+    protected int distrustOldCounter;
+        
 	protected RunningState playerState;
 	protected int playerCMDNo;
 	protected int playerOldCounter;
@@ -70,46 +95,99 @@ public class HackingChallengeTemplate : MonoBehaviour {
 		return true;
 	}
 		
-	virtual protected bool RunPlayerCommand() {
-		if (!CheckPlayerReady ()) {
-			return false;
-		}
-		if (FinishWithoutSucceed ()) {
-			return false;
-		}
-		enumPan.SetRunningState (playerCMDNo, EnumPanel.Status.Executing);
+    virtual protected bool DistrustMoves()
+    {
+        if (distrustPlayerState != RunningState.Inactive)
+        {
+            if (distrustCMDNo == enumPan.transform.childCount)
+            {
+                enumPan.ResetRunningState();
+                distrustPlayerState = RunningState.Inactive;
+                return false;
+            }
+            enumPan.SetRunningState(distrustCMDNo, EnumPanel.Status.Executing);
+            distrustPlayerState = RunningState.NotReady;
+            distrustOldCounter = distrust.counter;
+            TopCommand.Code topCodeToRun = distrustTopCode[distrustCMDNo];
+            if (topCodeToRun == TopCommand.Code.Inbox)
+            {
+                distrust.SetEndPosition(distrustInboxPos);
+            }
+            else if (distrustSubCode[distrustCMDNo] != SubCommand.Code.NoAction)
+            {
+                SetEndPositionBySubCMD(distrust, distrustSubCode[distrustCMDNo]);
+            }
+        }
 
-		playerOldCounter = player.counter;
-		TopCommand topCommandToRun = instructionPan.GetTopCommandAt (playerCMDNo);
-		if (topCommandToRun.myCode == TopCommand.Code.Inbox) {
-			player.SetEndPosition (playerInbox.playerPos);
-		} else if (topCommandToRun.myCode == TopCommand.Code.NoAction) {
-			player.counter += 1;
-		} else if (topCommandToRun.subCommandRef){
-			SetEndPositionBySubCMD (player, topCommandToRun.subCommandRef.myCode);
-		}
-		return true;
-	}
+        return true;
+    }
+    virtual protected bool RunPlayerCommand() {
+        if (!CheckPlayerReady())
+        {
+            return false;
+        }
+        if (FinishWithoutSucceed())
+        {
+            return false;
+        }
+        if (!DistrustMoves())
+        {
+            return false;
+        }
+        if (playerState != RunningState.Inactive)
+        {
+            playerState = RunningState.NotReady;
+            playerOldCounter = player.counter;
+            TopCommand topCommandToRun = instructionPan.GetTopCommandAt(playerCMDNo);
+            if (topCommandToRun.myCode == TopCommand.Code.Inbox)
+            {
+                player.SetEndPosition(playerInbox.playerPos);
+            }
+            else if (topCommandToRun.myCode == TopCommand.Code.NoAction)
+            {
+                player.counter += 1;
+            }
+            else if (topCommandToRun.subCommandRef)
+            {
+                SetEndPositionBySubCMD(player, topCommandToRun.subCommandRef.myCode);
+            }
+        }
+        
+        return true;
+    }
 
 	 virtual protected void Reset(){
 		hasSolved = 0;
 		playerState = RunningState.Inactive;
 		playerCMDNo = -1;
 		playerOldCounter = player.counter;
+        player.ResetAnimator ();
 
-		enumPan.ResetRunningState ();
-		player.ResetAnimator ();
-		playerInbox.ResetInbox (InitialInboxGenerator());
+        playerInbox.ResetInbox (InitialInboxGenerator());
 		playerOutbox.EmptyAllData();
 		playerFeedback.SetActive (false);
-	}
 
-	virtual protected void StartRunning() {
-		Reset ();
-		playerCMDNo = 0;
-		SetCodingModeActive (false);
-		playerState = RunningState.Ready;
-		Invoke ("RunPlayerCommand", delaySec);
+        enumPan.ResetRunningState();
+        memoryBar.EmptyMemoryBar();
+
+        distrustCMDNo = -1;
+        distrustPlayerState = RunningState.Inactive;
+        distrustOldCounter = distrust.counter;
+        distrust.ResetAnimator();
+
+        distrustOutbox.EmptyAllData();
+        distrustFeedback.SetActive(false);
+
+    }
+
+    virtual protected void StartRunning() {
+        Reset();
+        playerCMDNo = 0;
+        distrustCMDNo = 0;
+        distrustPlayerState = RunningState.Ready;
+        playerState = RunningState.Ready;
+        SetCodingModeActive(false);
+        Invoke("RunPlayerCommand", delaySec);
 	}
 
 	virtual protected void SetEndPositionBySubCMD(AnimatorController character, SubCommand.Code subCode){
