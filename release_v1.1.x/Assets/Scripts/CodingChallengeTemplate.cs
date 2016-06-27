@@ -2,134 +2,262 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public enum RunningState {
-	Inactive, NotReady, Ready
+public enum RunningState
+{
+    Inactive, NotReady, Ready, Pause, Back, Step
 };
 
-public class CodingChallengeTemplate : MonoBehaviour {
+public enum ButtonCode
+{
+    Run = 0, Back = 1, Stop = 2, Step = 3
+};
 
-	[SerializeField] protected AnimatorController player;
-	[SerializeField] protected GameObject playerFeedback;
+public class CodingChallengeTemplate : MonoBehaviour
+{
 
-	[SerializeField] protected Inbox playerInbox;
-	[SerializeField] protected Outbox playerOutbox;
+    [SerializeField]
+    protected AnimatorController player;
+    [SerializeField]
+    protected GameObject playerFeedback;
 
-	[SerializeField] protected InstructionPanel instructionPan;
-	[SerializeField] protected EnumPanel enumPan;
-	[SerializeField] protected Button runButton;
+    [SerializeField]
+    protected Inbox playerInbox;
+    [SerializeField]
+    protected Outbox playerOutbox;
 
-	/*Game State*/
+    [SerializeField]
+    protected InstructionPanel instructionPan;
+    [SerializeField]
+    protected GameObject CommandSelectPan;
+    [SerializeField]
+    protected EnumPanel enumPan;
 
-	protected int hasSolved;
+    [SerializeField]
+    protected Button[] debugButtons;
 
-	protected RunningState playerState;
-	protected int playerCMDNo;
-	protected int playerOldCounter;
+    /*Game State*/
 
-	protected float delaySec = 0.6f;
+    protected int hasSolved;
 
-	protected void PrepareFeedback(string message, GameObject feedback, Color32 colour){
-		Text feedbackText = feedback.GetComponentInChildren<Text> ();
-		feedbackText.text = message;
-		Renderer changeColor = feedback.GetComponent<Renderer> ();
-		changeColor.material.color = colour;
-		feedback.SetActive (true);
-	}
+    protected RunningState playerState;
+    protected int playerCMDNo;
+    protected int playerOldCounter;
 
-	protected void InformFeedback(string message, GameObject feedback){
-		PrepareFeedback (message, feedback, new Color32(83, 144, 195, 212));
-	}
+    protected float delaySec = 0.6f;
 
-	protected void FailFeedback(string message, GameObject feedback) {
-		PrepareFeedback (message, feedback, new Color32(235, 46, 44, 212));
-		if (playerCMDNo < instructionPan.GetLength ()) {
-			enumPan.SetRunningState (playerCMDNo, EnumPanel.Status.Error);
-		} else {
-			enumPan.SetRunningState (playerCMDNo - 1, EnumPanel.Status.Error);
-		}
-		playerCMDNo = -1;
-		playerState = RunningState.Inactive;
-		SetCodingModeActive (true);
-	}
+    protected void PrepareFeedback(string message, GameObject feedback, Color32 colour)
+    {
+        Text feedbackText = feedback.GetComponentInChildren<Text>();
+        feedbackText.text = message;
+        Renderer changeColor = feedback.GetComponent<Renderer>();
+        changeColor.material.color = colour;
+        feedback.SetActive(true);
+    }
 
-	protected void SucceedFeedback(string message, GameObject feedback) {
-		PrepareFeedback (message, feedback, new Color32(90, 174, 122, 212));
-		enumPan.ResetRunningState ();
-		playerCMDNo = -1;
-		playerState = RunningState.Inactive;
-		SetCodingModeActive (true);
-	}
+    protected void InformFeedback(string message, GameObject feedback)
+    {
+        PrepareFeedback(message, feedback, new Color32(83, 144, 195, 212));
+    }
 
-	protected void SetCodingModeActive(bool setting){
-		foreach (TopCommandSlot s in GameObject.FindObjectsOfType<TopCommandSlot> ()) {
-			s.ActivateEventTrigger (setting);
-		}
-	}
+    protected void SetDebugButtonActive(ButtonCode bcode, bool setting, string imagePath)
+    {
+        if (!setting)
+        {
+            imagePath += "_pressed";
+        }
+        debugButtons[(int)bcode].image.sprite = Resources.Load<Sprite>(imagePath);
+        debugButtons[(int)bcode].interactable = setting;
+    }
 
-	virtual protected bool CheckPlayerReady(){
-		return false;
-	}
+    protected void FailFeedback(string message, GameObject feedback)
+    {
+        PrepareFeedback(message, feedback, new Color32(235, 46, 44, 212));
+        if (playerCMDNo < instructionPan.GetLength())
+        {
+            enumPan.SetRunningState(playerCMDNo, EnumPanel.Status.Error);
+        }
+        else
+        {
+            enumPan.SetRunningState(playerCMDNo - 1, EnumPanel.Status.Error);
+        }
+        SetDebugButtonActive(ButtonCode.Stop, true, "ui_stop");
+        SetDebugButtonActive(ButtonCode.Step, false, "ui_step");
+        //Start should already be inactivated
+        playerState = RunningState.Inactive;
+    }
 
-	virtual protected bool FinishWithoutSucceed(){
-		return true;
-	}
-		
-	virtual protected bool RunPlayerCommand() {
-		if (!CheckPlayerReady ()) {
-			return false;
-		}
-		if (FinishWithoutSucceed ()) {
-			return false;
-		}
-		enumPan.SetRunningState (playerCMDNo, EnumPanel.Status.Executing);
+    protected void SucceedFeedback(string message, GameObject feedback)
+    {
+        PrepareFeedback(message, feedback, new Color32(90, 174, 122, 212));
+        enumPan.ResetRunningState();
+        SetDebugButtonActive(ButtonCode.Run, false, "ui_run");
+        SetDebugButtonActive(ButtonCode.Stop, false, "ui_stop");
+        SetDebugButtonActive(ButtonCode.Back, false, "ui_back");
+        SetDebugButtonActive(ButtonCode.Step, false, "ui_step");
+        playerCMDNo = -1;
+        playerState = RunningState.Inactive;
+        SetCodingModeActive(true);
+    }
 
-		playerOldCounter = player.counter;
-		TopCommand topCommandToRun = instructionPan.GetTopCommandAt (playerCMDNo);
-		if (topCommandToRun.myCode == TopCommand.Code.Inbox) {
-			player.SetEndPosition (playerInbox.playerPos);
-		} else if (topCommandToRun.myCode == TopCommand.Code.NoAction) {
-			player.counter += 1;
-		} else if (topCommandToRun.subCommandRef){
-			SetEndPositionBySubCMD (player, topCommandToRun.subCommandRef.myCode);
-		}
-		return true;
-	}
+    protected void SetCodingModeActive(bool setting)
+    {
+        CommandSelectPan.SetActive(setting);
+        foreach (TopCommandSlot s in GameObject.FindObjectsOfType<TopCommandSlot>())
+        {
+            s.ActivateEventTrigger(setting);
+        }
+    }
 
-	 virtual protected void Reset(){
-		hasSolved = 0;
-		playerState = RunningState.Inactive;
-		playerCMDNo = -1;
-		playerOldCounter = player.counter;
+    virtual protected bool CheckPlayerReady()
+    {
+        if (playerState == RunningState.Ready || playerState == RunningState.Step)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
-		enumPan.ResetRunningState ();
-		player.ResetAnimator ();
-		playerInbox.ResetInbox (InitialInboxGenerator());
-		playerOutbox.EmptyAllData();
-		playerFeedback.SetActive (false);
-	}
+    virtual protected bool FinishWithoutSucceed()
+    {
+        return true;
+    }
 
-	virtual protected void StartRunning() {
-		Reset ();
-		playerCMDNo = 0;
-		SetCodingModeActive (false);
-		playerState = RunningState.Ready;
-		Invoke ("RunPlayerCommand", delaySec);
-	}
+    virtual protected bool RunPlayerCommand()
+    {
+        if (!CheckPlayerReady())
+        {
+            return false;
+        }
+        if (FinishWithoutSucceed())
+        {
+            return false;
+        }
+        enumPan.SetRunningState(playerCMDNo, EnumPanel.Status.Executing);
 
-	virtual protected void SetEndPositionBySubCMD(AnimatorController character, SubCommand.Code subCode){
-	
-	}
+        //Store the state of the game for stepping back
+        
+        //manage the debug buttons
+        if (playerState == RunningState.Ready)
+        {
+            playerState = RunningState.NotReady;
+        }
+        else if(playerState == RunningState.Step)
+        {
+            playerState = RunningState.Pause;
+        }
 
-	virtual protected Data[] InitialInboxGenerator (){
-		return null;
-	}
+        playerOldCounter = player.counter;
+        TopCommand topCommandToRun = instructionPan.GetTopCommandAt(playerCMDNo);
+        if (topCommandToRun.myCode == TopCommand.Code.Inbox)
+        {
+            player.SetEndPosition(playerInbox.playerPos);
+        }
+        else if (topCommandToRun.myCode == TopCommand.Code.NoAction)
+        {
+            player.counter += 1;
+        }
+        else if (topCommandToRun.subCommandRef)
+        {
+            SetEndPositionBySubCMD(player, topCommandToRun.subCommandRef.myCode);
+        }
+        return true;
+    }
 
-	protected IEnumerator DiminishAfterSec(GameObject feedback, float time)
-	{
-		yield return new WaitForSeconds(time);
-		if (playerState != RunningState.Inactive) {
-			feedback.SetActive (false);
-		}
-	}
+
+    virtual protected void Reset()
+    {
+        hasSolved = 0;
+        playerState = RunningState.Inactive;
+        playerCMDNo = -1;
+        playerOldCounter = player.counter;
+
+        enumPan.ResetRunningState();
+        player.ResetAnimator();
+        playerInbox.ResetInbox(InitialInboxGenerator());
+        playerOutbox.EmptyAllData();
+        playerFeedback.SetActive(false);
+        SetCodingModeActive(true);
+
+        SetDebugButtonActive(ButtonCode.Run, true, "ui_run");
+        SetDebugButtonActive(ButtonCode.Stop, false, "ui_stop");
+        SetDebugButtonActive(ButtonCode.Back, false, "ui_back");
+        SetDebugButtonActive(ButtonCode.Step, false, "ui_step");
+
+    }
+
+    virtual protected void StartRunning()
+    {
+        if (playerState == RunningState.Inactive)
+        {
+            Reset();
+            playerCMDNo = 0;
+            SetCodingModeActive(false);
+            
+        }
+        // else must be in pause mode
+        SetDebugButtonActive(ButtonCode.Run, false, "ui_run");
+        SetDebugButtonActive(ButtonCode.Stop, true, "ui_stop");
+        SetDebugButtonActive(ButtonCode.Back, (playerCMDNo > 0), "ui_back");
+        SetDebugButtonActive(ButtonCode.Step, true, "ui_step");
+        playerState = RunningState.Ready;
+        Invoke("RunPlayerCommand", delaySec);
+    }
+
+    virtual protected void StartStepping()
+    {
+        SetDebugButtonActive(ButtonCode.Run, false, "ui_run");
+        SetDebugButtonActive(ButtonCode.Stop, true, "ui_stop");
+        SetDebugButtonActive(ButtonCode.Back, false, "ui_back");
+        SetDebugButtonActive(ButtonCode.Step, false, "ui_step");
+        if(playerState == RunningState.Ready || playerState == RunningState.Pause)
+        {
+            playerState = RunningState.Step;
+            Invoke("RunPlayerCommand", delaySec);
+        }
+        else if (playerState == RunningState.NotReady)
+        {
+            playerState = RunningState.Pause;
+        }
+        
+    }
+
+    virtual protected bool ExecuteNextIfNotPaused()
+    {
+        if (playerState == RunningState.Pause)
+        {
+            SetDebugButtonActive(ButtonCode.Run, true, "ui_run");
+            SetDebugButtonActive(ButtonCode.Stop, true, "ui_stop");
+            SetDebugButtonActive(ButtonCode.Back, (playerCMDNo > 0), "ui_back");
+            SetDebugButtonActive(ButtonCode.Step, true, "ui_step");
+            return false;
+        }
+        // playerState == RunningState.NotReady
+        SetDebugButtonActive(ButtonCode.Back, (playerCMDNo > 0), "ui_back");
+        playerState = RunningState.Ready;
+        Invoke("RunPlayerCommand", delaySec);
+        return true;
+    }
+
+    virtual protected void SetEndPositionBySubCMD(AnimatorController character, SubCommand.Code subCode)
+    {
+
+    }
+
+    virtual protected Data[] InitialInboxGenerator()
+    {
+        return null;
+    }
+
+    protected IEnumerator DiminishAfterSec(GameObject feedback, float time)
+    {
+        yield return new WaitForSeconds(time);
+        if (playerState != RunningState.Inactive)
+        {
+            feedback.SetActive(false);
+        }
+    }
 
 }

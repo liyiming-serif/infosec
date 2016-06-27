@@ -9,6 +9,7 @@ public class Outbox : MonoBehaviour{
 	
 	public Vector2 playerPos;
 
+    [SerializeField]
 	private Transform slotsTransform;
 
 	public void Initialise(Vector2 playerPos){
@@ -57,6 +58,6 @@ public class Outbox : MonoBehaviour{
 	}
 
 	void Start (){
-		slotsTransform = GetComponentInChildren<RectTransform> ();
+		slotsTransform = GetComponent<RectTransform> ();
 	}
 }

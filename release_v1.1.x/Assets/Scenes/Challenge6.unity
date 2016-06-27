@@ -1911,17 +1911,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 686162082}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68e4177acbf1b4839b72d7a40ebf0edb, type: 3}
+  m_Script: {fileID: 11500000, guid: 98b13d6bd7680e74da7e1c4d489cfb8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 335063740}
-  playerFeedback: {fileID: 1432000804}
   playerInbox: {fileID: 407094770}
+  playerFeedback: {fileID: 1432000804}
   playerOutbox: {fileID: 317247282}
   instructionPan: {fileID: 514481786}
   enumPan: {fileID: 1215708796}
   runButton: {fileID: 304624617}
-  distrustPlayer: {fileID: 1314392907}
+  distrust: {fileID: 1314392907}
   distrustFeedback: {fileID: 1319041653}
   distrustOutbox: {fileID: 1850441596}
   memoryBar: {fileID: 1401267461}
@@ -8785,7 +8785,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 4f85559942d7446f9ab95d9b3bab292e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 479779085c817414b99c3c3bf01af0a3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
