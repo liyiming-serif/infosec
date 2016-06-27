@@ -82,7 +82,8 @@ public class CodingChallengeTemplate : MonoBehaviour
         }
         SetDebugButtonActive(ButtonCode.Stop, true, "ui_stop");
         SetDebugButtonActive(ButtonCode.Step, false, "ui_step");
-        //Start should already be inactivated
+        SetDebugButtonActive(ButtonCode.Back, (playerCMDNo > 0), "ui_back");
+        SetDebugButtonActive(ButtonCode.Run, false, "ui_run");
         playerState = RunningState.Inactive;
     }
 
@@ -94,7 +95,7 @@ public class CodingChallengeTemplate : MonoBehaviour
         SetDebugButtonActive(ButtonCode.Stop, false, "ui_stop");
         SetDebugButtonActive(ButtonCode.Back, false, "ui_back");
         SetDebugButtonActive(ButtonCode.Step, false, "ui_step");
-        playerCMDNo = -1;
+
         playerState = RunningState.Inactive;
         SetCodingModeActive(true);
     }
@@ -137,14 +138,12 @@ public class CodingChallengeTemplate : MonoBehaviour
         }
         enumPan.SetRunningState(playerCMDNo, EnumPanel.Status.Executing);
 
-        //Store the state of the game for stepping back
-        
         //manage the debug buttons
         if (playerState == RunningState.Ready)
         {
             playerState = RunningState.NotReady;
         }
-        else if(playerState == RunningState.Step)
+        else if (playerState == RunningState.Step)
         {
             playerState = RunningState.Pause;
         }
@@ -184,7 +183,7 @@ public class CodingChallengeTemplate : MonoBehaviour
         SetDebugButtonActive(ButtonCode.Run, true, "ui_run");
         SetDebugButtonActive(ButtonCode.Stop, false, "ui_stop");
         SetDebugButtonActive(ButtonCode.Back, false, "ui_back");
-        SetDebugButtonActive(ButtonCode.Step, false, "ui_step");
+        SetDebugButtonActive(ButtonCode.Step, true, "ui_step");
 
     }
 
@@ -195,33 +194,49 @@ public class CodingChallengeTemplate : MonoBehaviour
             Reset();
             playerCMDNo = 0;
             SetCodingModeActive(false);
-            
+
         }
-        // else must be in pause mode
+        else if (playerState != RunningState.Pause)
+        {
+            throw new System.Exception("An unexpected player state: " + playerState);
+        }
+
         SetDebugButtonActive(ButtonCode.Run, false, "ui_run");
         SetDebugButtonActive(ButtonCode.Stop, true, "ui_stop");
         SetDebugButtonActive(ButtonCode.Back, (playerCMDNo > 0), "ui_back");
         SetDebugButtonActive(ButtonCode.Step, true, "ui_step");
         playerState = RunningState.Ready;
         Invoke("RunPlayerCommand", delaySec);
+
     }
 
     virtual protected void StartStepping()
     {
+        switch (playerState)
+        {
+            case RunningState.Inactive:
+                Reset();
+                playerCMDNo = 0;
+                SetCodingModeActive(false);
+                playerState = RunningState.Step;
+                break;
+            case RunningState.Pause:
+                playerState = RunningState.Step;
+                break;
+            case RunningState.NotReady:
+                playerState = RunningState.Pause;
+                break;
+            case RunningState.Ready:
+                return;
+            default:
+                throw new System.Exception("An unexpected player state: " + playerState);
+        }
+
         SetDebugButtonActive(ButtonCode.Run, false, "ui_run");
         SetDebugButtonActive(ButtonCode.Stop, true, "ui_stop");
         SetDebugButtonActive(ButtonCode.Back, false, "ui_back");
         SetDebugButtonActive(ButtonCode.Step, false, "ui_step");
-        if(playerState == RunningState.Ready || playerState == RunningState.Pause)
-        {
-            playerState = RunningState.Step;
-            Invoke("RunPlayerCommand", delaySec);
-        }
-        else if (playerState == RunningState.NotReady)
-        {
-            playerState = RunningState.Pause;
-        }
-        
+        Invoke("RunPlayerCommand", delaySec);
     }
 
     virtual protected bool ExecuteNextIfNotPaused()
@@ -234,11 +249,18 @@ public class CodingChallengeTemplate : MonoBehaviour
             SetDebugButtonActive(ButtonCode.Step, true, "ui_step");
             return false;
         }
-        // playerState == RunningState.NotReady
-        SetDebugButtonActive(ButtonCode.Back, (playerCMDNo > 0), "ui_back");
-        playerState = RunningState.Ready;
-        Invoke("RunPlayerCommand", delaySec);
-        return true;
+        else if (playerState == RunningState.NotReady)
+        {
+            SetDebugButtonActive(ButtonCode.Back, (playerCMDNo > 0), "ui_back");
+            playerState = RunningState.Ready;
+            Invoke("RunPlayerCommand", delaySec);
+            return true;
+        }
+        else
+        {
+            throw new System.Exception("An unexpected player state: " + playerState);
+        }
+
     }
 
     virtual protected void SetEndPositionBySubCMD(AnimatorController character, SubCommand.Code subCode)
