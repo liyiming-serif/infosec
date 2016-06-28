@@ -24,8 +24,7 @@ make obvious 'take' is from player's wire
 
 social engineering?
 
-
-computer security puzzles
+computer security puzzles:
 
 -ownership accepts everything
 
