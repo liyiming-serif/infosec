@@ -368,12 +368,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5464900d11994617af338be971fda0d, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &123451195 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11497438, guid: b787d16cbc5ff48dc88edb49959ab6fc,
-    type: 2}
-  m_PrefabInternal: {fileID: 1277385348}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &219324731
 Prefab:
   m_ObjectHideFlags: 0
@@ -534,12 +528,6 @@ Canvas:
   m_SortingLayerID: 1059483159
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &285423064 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11497438, guid: b787d16cbc5ff48dc88edb49959ab6fc,
-    type: 2}
-  m_PrefabInternal: {fileID: 95141706}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &304624616
 Prefab:
   m_ObjectHideFlags: 0
@@ -1267,6 +1255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPanel: {fileID: 1215708796}
+  debugPanel: {fileID: 0}
   spacing: 0
   maxCommands: 0
 --- !u!114 &514481787
@@ -1690,11 +1679,7 @@ MonoBehaviour:
   instructionPan: {fileID: 514481786}
   CommandSelectPan: {fileID: 1600448302}
   enumPan: {fileID: 1215708796}
-  debugButtons:
-  - {fileID: 1318366247}
-  - {fileID: 285423064}
-  - {fileID: 1979990965}
-  - {fileID: 123451195}
+  debugPan: {fileID: 0}
   distrustFeedback: {fileID: 2050237204}
   distrustOutbox: {fileID: 1850441596}
   memoryBar: {fileID: 1401267461}
@@ -3878,12 +3863,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 22450020, guid: b787d16cbc5ff48dc88edb49959ab6fc,
     type: 2}
   m_PrefabInternal: {fileID: 304624616}
---- !u!114 &1318366247 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11497438, guid: b787d16cbc5ff48dc88edb49959ab6fc,
-    type: 2}
-  m_PrefabInternal: {fileID: 304624616}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &1319041652
 Prefab:
   m_ObjectHideFlags: 0
@@ -6247,12 +6226,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b99ec134871094ef4b4cd739fb4de841, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1979990965 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11497438, guid: b787d16cbc5ff48dc88edb49959ab6fc,
-    type: 2}
-  m_PrefabInternal: {fileID: 1466381673}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &1992754729
 Prefab:
   m_ObjectHideFlags: 0
