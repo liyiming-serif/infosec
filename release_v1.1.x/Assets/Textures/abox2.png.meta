@@ -1,23 +1,23 @@
 fileFormatVersion: 2
-guid: 887b9fbf84a3d2e449770e48269662b0
-timeCreated: 1467074792
+guid: e8a382e8f96ca8149bdf61551f21ef9f
+timeCreated: 1467074835
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: abox_0
-    21300002: abox_1
-    21300004: abox_2
-    21300006: abox_3
-    21300008: abox_4
-    21300010: abox_5
-    21300012: abox_6
-    21300014: abox_7
-    21300016: abox_8
-    21300018: abox_9
-    21300020: abox_10
-    21300022: abox_11
-    21300024: abox_12
-    21300026: abox_13
+    21300000: abox2_0
+    21300002: abox2_1
+    21300004: abox2_2
+    21300006: abox2_3
+    21300008: abox2_4
+    21300010: abox2_5
+    21300012: abox2_6
+    21300014: abox2_7
+    21300016: abox2_8
+    21300018: abox2_9
+    21300020: abox2_10
+    21300022: abox2_11
+    21300024: abox2_12
+    21300026: abox2_13
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -64,235 +64,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: abox_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 702
-        width: 44
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19, y: 27}
-        - {x: -22, y: 19}
-        - {x: -22, y: -25}
-        - {x: -20, y: -27}
-        - {x: 20, y: -27}
-        - {x: 22, y: -25}
-        - {x: 22, y: 18}
-        - {x: 16, y: 27}
-    - name: abox_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 648
-        width: 44
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19, y: 27}
-        - {x: -22, y: 19}
-        - {x: -22, y: -25}
-        - {x: -20, y: -27}
-        - {x: 20, y: -27}
-        - {x: 22, y: -25}
-        - {x: 22, y: 18}
-        - {x: 16, y: 27}
-    - name: abox_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 594
-        width: 44
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19, y: 27}
-        - {x: -22, y: 19}
-        - {x: -22, y: -25}
-        - {x: -20, y: -27}
-        - {x: 20, y: -27}
-        - {x: 22, y: -25}
-        - {x: 22, y: 18}
-        - {x: 16, y: 27}
-    - name: abox_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 540
-        width: 44
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19, y: 27}
-        - {x: -22, y: 19}
-        - {x: -22, y: -25}
-        - {x: -20, y: -27}
-        - {x: 20, y: -27}
-        - {x: 22, y: -25}
-        - {x: 22, y: 18}
-        - {x: 16, y: 27}
-    - name: abox_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 486
-        width: 44
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19, y: 27}
-        - {x: -22, y: 19}
-        - {x: -22, y: -25}
-        - {x: -20, y: -27}
-        - {x: 20, y: -27}
-        - {x: 22, y: -25}
-        - {x: 22, y: 18}
-        - {x: 16, y: 27}
-    - name: abox_5
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 432
-        width: 44
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19, y: 27}
-        - {x: -22, y: 19}
-        - {x: -22, y: -25}
-        - {x: -20, y: -27}
-        - {x: 20, y: -27}
-        - {x: 22, y: -25}
-        - {x: 22, y: 18}
-        - {x: 16, y: 27}
-    - name: abox_6
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 378
-        width: 44
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19, y: 27}
-        - {x: -22, y: 19}
-        - {x: -22, y: -25}
-        - {x: -20, y: -27}
-        - {x: 20, y: -27}
-        - {x: 22, y: -25}
-        - {x: 22, y: 18}
-        - {x: 16, y: 27}
-    - name: abox_7
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 324
-        width: 44
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19, y: 27}
-        - {x: -22, y: 19}
-        - {x: -22, y: -25}
-        - {x: -20, y: -27}
-        - {x: 20, y: -27}
-        - {x: 22, y: -25}
-        - {x: 22, y: 18}
-        - {x: 16, y: 27}
-    - name: abox_8
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 270
-        width: 44
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19, y: 27}
-        - {x: -22, y: 19}
-        - {x: -22, y: -25}
-        - {x: -20, y: -27}
-        - {x: 20, y: -27}
-        - {x: 22, y: -25}
-        - {x: 22, y: 18}
-        - {x: 16, y: 27}
-    - name: abox_9
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 216
-        width: 44
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19, y: 27}
-        - {x: -22, y: 19}
-        - {x: -22, y: -25}
-        - {x: -20, y: -27}
-        - {x: 20, y: -27}
-        - {x: 22, y: -25}
-        - {x: 22, y: 18}
-        - {x: 16, y: 27}
-    - name: abox_10
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 162
-        width: 44
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19, y: 27}
-        - {x: -22, y: 19}
-        - {x: -22, y: -25}
-        - {x: -20, y: -27}
-        - {x: 20, y: -27}
-        - {x: 22, y: -25}
-        - {x: 22, y: 18}
-        - {x: 16, y: 27}
-    - name: abox_11
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 108
-        width: 44
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -19, y: 27}
-        - {x: -22, y: 19}
-        - {x: -22, y: -25}
-        - {x: -20, y: -27}
-        - {x: 20, y: -27}
-        - {x: 22, y: -25}
-        - {x: 22, y: 18}
-        - {x: 16, y: 27}
-    - name: abox_12
+    - name: abox2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -303,15 +75,129 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -19, y: 27}
-        - {x: -22, y: 19}
+      - - {x: -6, y: 27}
+        - {x: -22, y: 21}
         - {x: -22, y: -25}
         - {x: -20, y: -27}
         - {x: 20, y: -27}
         - {x: 22, y: -25}
-        - {x: 22, y: 18}
-        - {x: 16, y: 27}
-    - name: abox_13
+        - {x: 22, y: 21}
+        - {x: 11, y: 27}
+    - name: abox2_1
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 54
+        width: 44
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -6, y: 27}
+        - {x: -22, y: 21}
+        - {x: -22, y: -25}
+        - {x: -20, y: -27}
+        - {x: 20, y: -27}
+        - {x: 22, y: -25}
+        - {x: 22, y: 21}
+        - {x: 11, y: 27}
+    - name: abox2_2
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 54
+        width: 44
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -6, y: 27}
+        - {x: -22, y: 21}
+        - {x: -22, y: -25}
+        - {x: -20, y: -27}
+        - {x: 20, y: -27}
+        - {x: 22, y: -25}
+        - {x: 22, y: 21}
+        - {x: 11, y: 27}
+    - name: abox2_3
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 54
+        width: 44
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -6, y: 27}
+        - {x: -22, y: 21}
+        - {x: -22, y: -25}
+        - {x: -20, y: -27}
+        - {x: 20, y: -27}
+        - {x: 22, y: -25}
+        - {x: 22, y: 21}
+        - {x: 11, y: 27}
+    - name: abox2_4
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 54
+        width: 44
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -6, y: 27}
+        - {x: -22, y: 21}
+        - {x: -22, y: -25}
+        - {x: -20, y: -27}
+        - {x: 20, y: -27}
+        - {x: 22, y: -25}
+        - {x: 22, y: 21}
+        - {x: 11, y: 27}
+    - name: abox2_5
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 54
+        width: 44
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -6, y: 27}
+        - {x: -22, y: 21}
+        - {x: -22, y: -25}
+        - {x: -20, y: -27}
+        - {x: 20, y: -27}
+        - {x: 22, y: -25}
+        - {x: 22, y: 21}
+        - {x: 11, y: 27}
+    - name: abox2_6
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 54
+        width: 44
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -6, y: 27}
+        - {x: -22, y: 21}
+        - {x: -22, y: -25}
+        - {x: -20, y: -27}
+        - {x: 20, y: -27}
+        - {x: 22, y: -25}
+        - {x: 22, y: 21}
+        - {x: 11, y: 27}
+    - name: abox2_7
       rect:
         serializedVersion: 2
         x: 0
@@ -322,14 +208,125 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -19, y: 27}
-        - {x: -22, y: 19}
+      - - {x: -6, y: 27}
+        - {x: -22, y: 21}
         - {x: -22, y: -25}
         - {x: -20, y: -27}
         - {x: 20, y: -27}
         - {x: 22, y: -25}
-        - {x: 22, y: 18}
-        - {x: 16, y: 27}
+        - {x: 22, y: 21}
+        - {x: 11, y: 27}
+    - name: abox2_8
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 0
+        width: 44
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -10, y: 27}
+        - {x: -22, y: 20}
+        - {x: -22, y: -25}
+        - {x: -20, y: -27}
+        - {x: 22, y: -27}
+        - {x: 22, y: 24}
+        - {x: 17, y: 27}
+    - name: abox2_9
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 0
+        width: 44
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -6, y: 27}
+        - {x: -22, y: 21}
+        - {x: -22, y: -25}
+        - {x: -20, y: -27}
+        - {x: 20, y: -27}
+        - {x: 22, y: -25}
+        - {x: 22, y: 21}
+        - {x: 11, y: 27}
+    - name: abox2_10
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 0
+        width: 44
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -10, y: 27}
+        - {x: -22, y: 20}
+        - {x: -22, y: -25}
+        - {x: -20, y: -27}
+        - {x: 22, y: -27}
+        - {x: 22, y: 24}
+        - {x: 17, y: 27}
+    - name: abox2_11
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 0
+        width: 44
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -10, y: 27}
+        - {x: -22, y: 20}
+        - {x: -22, y: -25}
+        - {x: -20, y: -27}
+        - {x: 22, y: -27}
+        - {x: 22, y: 24}
+        - {x: 17, y: 27}
+    - name: abox2_12
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 0
+        width: 44
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -6, y: 27}
+        - {x: -22, y: 21}
+        - {x: -22, y: -25}
+        - {x: -20, y: -27}
+        - {x: 20, y: -27}
+        - {x: 22, y: -25}
+        - {x: 22, y: 21}
+        - {x: 11, y: 27}
+    - name: abox2_13
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 0
+        width: 44
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -6, y: 27}
+        - {x: -22, y: 21}
+        - {x: -22, y: -25}
+        - {x: -20, y: -27}
+        - {x: 20, y: -27}
+        - {x: 22, y: -25}
+        - {x: 22, y: 21}
+        - {x: 11, y: 27}
     outline: []
   spritePackingTag: 
   userData: 
