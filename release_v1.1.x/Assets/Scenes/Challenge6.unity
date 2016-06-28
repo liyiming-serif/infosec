@@ -777,6 +777,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counter: 0
+  initPosition: {x: 0, y: 0}
+  endPosition: {x: 0, y: 0}
+  startPosition: {x: 0, y: 0}
 --- !u!95 &335063741
 Animator:
   serializedVersion: 3
@@ -5233,6 +5236,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counter: 0
+  initPosition: {x: 0, y: 0}
+  endPosition: {x: 0, y: 0}
+  startPosition: {x: 0, y: 0}
 --- !u!95 &1314392908
 Animator:
   serializedVersion: 3
@@ -6196,7 +6202,7 @@ RectTransform:
   m_RootOrder: 6
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 587, y: 358}
+  m_AnchoredPosition: {x: 571.9, y: 358}
   m_SizeDelta: {x: 73, y: 425}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1549984322

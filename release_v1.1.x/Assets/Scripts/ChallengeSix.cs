@@ -21,14 +21,6 @@ public class ChallengeSix : HackingChallengeTemplate {
 		}
 	}
 
-	protected override bool CheckPlayerReady ()
-	{
-		
-		if ((playerState == RunningState.NotReady) || (distrustPlayerState == RunningState.NotReady)) {
-			return false;
-		}
-		return true;
-	}
 
 	protected override bool FinishWithoutSucceed ()
 	{

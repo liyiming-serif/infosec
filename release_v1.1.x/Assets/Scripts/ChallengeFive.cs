@@ -20,16 +20,6 @@ public class ChallengeFive : HackingChallengeTemplate {
 			break;
 		}
 	}
-
-	protected override bool CheckPlayerReady ()
-	{
-		
-		if ((playerState == RunningState.NotReady) || (distrustPlayerState == RunningState.NotReady)) {
-			return false;
-		}
-		return true;
-	}
-
 	protected override bool FinishWithoutSucceed ()
 	{
 		if (distrustCMDNo == enumPan.transform.childCount) {

@@ -87,11 +87,18 @@ public class HackingChallengeTemplate : MonoBehaviour {
 		}
 	}
 
-	virtual protected bool CheckPlayerReady(){
-		return false;
-	}
+    virtual protected bool CheckPlayerReady()
+    {
 
-	virtual protected bool FinishWithoutSucceed(){
+        if ((playerState == RunningState.NotReady) || (distrustPlayerState == RunningState.NotReady))
+        {
+            return false;
+        }
+        return true;
+    }
+
+
+    virtual protected bool FinishWithoutSucceed(){
 		return true;
 	}
 		
@@ -122,6 +129,7 @@ public class HackingChallengeTemplate : MonoBehaviour {
         return true;
     }
     virtual protected bool RunPlayerCommand() {
+
         if (!CheckPlayerReady())
         {
             return false;
@@ -151,6 +159,7 @@ public class HackingChallengeTemplate : MonoBehaviour {
             {
                 SetEndPositionBySubCMD(player, topCommandToRun.subCommandRef.myCode);
             }
+            Debug.Log("Hey");
         }
         
         return true;
