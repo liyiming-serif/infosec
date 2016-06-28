@@ -8,8 +8,8 @@ public class AnimatorController : MonoBehaviour
 
 	float speed = 200.0f;
 	public int counter = 0;
-	Vector2 initPosition;
-	Vector2 endPosition;
+	public Vector2 initPosition;
+	public Vector2 endPosition;
 
 	void Start()
 	{
@@ -79,6 +79,12 @@ public class AnimatorController : MonoBehaviour
 	public bool IsCarryingData(){
 		return (dslot.data != null);
 	}
+
+    public void RebasePosition(Vector2 oldPosition)
+    {
+        animator.transform.position = oldPosition;
+        endPosition = oldPosition;
+    }
 
 	private void SetDirection()
 	{

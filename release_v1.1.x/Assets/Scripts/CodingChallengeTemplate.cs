@@ -38,6 +38,9 @@ public class CodingChallengeTemplate : MonoBehaviour
 
     protected float delaySec = 0.6f;
 
+    /*Execution Record*/
+
+
     protected void PrepareFeedback(string message, GameObject feedback, Color32 colour)
     {
         Text feedbackText = feedback.GetComponentInChildren<Text>();
@@ -233,10 +236,9 @@ public class CodingChallengeTemplate : MonoBehaviour
             case RunningState.Inactive:
                 //Must be in failling state
                 playerState = RunningState.Back;    //Serves as a lock
-                playerFeedback.SetActive(false);
                 break;
             case RunningState.Pause:
-                playerState = RunningState.Back;    //Serves as a lock
+                playerState = RunningState.Back; 
                 break;
             case RunningState.NotReady:
                 playerState = RunningState.Pause;
@@ -252,8 +254,16 @@ public class CodingChallengeTemplate : MonoBehaviour
 
         /* Undo One Command*/
         UndoCommand();
-        playerState = RunningState.Pause; //Release the lock
-
+        if(playerCMDNo < 0)
+        {
+            player.RebasePosition(player.initPosition);
+            playerState = RunningState.Inactive; //The beginning of the state. Should be reset.
+        }
+        else
+        {
+            playerState = RunningState.Pause; //Release the lock
+        }
+        
         debugPan.SetDebugButtonActive(ButtonCode.Stop, true);
         debugPan.SetDebugButtonActive(ButtonCode.Run, true);
         debugPan.SetDebugButtonActive(ButtonCode.Back, (playerCMDNo > -1));
