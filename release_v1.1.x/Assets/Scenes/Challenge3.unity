@@ -1512,7 +1512,7 @@ MonoBehaviour:
   playerInbox: {fileID: 407094770}
   playerOutbox: {fileID: 317247282}
   instructionPan: {fileID: 514481786}
-  commandSelectPan: {fileID: 0}
+  commandSelectPan: {fileID: 1215708795}
   enumPan: {fileID: 1215708796}
   debugPan: {fileID: 1821418768}
   distrustFeedback: {fileID: 2050237204}

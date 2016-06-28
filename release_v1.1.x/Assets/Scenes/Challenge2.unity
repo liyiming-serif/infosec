@@ -1591,7 +1591,7 @@ MonoBehaviour:
   playerInbox: {fileID: 407094770}
   playerOutbox: {fileID: 317247282}
   instructionPan: {fileID: 514481786}
-  commandSelectPan: {fileID: 0}
+  commandSelectPan: {fileID: 1600448302}
   enumPan: {fileID: 1215708796}
   debugPan: {fileID: 517966739}
   distrustFeedback: {fileID: 2050237204}
