@@ -13,9 +13,9 @@ public class ClickHandler : MonoBehaviour, IPointerClickHandler {
 	{
 		if (subCommandToBeChanged) {
 			ExecuteEvents.Execute<IUpdateSubCMDChoice> (subCommandToBeChanged.gameObject, null, (x,y) => x.FinaliseSubCMDChoice(myCode));
-			foreach (TopCommandSlot s in GameObject.FindObjectsOfType<TopCommandSlot> ()) {
-				s.ActivateEventTrigger (true);
-			}
+			//foreach (TopCommandSlot s in GameObject.FindObjectsOfType<TopCommandSlot> ()) {
+			//	s.ActivateEventTrigger (true);
+			//}
 			subCommandToBeChanged = null;
 		}
 	}

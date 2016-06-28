@@ -26,9 +26,9 @@ public class ChallengeSix : HackingChallengeTemplate {
 	{
 		if (distrustCMDNo == enumPan.transform.childCount) {
 			if (hasSolved == 0) {
-				FailFeedback ("You can steal data from \"Distrust\".", playerFeedback);
+				FailFeedback ("You can steal data from the ground.", playerFeedback);
 			} else if(hasSolved == 1){
-				FailFeedback ("You are half-way the goal. The final step is to\"Send\" the secerte \"Y\" to me.", playerFeedback);
+				FailFeedback ("You are half-way the goal. The final step is to \"Give\" the secerte \"Y\" to me.", playerFeedback);
 			}
 
 			return true;
@@ -65,8 +65,9 @@ public class ChallengeSix : HackingChallengeTemplate {
         distrustInboxPos = new Vector2(-436f, -111f);
         distrustOutbox.Initialise (new Vector2(-83f, 132f));
 		memoryBar.Initialise (InitialMemoryPickupPos());
-		runButton.onClick.AddListener (() => StartRunning());
-		Reset ();
+        debugPan.debugButtons[(int)ButtonCode.Run].onClick.AddListener(() => StartRunning());
+        debugPan.debugButtons[(int)ButtonCode.Stop].onClick.AddListener(() => Reset());
+        Reset ();
 	}
 
 	void Update () {

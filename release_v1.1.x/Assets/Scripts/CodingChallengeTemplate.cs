@@ -24,7 +24,7 @@ public class CodingChallengeTemplate : MonoBehaviour
     [SerializeField]
     protected InstructionPanel instructionPan;
     [SerializeField]
-    protected GameObject CommandSelectPan;
+    protected GameObject commandSelectPan;
     [SerializeField]
     protected EnumPanel enumPan;
     [SerializeField]
@@ -88,7 +88,7 @@ public class CodingChallengeTemplate : MonoBehaviour
 
     protected void SetCodingModeActive(bool setting)
     {
-        CommandSelectPan.SetActive(setting);
+        commandSelectPan.SetActive(setting);
         foreach (TopCommandSlot s in GameObject.FindObjectsOfType<TopCommandSlot>())
         {
             s.ActivateEventTrigger(setting);

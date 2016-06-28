@@ -144,12 +144,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
---- !u!114 &59106066 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11421372, guid: 9086556e2c66fd54aaf3c3c0a81069c8,
-    type: 2}
-  m_PrefabInternal: {fileID: 1993441143}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &89141506
 Prefab:
   m_ObjectHideFlags: 0
@@ -1309,6 +1303,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 22479398, guid: b99ec134871094ef4b4cd739fb4de841,
     type: 2}
   m_PrefabInternal: {fileID: 650646384}
+--- !u!114 &679359571 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11431008, guid: 9086556e2c66fd54aaf3c3c0a81069c8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1993441143}
+  m_Script: {fileID: 11500000, guid: 465c9e4359b92c24fac53f2290d0c67c, type: 3}
 --- !u!1 &679583876
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,7 +1486,8 @@ MonoBehaviour:
   playerOutbox: {fileID: 317247282}
   instructionPan: {fileID: 514481786}
   enumPan: {fileID: 1215708796}
-  runButton: {fileID: 59106066}
+  commandSelectPan: {fileID: 1600448302}
+  debugPan: {fileID: 679359571}
   distrust: {fileID: 1314392907}
   distrustFeedback: {fileID: 1319041653}
   distrustOutbox: {fileID: 1850441596}
@@ -4974,7 +4975,7 @@ RectTransform:
   m_RootOrder: 6
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 574, y: 358}
+  m_AnchoredPosition: {x: 585, y: 357}
   m_SizeDelta: {x: 73, y: 425}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1549984322
@@ -6193,7 +6194,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 5
+  m_ChildAlignment: 4
   m_StartCorner: 2
   m_StartAxis: 1
   m_CellSize: {x: 50, y: 66}
@@ -6774,6 +6775,18 @@ Prefab:
     - target: {fileID: 22461960, guid: 9086556e2c66fd54aaf3c3c0a81069c8, type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 111310, guid: 9086556e2c66fd54aaf3c3c0a81069c8, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 180684, guid: 9086556e2c66fd54aaf3c3c0a81069c8, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 117990, guid: 9086556e2c66fd54aaf3c3c0a81069c8, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9086556e2c66fd54aaf3c3c0a81069c8, type: 2}

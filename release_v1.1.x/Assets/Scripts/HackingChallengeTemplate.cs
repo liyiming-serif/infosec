@@ -18,8 +18,10 @@ public class HackingChallengeTemplate : MonoBehaviour {
     protected AttackInstructionPanel instructionPan;
 	[SerializeField]
     protected EnumPanel enumPan;
-	[SerializeField]
-    protected Button runButton;
+    [SerializeField]
+    protected GameObject commandSelectPan;
+    [SerializeField]
+    protected DebugPanel debugPan;
 
     [SerializeField]
     protected AnimatorController distrust;
@@ -82,7 +84,8 @@ public class HackingChallengeTemplate : MonoBehaviour {
 	}
 
 	protected void SetCodingModeActive(bool setting){
-		foreach (AttackTopCommandSlot s in GameObject.FindObjectsOfType<AttackTopCommandSlot> ()) {
+        commandSelectPan.SetActive(setting);
+        foreach (AttackTopCommandSlot s in GameObject.FindObjectsOfType<AttackTopCommandSlot> ()) {
 			s.ActivateEventTrigger (setting);
 		}
 	}
@@ -159,7 +162,6 @@ public class HackingChallengeTemplate : MonoBehaviour {
             {
                 SetEndPositionBySubCMD(player, topCommandToRun.subCommandRef.myCode);
             }
-            Debug.Log("Hey");
         }
         
         return true;
@@ -187,6 +189,11 @@ public class HackingChallengeTemplate : MonoBehaviour {
         distrustOutbox.EmptyAllData();
         distrustFeedback.SetActive(false);
 
+        debugPan.SetDebugButtonActive(ButtonCode.Run, true);
+        debugPan.SetDebugButtonActive(ButtonCode.Stop, false);
+        //TODO Implement step back and step forward
+        debugPan.debugButtons[(int)ButtonCode.Back].gameObject.SetActive(false);
+        debugPan.debugButtons[(int)ButtonCode.Step].gameObject.SetActive(false);
     }
 
     virtual protected void StartRunning() {
@@ -196,6 +203,10 @@ public class HackingChallengeTemplate : MonoBehaviour {
         distrustPlayerState = RunningState.Ready;
         playerState = RunningState.Ready;
         SetCodingModeActive(false);
+
+        debugPan.SetDebugButtonActive(ButtonCode.Run, false);
+        debugPan.SetDebugButtonActive(ButtonCode.Stop, true);
+
         Invoke("RunPlayerCommand", delaySec);
 	}
 

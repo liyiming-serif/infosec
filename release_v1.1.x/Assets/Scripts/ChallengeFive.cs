@@ -26,7 +26,7 @@ public class ChallengeFive : HackingChallengeTemplate {
 			if (hasSolved == 0) {
 				FailFeedback ("You can load the actual data of \"?\"", playerFeedback);
 			} else if(hasSolved == 1){
-				FailFeedback ("You are half-way the goal. \"Give\" the value \"Y\" to me.", playerFeedback);
+				FailFeedback ("You are half-way the goal. The final step is to \"Give\" the value \"Y\" to me.", playerFeedback);
 			}
 
 			return true;
@@ -63,8 +63,9 @@ public class ChallengeFive : HackingChallengeTemplate {
         distrustInboxPos = new Vector2(-436f, -111f);
         distrustOutbox.Initialise (new Vector2(-83f, 132f));
 		memoryBar.Initialise (InitialMemoryPickupPos());
-		runButton.onClick.AddListener (() => StartRunning());
-		Reset ();
+        debugPan.debugButtons[(int)ButtonCode.Run].onClick.AddListener(() => StartRunning());
+        debugPan.debugButtons[(int)ButtonCode.Stop].onClick.AddListener(() => Reset());
+        Reset ();
 	}
 
 	void Update () {

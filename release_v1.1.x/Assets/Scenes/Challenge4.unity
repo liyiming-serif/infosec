@@ -1512,7 +1512,7 @@ MonoBehaviour:
   playerInbox: {fileID: 407094770}
   playerOutbox: {fileID: 317247282}
   instructionPan: {fileID: 514481786}
-  CommandSelectPan: {fileID: 1600448302}
+  commandSelectPan: {fileID: 0}
   enumPan: {fileID: 1215708796}
   debugPan: {fileID: 210921485}
   distrustFeedback: {fileID: 2050237204}
@@ -5662,7 +5662,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 5
+  m_ChildAlignment: 4
   m_StartCorner: 2
   m_StartAxis: 1
   m_CellSize: {x: 50, y: 66}
