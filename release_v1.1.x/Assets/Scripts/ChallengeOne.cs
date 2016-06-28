@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -45,22 +46,11 @@ public class ChallengeOne : CodingChallengeTemplate
         return false;
     }
 
-    void Start()
+    protected override void UndoCommand()
     {
-        playerInbox.Initialise(new Vector2(-344f, 251f), InitialInboxGenerator());
-        playerOutbox.Initialise(new Vector2(-83f, -171f));
-        debugButtons[(int)ButtonCode.Run].onClick.AddListener(() => StartRunning());
-        debugButtons[(int)ButtonCode.Stop].onClick.AddListener(() => Reset());
-        debugButtons[(int)ButtonCode.Step].onClick.AddListener(() => StartStepping());
-        Reset();
-    }
-
-    void Update()
-    {
-        Data d;
-        if (playerOldCounter != player.counter)
+        if (playerCMDNo < instructionPan.GetLength())
         {
-            playerOldCounter = player.counter;
+            Data d;
             TopCommand runTopCommand = instructionPan.GetTopCommandAt(playerCMDNo);
             switch (runTopCommand.myCode)
             {
@@ -110,7 +100,85 @@ public class ChallengeOne : CodingChallengeTemplate
                         Debug.Log("Should not reach here @ 1 Update, Challenge One.");
                     }
                     break;
+                default:
+                    throw new System.Exception("An unexpected command: " + runTopCommand.myCode);
             }
+        }
+        playerCMDNo -= 1;
+        enumPan.SetRunningState(playerCMDNo, EnumPanel.Status.Executing);
+    }
+
+    protected override void ExecuteCommand()
+    {
+        Data d;
+        TopCommand runTopCommand = instructionPan.GetTopCommandAt(playerCMDNo);
+        switch (runTopCommand.myCode)
+        {
+            case TopCommand.Code.Inbox:
+                d = playerInbox.sendFirstData();
+                if (d)
+                {
+                    player.PickupData(d);
+                    playerCMDNo += 1;
+                    ExecuteNextIfNotPaused();
+                }
+                else
+                {
+                    FailFeedback("There is no data on the line. Try \"Give\" what you had to me.", playerFeedback);
+                }
+                break;
+            case TopCommand.Code.Outbox:
+                if (runTopCommand.subCommandRef.myCode == SubCommand.Code.Boss)
+                {
+                    d = player.SendData();
+                    if (d)
+                    {
+                        playerOutbox.AcceptData(d);
+                        if (hasSolved == 0 && d.dataStr == "O")
+                        {
+                            hasSolved += 1;
+                            playerCMDNo += 1;
+                            ExecuteNextIfNotPaused();
+                        }
+                        else if (hasSolved == 0 && d.dataStr == "K")
+                        {
+                            FailFeedback("You have dropped letter \"O\". Please send both letters to me.", playerFeedback);
+                        }
+                        else if (hasSolved == 1 && d.dataStr == "K")
+                        {
+                            hasSolved += 1;
+                            SucceedFeedback("Thanks for giving me \"OK\".", playerFeedback);
+                        }
+                    }
+                    else
+                    {
+                        FailFeedback("No data can you give to me. Please \"Take\" before \"Giving\" me data.", playerFeedback);
+                    }
+                }
+                else
+                {
+                    Debug.Log("Should not reach here @ 1 Update, Challenge One.");
+                }
+                break;
+            default:
+                throw new System.Exception("An unexpected command: " + runTopCommand.myCode);
+        }
+    }
+    void Start()
+    {
+        playerInbox.Initialise(new Vector2(-344f, 251f), InitialInboxGenerator());
+        playerOutbox.Initialise(new Vector2(-83f, -171f));
+        AddButtonListener();
+        Reset();
+        instructionPan.GetComponent<IHasFinalised>().HasFinalised();
+    }
+
+    void Update()
+    {
+        if (playerOldCounter != player.counter)
+        {
+            playerOldCounter = player.counter;
+            ExecuteCommand();
         }
 
     }

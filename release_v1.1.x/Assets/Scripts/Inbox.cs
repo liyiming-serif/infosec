@@ -70,6 +70,14 @@ public class Inbox : MonoBehaviour{
 		return sendData (0);
 	}
 
+    public void AcceptData(Data firstData)
+    {
+        if(firstData == null)
+        {
+            throw new System.Exception("Player is holding nothing in his hands. Unexpected");
+        }
+    }
+
 	void Start (){
 		slotsTransform = GetComponent<RectTransform> ();
 	}

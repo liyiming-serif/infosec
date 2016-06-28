@@ -62,9 +62,9 @@ public class ChallengeTwo : CodingChallengeTemplate
         playerInbox.Initialise(new Vector2(-344f, 251f), InitialInboxGenerator());
         playerOutbox.Initialise(new Vector2(-83f, -171f));
         distrustOutbox.Initialise(new Vector2(-83f, 132f));
-        debugButtons[(int)ButtonCode.Run].onClick.AddListener(() => StartRunning());
-        debugButtons[(int)ButtonCode.Stop].onClick.AddListener(() => Reset());
-        debugButtons[(int)ButtonCode.Step].onClick.AddListener(() => StartStepping());
+        debugPan.debugButtons[(int)ButtonCode.Run].onClick.AddListener(() => StartRunning());
+        debugPan.debugButtons[(int)ButtonCode.Stop].onClick.AddListener(() => Reset());
+        debugPan.debugButtons[(int)ButtonCode.Step].onClick.AddListener(() => StartStepping());
         Reset();
     }
 

@@ -77,9 +77,9 @@ public class ChallengeThree : CodingChallengeTemplate
         Data initialData = Instantiate(Resources.Load("DataBoard", typeof(Data))) as Data;
         initialData.dataStr = "O";
         memoryBar.AcceptDataAt(0, initialData);
-        debugButtons[(int)ButtonCode.Run].onClick.AddListener(() => StartRunning());
-        debugButtons[(int)ButtonCode.Stop].onClick.AddListener(() => Reset());
-        debugButtons[(int)ButtonCode.Step].onClick.AddListener(() => StartStepping());
+        debugPan.debugButtons[(int)ButtonCode.Run].onClick.AddListener(() => StartRunning());
+        debugPan.debugButtons[(int)ButtonCode.Stop].onClick.AddListener(() => Reset());
+        debugPan.debugButtons[(int)ButtonCode.Step].onClick.AddListener(() => StartStepping());
         Reset();
     }
 
