@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 43d634234d06fe74f8ed66e6d9767b27
-timeCreated: 1467082540
+guid: 4906117bbef288b4fa6b731a3d0757cc
+timeCreated: 1467085554
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -66,10 +66,13 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -54, y: 58}
-        - {x: -54, y: -58}
-        - {x: 54, y: -58}
-        - {x: 54, y: 58}
+      - - {x: -43, y: 58}
+        - {x: -54, y: 58}
+        - {x: -54, y: -54}
+        - {x: -19, y: -58}
+        - {x: 40, y: -58}
+        - {x: 40, y: -36}
+        - {x: 7, y: -19}
     - name: cmd_arrow_tut_1
       rect:
         serializedVersion: 2
@@ -81,10 +84,16 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -54, y: 58}
-        - {x: -54, y: -58}
-        - {x: 54, y: -58}
-        - {x: 54, y: 58}
+      - - {x: 11, y: 23}
+        - {x: -32, y: 58}
+        - {x: -46, y: 58}
+        - {x: -46, y: -17}
+        - {x: -36, y: -35}
+        - {x: 10, y: -58}
+        - {x: 21, y: -58}
+        - {x: 41, y: -51}
+        - {x: 50, y: -43}
+        - {x: 50, y: -32}
     - name: cmd_arrow_tut_2
       rect:
         serializedVersion: 2
@@ -96,10 +105,16 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -54, y: 58}
-        - {x: -54, y: -58}
-        - {x: 54, y: -58}
-        - {x: 54, y: 58}
+      - - {x: 14, y: 23}
+        - {x: -29, y: 58}
+        - {x: -43, y: 58}
+        - {x: -43, y: -17}
+        - {x: -33, y: -35}
+        - {x: 13, y: -58}
+        - {x: 24, y: -58}
+        - {x: 44, y: -51}
+        - {x: 53, y: -43}
+        - {x: 53, y: -32}
     - name: cmd_arrow_tut_3
       rect:
         serializedVersion: 2
@@ -111,10 +126,16 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -54, y: 58}
-        - {x: -54, y: -58}
-        - {x: 54, y: -58}
-        - {x: 54, y: 58}
+      - - {x: 22, y: -19}
+        - {x: -28, y: 58}
+        - {x: -41, y: 58}
+        - {x: -41, y: -17}
+        - {x: -31, y: -35}
+        - {x: 15, y: -58}
+        - {x: 26, y: -58}
+        - {x: 46, y: -51}
+        - {x: 54, y: -44}
+        - {x: 54, y: -36}
     - name: cmd_arrow_tut_4
       rect:
         serializedVersion: 2
@@ -126,10 +147,13 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -54, y: 58}
-        - {x: -54, y: -58}
-        - {x: 54, y: -58}
-        - {x: 54, y: 58}
+      - - {x: -40, y: 58}
+        - {x: -40, y: -27}
+        - {x: -4, y: -58}
+        - {x: 41, y: -58}
+        - {x: 54, y: -50}
+        - {x: 54, y: -15}
+        - {x: -26, y: 58}
     outline: []
   spritePackingTag: 
   userData: 

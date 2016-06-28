@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 31bf97e21f6b2e240b5216383a7a6a01
-timeCreated: 1467082595
+timeCreated: 1467085504
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -66,8 +66,9 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -91, y: 30}
-        - {x: -91, y: -30}
+      - - {x: -72, y: 30}
+        - {x: -72, y: -29}
+        - {x: -69, y: -30}
         - {x: 91, y: -30}
         - {x: 91, y: 30}
     - name: cmd_take_tut_1
@@ -81,10 +82,12 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -91, y: 30}
-        - {x: -91, y: -30}
-        - {x: 91, y: -30}
-        - {x: 91, y: 30}
+      - - {x: -80, y: 30}
+        - {x: -80, y: -29}
+        - {x: -77, y: -30}
+        - {x: 82, y: -30}
+        - {x: 84, y: -29}
+        - {x: 84, y: 30}
     - name: cmd_take_tut_2
       rect:
         serializedVersion: 2
@@ -96,10 +99,12 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -91, y: 30}
-        - {x: -91, y: -30}
-        - {x: 91, y: -30}
-        - {x: 91, y: 30}
+      - - {x: -85, y: 30}
+        - {x: -85, y: -26}
+        - {x: -84, y: -30}
+        - {x: 77, y: -30}
+        - {x: 79, y: -29}
+        - {x: 79, y: 30}
     - name: cmd_take_tut_3
       rect:
         serializedVersion: 2
@@ -111,10 +116,12 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -91, y: 30}
-        - {x: -91, y: -30}
-        - {x: 91, y: -30}
-        - {x: 91, y: 30}
+      - - {x: -88, y: 30}
+        - {x: -88, y: -26}
+        - {x: -87, y: -30}
+        - {x: 74, y: -30}
+        - {x: 76, y: -29}
+        - {x: 76, y: 30}
     - name: cmd_take_tut_4
       rect:
         serializedVersion: 2
@@ -128,8 +135,9 @@ TextureImporter:
       outline:
       - - {x: -91, y: 30}
         - {x: -91, y: -30}
-        - {x: 91, y: -30}
-        - {x: 91, y: 30}
+        - {x: 69, y: -30}
+        - {x: 71, y: -29}
+        - {x: 71, y: 30}
     outline: []
   spritePackingTag: 
   userData: 
