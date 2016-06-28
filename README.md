@@ -6,21 +6,25 @@ RHS arg select interface must work
 
 number line bleeds into the LHS
 
-put it online
+highlight stop button: let player know that player can exit run mode
+
+step back and step forward icon redesign
 
 proofread
 
-set up tutorial
-
 level select as tabs
 
-highlight stop button: let player know that player can exit run mode
+put it online
+
+
 
 debug tutorial
 
 level complete screen
 
 make obvious 'take' is from player's wire
+
+
 
 social engineering?
 
