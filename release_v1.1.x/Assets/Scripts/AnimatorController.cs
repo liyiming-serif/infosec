@@ -10,6 +10,7 @@ public class AnimatorController : MonoBehaviour
 	public int counter = 0;
 	public Vector2 initPosition;
 	public Vector2 endPosition;
+    public Vector2 startPosition;
 
 	void Start()
 	{
@@ -18,6 +19,7 @@ public class AnimatorController : MonoBehaviour
 		animator.enabled = false;
 		initPosition = animator.transform.position;
 		endPosition = initPosition;
+        startPosition = endPosition;
 	}
 
 	public void ResetAnimator()
@@ -37,8 +39,9 @@ public class AnimatorController : MonoBehaviour
 	{
 		animator.enabled = true;
 		if (Vector2.Distance (endPosition, destination) > .1f) {
-			endPosition = destination;
-		}
+            startPosition = endPosition;
+            endPosition = destination;
+       }
 	}
 
 	public void PickupData(Data data){

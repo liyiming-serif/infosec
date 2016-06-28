@@ -4,7 +4,7 @@ using System.Collections;
 
 public enum ButtonCode
 {
-    Run = 0, Back = 1, Stop = 2, Step = 3
+    Back = 0, Run = 1, Step = 2, Stop = 3
 };
 
 public class DebugPanel : MonoBehaviour

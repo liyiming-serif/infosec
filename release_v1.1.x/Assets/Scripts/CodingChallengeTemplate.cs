@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum RunningState
 {
@@ -39,7 +40,11 @@ public class CodingChallengeTemplate : MonoBehaviour
     protected float delaySec = 0.6f;
 
     /*Execution Record*/
-
+    protected List<string[]> playerInboxLog;
+    protected List<string[]> playerOutboxLog;
+    protected List<int> hasSolvedLog;
+    protected List<string> playerHoldingLog;
+    protected List<Vector2> playerPosLog;
 
     protected void PrepareFeedback(string message, GameObject feedback, Color32 colour)
     {
@@ -59,14 +64,8 @@ public class CodingChallengeTemplate : MonoBehaviour
     protected void FailFeedback(string message, GameObject feedback)
     {
         PrepareFeedback(message, feedback, new Color32(235, 46, 44, 212));
-        if (playerCMDNo < instructionPan.GetLength())
-        {
-            enumPan.SetRunningState(playerCMDNo, EnumPanel.Status.Error);
-        }
-        else
-        {
-            enumPan.SetRunningState(playerCMDNo - 1, EnumPanel.Status.Error);
-        }
+        enumPan.SetRunningState(playerCMDNo, EnumPanel.Status.Error);
+
         playerState = RunningState.Inactive;
 
         debugPan.SetDebugButtonActive(ButtonCode.Stop, true);
@@ -166,6 +165,11 @@ public class CodingChallengeTemplate : MonoBehaviour
         playerFeedback.SetActive(false);
         SetCodingModeActive(true);
 
+        playerInboxLog.Clear();
+        playerOutboxLog.Clear();
+        hasSolvedLog.Clear();
+        playerHoldingLog.Clear();
+        playerPosLog.Clear();
 
         debugPan.SetDebugButtonActive(ButtonCode.Run, true);
         debugPan.SetDebugButtonActive(ButtonCode.Step, true);
@@ -179,7 +183,6 @@ public class CodingChallengeTemplate : MonoBehaviour
         if (playerState == RunningState.Inactive)
         {
             Reset();
-            playerCMDNo = 0;
             SetCodingModeActive(false);
         }
         else if (playerState != RunningState.Pause)
@@ -193,6 +196,7 @@ public class CodingChallengeTemplate : MonoBehaviour
         debugPan.SetDebugButtonActive(ButtonCode.Back, (playerCMDNo > -1));
         debugPan.SetDebugButtonActive(ButtonCode.Step, true);
 
+        playerCMDNo += 1;
         Invoke("RunPlayerCommand", delaySec);
 
     }
@@ -203,7 +207,6 @@ public class CodingChallengeTemplate : MonoBehaviour
         {
             case RunningState.Inactive:
                 Reset();
-                playerCMDNo = 0;
                 SetCodingModeActive(false);
                 playerState = RunningState.Step;
                 break;
@@ -212,7 +215,7 @@ public class CodingChallengeTemplate : MonoBehaviour
                 break;
             case RunningState.NotReady:
                 playerState = RunningState.Pause;
-                break;
+                return;
             case RunningState.Ready:
                 //ignore
                 return;
@@ -226,6 +229,7 @@ public class CodingChallengeTemplate : MonoBehaviour
         debugPan.SetDebugButtonActive(ButtonCode.Back, false);
         debugPan.SetDebugButtonActive(ButtonCode.Step, false);
 
+        playerCMDNo += 1;
         Invoke("RunPlayerCommand", delaySec);
     }
 
@@ -236,9 +240,10 @@ public class CodingChallengeTemplate : MonoBehaviour
             case RunningState.Inactive:
                 //Must be in failling state
                 playerState = RunningState.Back;    //Serves as a lock
+                playerFeedback.SetActive(false);    //Undo exception
                 break;
             case RunningState.Pause:
-                playerState = RunningState.Back; 
+                playerState = RunningState.Back;
                 break;
             case RunningState.NotReady:
                 playerState = RunningState.Pause;
@@ -252,9 +257,8 @@ public class CodingChallengeTemplate : MonoBehaviour
                 return;
         }
 
-        /* Undo One Command*/
         UndoCommand();
-        if(playerCMDNo < 0)
+        if (playerCMDNo < 0)
         {
             player.RebasePosition(player.initPosition);
             playerState = RunningState.Inactive; //The beginning of the state. Should be reset.
@@ -263,7 +267,7 @@ public class CodingChallengeTemplate : MonoBehaviour
         {
             playerState = RunningState.Pause; //Release the lock
         }
-        
+
         debugPan.SetDebugButtonActive(ButtonCode.Stop, true);
         debugPan.SetDebugButtonActive(ButtonCode.Run, true);
         debugPan.SetDebugButtonActive(ButtonCode.Back, (playerCMDNo > -1));
@@ -290,6 +294,7 @@ public class CodingChallengeTemplate : MonoBehaviour
             debugPan.SetDebugButtonActive(ButtonCode.Step, true);
             debugPan.SetDebugButtonActive(ButtonCode.Back, (playerCMDNo > -1));
 
+            playerCMDNo += 1;
             Invoke("RunPlayerCommand", delaySec);
             return true;
         }
@@ -302,7 +307,53 @@ public class CodingChallengeTemplate : MonoBehaviour
 
     virtual protected void UndoCommand()
     {
- 
+        player.RebasePosition(playerPosLog[playerCMDNo]);
+        hasSolved = hasSolvedLog[playerCMDNo];
+
+        if (playerInboxLog[playerCMDNo] == null)
+        {
+            playerInbox.ResetInbox();
+        }
+        else
+        {
+            List<Data> tempList = new List<Data>();
+            foreach (string s in playerInboxLog[playerCMDNo])
+            {
+                Data d = Instantiate(Resources.Load("DataBoard", typeof(Data))) as Data;
+                d.dataStr = s;
+                tempList.Add(d);
+            }
+            playerInbox.ResetInbox(tempList.ToArray());
+        }
+
+        if (playerHoldingLog[playerCMDNo] == null)
+        {
+            player.DropdownData();
+        }
+        else
+        {
+            Data d = Instantiate(Resources.Load("DataBoard", typeof(Data))) as Data;
+            d.dataStr = playerHoldingLog[playerCMDNo];
+            player.PickupData(d);
+        }
+
+        if (playerOutboxLog[playerCMDNo] == null)
+        {
+            playerOutbox.ResetOutbox();
+        }
+        else
+        {
+            List<Data> tempList = new List<Data>();
+            foreach (string s in playerOutboxLog[playerCMDNo])
+            {
+                Data d = Instantiate(Resources.Load("DataBoard", typeof(Data))) as Data;
+                d.dataStr = s;
+                tempList.Add(d);
+            }
+            playerOutbox.ResetOutbox(tempList.ToArray());
+        }
+        playerCMDNo -= 1;
+        enumPan.SetRunningState(playerCMDNo, EnumPanel.Status.Executing);
     }
 
     virtual protected void ExecuteCommand()
@@ -320,6 +371,18 @@ public class CodingChallengeTemplate : MonoBehaviour
         return null;
     }
 
+    virtual protected void Logging()
+    {
+        if (playerCMDNo >= playerPosLog.Count)
+        {
+            hasSolvedLog.Add(hasSolved);
+            playerPosLog.Add(player.endPosition);
+            playerHoldingLog.Add(player.GetData());
+            playerInboxLog.Add(playerInbox.GetCurrentState());
+            playerOutboxLog.Add(playerOutbox.GetCurrentState());
+        }
+
+    }
     protected IEnumerator DiminishAfterSec(GameObject feedback, float time)
     {
         yield return new WaitForSeconds(time);

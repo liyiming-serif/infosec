@@ -46,7 +46,32 @@ public class Inbox : MonoBehaviour{
 		}
 	}
 
-	public void EmptyAllData()
+    public string[] GetCurrentState()
+    {
+        List<string> tempList = new List<string>();
+        foreach (Transform slotTransform in slotsTransform)
+        {
+            Data item = slotTransform.GetComponent<DataSlot>().data;
+            if (item != null)
+            {
+                tempList.Add(item.dataStr);
+            }
+            else
+            {
+                break;
+            }
+        }
+        if (tempList.Count == 0)
+        {
+            return null;
+        }
+        else
+        {
+            return tempList.ToArray();
+        }
+    }
+
+    public void EmptyAllData()
 	{
 		foreach (Transform slotTransform in slotsTransform) {
 			slotTransform.GetComponent<DataSlot> ().RemoveData ();
@@ -57,12 +82,14 @@ public class Inbox : MonoBehaviour{
 		if (GetCount () <= index) {
 			return null;
 		}
-		Data item = slotsTransform.GetChild (index).GetComponent<DataSlot> ().data;
-		for (int i = index+1; i < GetCount (); i++) {
+
+        Data item = slotsTransform.GetChild (index).GetComponent<DataSlot> ().data;
+ 		for (int i = index+1; i < GetCount (); i++) {
 			Data moveBox = slotsTransform.GetChild (i).GetComponent<DataSlot>().data;
 			moveBox.transform.SetParent (slotsTransform.GetChild (i - 1));
-		}
-		return item;
+ 		}
+
+        return item;
 	}
 
 

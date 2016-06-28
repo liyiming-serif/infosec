@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ChallengeFour : CodingChallengeTemplate
 {
@@ -11,6 +13,10 @@ public class ChallengeFour : CodingChallengeTemplate
     protected Outbox distrustOutbox;
     [SerializeField]
     protected MemoryBar memoryBar;
+
+    /*Execution Record*/
+    protected List<string[]> distrustOutboxLog;
+    protected List<string[]> memoryBarLog;
 
     override protected void SetEndPositionBySubCMD(AnimatorController character, SubCommand.Code subCode)
     {
@@ -36,6 +42,7 @@ public class ChallengeFour : CodingChallengeTemplate
     {
         if (playerCMDNo == instructionPan.GetLength())
         {
+            playerCMDNo -= 1;
             if (hasSolved == 0)
             {
                 FailFeedback("You can \"Store\" \"K\" in a cell. Then \"Give\" \"O\" to me.", playerFeedback);
@@ -55,6 +62,13 @@ public class ChallengeFour : CodingChallengeTemplate
         memoryBar.EmptyMemoryBar();
         distrustOutbox.EmptyAllData();
         distrustFeedback.SetActive(false);
+        playerInboxLog.Clear();
+        playerOutboxLog.Clear();
+        hasSolvedLog.Clear();
+        playerHoldingLog.Clear();
+        playerPosLog.Clear();
+        distrustOutboxLog.Clear();
+        memoryBarLog.Clear();
     }
 
     protected override Data[] InitialInboxGenerator()
@@ -75,130 +89,174 @@ public class ChallengeFour : CodingChallengeTemplate
         return initialPickupPos;
     }
 
+    protected override void Logging()
+    {
+        if (playerCMDNo >= playerPosLog.Count)
+        {
+            hasSolvedLog.Add(hasSolved);
+            playerPosLog.Add(player.startPosition);
+            playerHoldingLog.Add(player.GetData());
+            playerInboxLog.Add(playerInbox.GetCurrentState());
+            playerOutboxLog.Add(playerOutbox.GetCurrentState());
+            distrustOutboxLog.Add(distrustOutbox.GetCurrentState());
+            memoryBarLog.Add(memoryBar.GetCurrentState());
+        }
+    }
+
     void Start()
     {
         playerInbox.Initialise(new Vector2(-344f, 251f), InitialInboxGenerator());
         playerOutbox.Initialise(new Vector2(-83f, -171f));
         distrustOutbox.Initialise(new Vector2(-83f, 132f));
         memoryBar.Initialise(InitialMemoryPickupPos());
-        debugPan.debugButtons[(int)ButtonCode.Run].onClick.AddListener(() => StartRunning());
-        debugPan.debugButtons[(int)ButtonCode.Stop].onClick.AddListener(() => Reset());
-        debugPan.debugButtons[(int)ButtonCode.Step].onClick.AddListener(() => StartStepping());
+        AddButtonListener();
+        playerInboxLog = new List<string[]>();
+        playerOutboxLog = new List<string[]>();
+        hasSolvedLog = new List<int>();
+        playerHoldingLog = new List<string>();
+        playerPosLog = new List<Vector2>();
+        distrustOutboxLog = new List<string[]>();
+        memoryBarLog = new List<string[]>();
         Reset();
+        instructionPan.GetComponent<IHasFinalised>().HasFinalised();
     }
 
+    protected override void UndoCommand()
+    {
+        memoryBar.RestoreState(memoryBarLog[playerCMDNo]);
+        if (distrustOutboxLog[playerCMDNo] == null)
+        {
+            distrustOutbox.ResetOutbox();
+        }
+        else
+        {
+            List<Data> tempList = new List<Data>();
+            foreach (string s in distrustOutboxLog[playerCMDNo])
+            {
+                Data d = Instantiate(Resources.Load("DataBoard", typeof(Data))) as Data;
+                d.dataStr = s;
+                tempList.Add(d);
+            }
+            distrustOutbox.ResetOutbox(tempList.ToArray());
+        }
+        base.UndoCommand();
+    }
+
+    protected override void ExecuteCommand()
+    {
+        Logging();
+        Data d;
+        TopCommand runTopCommand = instructionPan.GetTopCommandAt(playerCMDNo);
+        switch (runTopCommand.myCode)
+        {
+            case TopCommand.Code.Inbox:
+                d = playerInbox.sendFirstData();
+                if (d)
+                {
+                    player.PickupData(d);
+                    ExecuteNextIfNotPaused();
+                }
+                else
+                {
+                    FailFeedback("There is no data on the line. Try \"Give\" what you had to me.", playerFeedback);
+                }
+                break;
+            case TopCommand.Code.Outbox:
+                d = player.SendData();
+                if (runTopCommand.subCommandRef.myCode == SubCommand.Code.Boss)
+                {
+                    if (d)
+                    {
+                        playerOutbox.AcceptData(d);
+                        if (hasSolved == 0 && d.dataStr == "O")
+                        {
+                            hasSolved = 1;
+                            InformFeedback("Thanks! The next letter that I need is \"K\".", playerFeedback);
+                            StartCoroutine(DiminishAfterSec(playerFeedback, 1f));
+                            ExecuteNextIfNotPaused();
+                        }
+                        else if (hasSolved == 0 && d.dataStr == "K")
+                        {
+                            FailFeedback("I was expecting to receive \"O\" first. You can \"Store\" \"K\" in a cell first.", playerFeedback);
+                        }
+                        else if (hasSolved == 1 && d.dataStr == "K")
+                        {
+                            hasSolved = 2;
+                            SucceedFeedback("Well done!", playerFeedback);
+                        }
+                        else if (hasSolved == 1 && d.dataStr == "O")
+                        {
+                            FailFeedback("I was not expecting to receive \"O\" twice.", playerFeedback);
+                        }
+                    }
+                    else
+                    {
+                        FailFeedback("No data can you give to me. Please \"Take\" before \"Giving\" me data.", playerFeedback);
+                    }
+                }
+                else if (runTopCommand.subCommandRef.myCode == SubCommand.Code.Distrust)
+                {
+                    if (d)
+                    {
+                        distrustOutbox.AcceptData(d);
+                        FailFeedback("I was not expecting to receive any data.", distrustFeedback);
+                    }
+                    else
+                    {
+                        FailFeedback("No data can you give to me. Please \"Take\" before \"Giving\" me data.", playerFeedback);
+                    }
+                }
+                break;
+            case TopCommand.Code.Load:
+                if (runTopCommand.subCommandRef.myCode == SubCommand.Code.Zero)
+                {
+                    d = memoryBar.CloneDataAt(0);
+                }
+                else
+                {
+                    d = memoryBar.CloneDataAt(1);
+                }
+                if (d)
+                {
+                    player.PickupData(d);
+                    ExecuteNextIfNotPaused();
+                }
+                else
+                {
+                    FailFeedback("No data can be loaded from it.", playerFeedback);
+                }
+                break;
+            case TopCommand.Code.Store:
+                d = player.CloneData();
+                if (d)
+                {
+                    if (runTopCommand.subCommandRef.myCode == SubCommand.Code.Zero)
+                    {
+                        memoryBar.AcceptDataAt(0, d);
+                    }
+                    else
+                    {
+                        memoryBar.AcceptDataAt(1, d);
+                    }
+                    ExecuteNextIfNotPaused();
+                }
+                else
+                {
+                    FailFeedback("No data can you store on the ground.", playerFeedback);
+                }
+                break;
+
+        }
+
+    }
     void Update()
     {
-        Data d;
+
         if (playerOldCounter != player.counter)
         {
             playerOldCounter = player.counter;
-            TopCommand runTopCommand = instructionPan.GetTopCommandAt(playerCMDNo);
-            switch (runTopCommand.myCode)
-            {
-                case TopCommand.Code.Inbox:
-                    d = playerInbox.sendFirstData();
-                    if (d)
-                    {
-                        player.PickupData(d);
-                        playerCMDNo += 1;
-                        ExecuteNextIfNotPaused();
-                    }
-                    else
-                    {
-                        FailFeedback("There is no data on the line. Try \"Give\" what you had to me.", playerFeedback);
-                    }
-                    break;
-                case TopCommand.Code.Outbox:
-                    d = player.SendData();
-                    if (runTopCommand.subCommandRef.myCode == SubCommand.Code.Boss)
-                    {
-                        if (d)
-                        {
-                            playerOutbox.AcceptData(d);
-                            if (hasSolved == 0 && d.dataStr == "O")
-                            {
-                                hasSolved = 1;
-                                InformFeedback("Thanks! The next letter that I need is \"K\".", playerFeedback);
-                                StartCoroutine(DiminishAfterSec(playerFeedback, 1f));
-                                playerCMDNo += 1;
-                                ExecuteNextIfNotPaused();
-                            }
-                            else if (hasSolved == 0 && d.dataStr == "K")
-                            {
-                                FailFeedback("I was expecting to receive \"O\" first. You can \"Store\" \"K\" in a cell first.", playerFeedback);
-                            }
-                            else if (hasSolved == 1 && d.dataStr == "K")
-                            {
-                                hasSolved = 2;
-                                SucceedFeedback("Well done!", playerFeedback);
-                            }
-                            else if (hasSolved == 1 && d.dataStr == "O")
-                            {
-                                FailFeedback("I was not expecting to receive \"O\" twice.", playerFeedback);
-                            }
-                        }
-                        else
-                        {
-                            FailFeedback("No data can you give to me. Please \"Take\" before \"Giving\" me data.", playerFeedback);
-                        }
-                    }
-                    else if (runTopCommand.subCommandRef.myCode == SubCommand.Code.Distrust)
-                    {
-                        if (d)
-                        {
-                            distrustOutbox.AcceptData(d);
-                            FailFeedback("I was not expecting to receive any data.", distrustFeedback);
-                        }
-                        else
-                        {
-                            FailFeedback("No data can you give to me. Please \"Take\" before \"Giving\" me data.", playerFeedback);
-                        }
-                    }
-                    break;
-                case TopCommand.Code.Load:
-                    if (runTopCommand.subCommandRef.myCode == SubCommand.Code.Zero)
-                    {
-                        d = memoryBar.CloneDataAt(0);
-                    }
-                    else
-                    {
-                        d = memoryBar.CloneDataAt(1);
-                    }
-                    if (d)
-                    {
-                        player.PickupData(d);
-                        playerCMDNo += 1;
-                        ExecuteNextIfNotPaused();
-                    }
-                    else
-                    {
-                        FailFeedback("No data can be loaded from it.", playerFeedback);
-                    }
-                    break;
-                case TopCommand.Code.Store:
-                    d = player.CloneData();
-                    if (d)
-                    {
-                        if (runTopCommand.subCommandRef.myCode == SubCommand.Code.Zero)
-                        {
-                            memoryBar.AcceptDataAt(0, d);
-                        }
-                        else
-                        {
-                            memoryBar.AcceptDataAt(1, d);
-                        }
-                        playerCMDNo += 1;
-                        ExecuteNextIfNotPaused();
-                    }
-                    else
-                    {
-                        FailFeedback("No data can you store on the ground.", playerFeedback);
-                    }
-                    break;
-
-            }
-        }
+            ExecuteCommand();
+         }
 
     }
 }

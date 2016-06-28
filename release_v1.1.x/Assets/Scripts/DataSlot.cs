@@ -13,9 +13,15 @@ public class DataSlot : MonoBehaviour {
 		}
 	}
 
-	public void RemoveData(){
+	public string RemoveData(){
 		if (data) {
+            string returnStr = data.dataStr;
 			DestroyImmediate (data.gameObject);
-		}
+            return returnStr;
+        }
+        else
+        {
+            return null;
+        }
 	}
 }

@@ -2,6 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ChallengeOne : CodingChallengeTemplate
 {
@@ -32,6 +33,7 @@ public class ChallengeOne : CodingChallengeTemplate
     {
         if (playerCMDNo == instructionPan.GetLength())
         {
+            playerCMDNo -= 1;
             switch (hasSolved)
             {
                 case 0:
@@ -46,21 +48,9 @@ public class ChallengeOne : CodingChallengeTemplate
         return false;
     }
 
-    protected override void UndoCommand()
-    {
-        if (playerCMDNo == instructionPan.GetLength())
-        {
-            playerFeedback.SetActive(false); //Undo exception
-        }
-        else
-        {
-        }
-        playerCMDNo -= 1;
-        enumPan.SetRunningState(playerCMDNo, EnumPanel.Status.Executing);
-    }
-
     protected override void ExecuteCommand()
     {
+        Logging();
         Data d;
         TopCommand runTopCommand = instructionPan.GetTopCommandAt(playerCMDNo);
         switch (runTopCommand.myCode)
@@ -70,7 +60,6 @@ public class ChallengeOne : CodingChallengeTemplate
                 if (d)
                 {
                     player.PickupData(d);
-                    playerCMDNo += 1;
                     ExecuteNextIfNotPaused();
                 }
                 else
@@ -88,7 +77,6 @@ public class ChallengeOne : CodingChallengeTemplate
                         if (hasSolved == 0 && d.dataStr == "O")
                         {
                             hasSolved += 1;
-                            playerCMDNo += 1;
                             ExecuteNextIfNotPaused();
                         }
                         else if (hasSolved == 0 && d.dataStr == "K")
@@ -120,6 +108,11 @@ public class ChallengeOne : CodingChallengeTemplate
         playerInbox.Initialise(new Vector2(-344f, 251f), InitialInboxGenerator());
         playerOutbox.Initialise(new Vector2(-83f, -171f));
         AddButtonListener();
+        playerInboxLog = new List<string[]>();
+        playerOutboxLog = new List<string[]>();
+        hasSolvedLog = new List<int>();
+        playerHoldingLog = new List<string>();
+        playerPosLog = new List<Vector2>();
         Reset();
         instructionPan.GetComponent<IHasFinalised>().HasFinalised();
     }
