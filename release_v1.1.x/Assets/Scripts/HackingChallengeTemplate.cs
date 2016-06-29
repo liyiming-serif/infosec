@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
-
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 public class HackingChallengeTemplate : MonoBehaviour {
 
 	[SerializeField]
@@ -32,6 +34,12 @@ public class HackingChallengeTemplate : MonoBehaviour {
     protected Outbox distrustOutbox;
     [SerializeField]
     protected MemoryBar memoryBar;
+
+    [SerializeField]
+    protected GameObject menuPanel;
+
+    [SerializeField]
+    protected Button menuToggle;
 
     /*Game Logic*/
     protected int hasSolved;
@@ -72,15 +80,13 @@ public class HackingChallengeTemplate : MonoBehaviour {
 		}
 		playerCMDNo = -1;
 		playerState = RunningState.Inactive;
-		SetCodingModeActive (true);
 	}
 
 	protected void SucceedFeedback(string message, GameObject feedback) {
 		PrepareFeedback (message, feedback, new Color32(90, 174, 122, 212));
 		enumPan.ResetRunningState ();
 		playerCMDNo = -1;
-		playerState = RunningState.Inactive;
-		SetCodingModeActive (true);
+        playerState = RunningState.Inactive;
 	}
 
 	protected void SetCodingModeActive(bool setting){
@@ -188,6 +194,7 @@ public class HackingChallengeTemplate : MonoBehaviour {
 
         distrustOutbox.EmptyAllData();
         distrustFeedback.SetActive(false);
+        SetCodingModeActive(true);
 
         debugPan.SetDebugButtonActive(ButtonCode.Run, true);
         debugPan.SetDebugButtonActive(ButtonCode.Stop, false);
@@ -226,4 +233,19 @@ public class HackingChallengeTemplate : MonoBehaviour {
 		}
 	}
 
+    protected void MenuToggle()
+    {
+        menuPanel.gameObject.SetActive(!menuPanel.gameObject.activeSelf);
+    }
+
+    protected void linkMenuEntry()
+    {
+        menuPanel.gameObject.SetActive(false);
+        menuToggle.onClick.AddListener(() => MenuToggle());
+        for(int i = 0; i < 6; i++)
+        {
+            string s = "Challenge" + ((int)(i + 1)).ToString();
+            menuPanel.transform.GetChild(i).GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene(s));
+        }
+    }
 }

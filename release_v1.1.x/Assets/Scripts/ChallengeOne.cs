@@ -148,6 +148,7 @@ public class ChallengeOne : CodingChallengeTemplate
         playerPosLog = new List<Vector2>();
         Reset();
         instructionPan.GetComponent<IHasFinalised>().HasFinalised();
+        linkMenuEntry();
     }
 
     void Update()

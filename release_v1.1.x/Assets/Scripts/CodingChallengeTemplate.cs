@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public enum RunningState
 {
@@ -30,6 +31,11 @@ public class CodingChallengeTemplate : MonoBehaviour
     [SerializeField]
     protected DebugPanel debugPan;
 
+    [SerializeField]
+    protected GameObject menuPanel;
+
+    [SerializeField]
+    protected Button menuToggle;
     /*Game State*/
     protected int hasSolved;
 
@@ -400,6 +406,22 @@ public class CodingChallengeTemplate : MonoBehaviour
         debugPan.debugButtons[(int)ButtonCode.Stop].onClick.AddListener(() => Reset());
         debugPan.debugButtons[(int)ButtonCode.Step].onClick.AddListener(() => StartStepping());
         debugPan.debugButtons[(int)ButtonCode.Back].onClick.AddListener(() => StartBackStepping());
+    }
+
+    protected void MenuToggle()
+    {
+        menuPanel.gameObject.SetActive(!menuPanel.gameObject.activeSelf);
+    }
+
+    protected void linkMenuEntry()
+    {
+        menuPanel.gameObject.SetActive(false);
+        menuToggle.onClick.AddListener(() => MenuToggle());
+        for (int i = 0; i < 6; i++)
+        {
+            string s = "Challenge" + ((int)(i + 1)).ToString();
+            menuPanel.transform.GetChild(i).GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene(s));
+        }
     }
 
 }

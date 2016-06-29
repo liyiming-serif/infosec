@@ -29,7 +29,7 @@ public class AttackTopCommandSlot : MonoBehaviour, IDropHandler {
 		} else {
 			Destroy (c.gameObject);
 			newCommand.transform.SetParent (transform);
-			return true;
+            return true;
 		}
 	}
 

@@ -37,6 +37,10 @@ public class AttackSpawnCMDHandler : MonoBehaviour, IBeginDragHandler, IDragHand
 		} else {
 			commandBeingSpawned.GetComponent<CanvasGroup> ().blocksRaycasts = true;
 			InstantiateSubCommand ();
+            if (commandBeingSpawned.subCommandRef)
+            {
+                commandBeingSpawned.subCommandRef.startArguUpdate();
+            }
 		}
 		commandBeingSpawned = null;
 	}

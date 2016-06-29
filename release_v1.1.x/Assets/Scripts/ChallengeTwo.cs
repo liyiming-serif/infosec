@@ -192,6 +192,7 @@ public class ChallengeTwo : CodingChallengeTemplate
         distrustOutboxLog = new List<string[]>();
         Reset();
         instructionPan.GetComponent<IHasFinalised>().HasFinalised();
+        linkMenuEntry();
     }
 
     void Update()

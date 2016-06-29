@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class ChallengeFour : CodingChallengeTemplate
 {
@@ -119,6 +120,7 @@ public class ChallengeFour : CodingChallengeTemplate
         memoryBarLog = new List<string[]>();
         Reset();
         instructionPan.GetComponent<IHasFinalised>().HasFinalised();
+        linkMenuEntry();
     }
 
     protected override void UndoCommand()
@@ -257,6 +259,10 @@ public class ChallengeFour : CodingChallengeTemplate
             playerOldCounter = player.counter;
             ExecuteCommand();
          }
+        if (hasSolved == 2)
+        {
+            SceneManager.LoadScene("Challenge5");
+        }
 
         if (ClickHandler.checkUpdate == 2)
         {

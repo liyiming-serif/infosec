@@ -117,6 +117,7 @@ public class ChallengeThree : CodingChallengeTemplate
         memoryBarLog = new List<string[]>();
         Reset();
         instructionPan.GetComponent<IHasFinalised>().HasFinalised();
+        linkMenuEntry();
     }
 
     protected override void UndoCommand()
@@ -246,7 +247,7 @@ public class ChallengeThree : CodingChallengeTemplate
             ExecuteCommand();
         }
 
-        if (hasSolved == 2)
+        if (hasSolved == 3)
         {
             SceneManager.LoadScene("Challenge4");
         }
