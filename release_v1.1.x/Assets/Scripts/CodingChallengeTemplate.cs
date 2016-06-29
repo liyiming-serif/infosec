@@ -61,7 +61,7 @@ public class CodingChallengeTemplate : MonoBehaviour
     }
 
 
-    protected void FailFeedback(string message, GameObject feedback)
+    virtual protected void FailFeedback(string message, GameObject feedback)
     {
         PrepareFeedback(message, feedback, new Color32(235, 46, 44, 212));
         enumPan.SetRunningState(playerCMDNo, EnumPanel.Status.Error);
@@ -175,6 +175,8 @@ public class CodingChallengeTemplate : MonoBehaviour
         debugPan.SetDebugButtonActive(ButtonCode.Step, true);
         debugPan.SetDebugButtonActive(ButtonCode.Stop, false);
         debugPan.SetDebugButtonActive(ButtonCode.Back, false);
+
+       
 
     }
 
@@ -376,7 +378,7 @@ public class CodingChallengeTemplate : MonoBehaviour
         if (playerCMDNo >= playerPosLog.Count)
         {
             hasSolvedLog.Add(hasSolved);
-            playerPosLog.Add(player.endPosition);
+            playerPosLog.Add(player.startPosition);
             playerHoldingLog.Add(player.GetData());
             playerInboxLog.Add(playerInbox.GetCurrentState());
             playerOutboxLog.Add(playerOutbox.GetCurrentState());

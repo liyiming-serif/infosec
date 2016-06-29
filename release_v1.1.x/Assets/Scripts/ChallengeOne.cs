@@ -12,6 +12,19 @@ public class ChallengeOne : CodingChallengeTemplate
     [SerializeField]
     GameObject tutorialArrow;
 
+    [SerializeField]
+    GameObject stopHint;
+    [SerializeField]
+    GameObject debugHint;
+
+
+    protected override void FailFeedback(string message, GameObject feedback)
+    {
+        base.FailFeedback(message, feedback);
+        stopHint.SetActive(true);
+        debugHint.SetActive(true);
+    }
+
     override protected void SetEndPositionBySubCMD(AnimatorController character, SubCommand.Code subCode)
     {
         if (subCode == SubCommand.Code.Boss)
@@ -107,6 +120,20 @@ public class ChallengeOne : CodingChallengeTemplate
             default:
                 throw new System.Exception("An unexpected command: " + runTopCommand.myCode);
         }
+    }
+
+    protected override void Reset()
+    {
+        base.Reset();
+        stopHint.SetActive(false);
+        debugHint.SetActive(false);
+    }
+
+    protected override void StartBackStepping()
+    {
+        base.StartBackStepping();
+        stopHint.SetActive(false);
+        debugHint.SetActive(false);
     }
     void Start()
     {
