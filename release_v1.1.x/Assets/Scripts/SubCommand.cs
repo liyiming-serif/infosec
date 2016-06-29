@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
@@ -12,12 +13,20 @@ public class SubCommand : MonoBehaviour, IPointerClickHandler{
 
 	void IPointerClickHandler.OnPointerClick (PointerEventData eventData)
 	{
-		ClickHandler.subCommandToBeChanged = gameObject.GetComponentInParent<TopCommand> ();
-		//foreach (TopCommandSlot s in GameObject.FindObjectsOfType<TopCommandSlot> ()) {
-		//	s.ActivateEventTrigger (false);
-		//}
-	}
-
+        startArguUpdate();
+    }
 	#endregion
+
+    public void startArguUpdate()
+    {
+        transform.GetChild(0).GetComponent<Image>().gameObject.SetActive(true);
+        ClickHandler.subCommandToBeChanged = gameObject.GetComponentInParent<TopCommand>();
+        ClickHandler.isUpdated = 0;
+        ClickHandler.checkUpdate = 0;
+        foreach (TopCommandSlot s in GameObject.FindObjectsOfType<TopCommandSlot>())
+        {
+            s.ActivateEventTrigger(false);
+        }
+    }
 
 }

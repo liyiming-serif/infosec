@@ -17,8 +17,12 @@ public class TopCommandSlot : MonoBehaviour {
 		if (c) {
 			return false;
 		} else {
-			newCommand.transform.SetParent (transform);
-			return true;
+            newCommand.transform.SetParent(transform);
+            if (newCommand.subCommandRef)
+            {
+                newCommand.subCommandRef.startArguUpdate();
+            }
+            return true;
 		}
 	}
 

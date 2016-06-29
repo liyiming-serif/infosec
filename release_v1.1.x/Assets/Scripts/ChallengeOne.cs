@@ -7,6 +7,11 @@ using System.Collections.Generic;
 public class ChallengeOne : CodingChallengeTemplate
 {
 
+    [SerializeField]
+    GameObject tutorialTake;
+    [SerializeField]
+    GameObject tutorialArrow;
+
     override protected void SetEndPositionBySubCMD(AnimatorController character, SubCommand.Code subCode)
     {
         if (subCode == SubCommand.Code.Boss)
@@ -86,7 +91,7 @@ public class ChallengeOne : CodingChallengeTemplate
                         else if (hasSolved == 1 && d.dataStr == "K")
                         {
                             hasSolved += 1;
-                            SucceedFeedback("Thanks for giving me \"OK\".", playerFeedback);
+                            SucceedFeedback("Well done!", playerFeedback);
                         }
                     }
                     else
@@ -119,10 +124,34 @@ public class ChallengeOne : CodingChallengeTemplate
 
     void Update()
     {
+        if(instructionPan.GetLength() == 0)
+        {
+            tutorialArrow.SetActive(true);
+            tutorialTake.SetActive(true);
+        }else
+        {
+            tutorialArrow.SetActive(false);
+            tutorialTake.SetActive(false);
+        }
         if (playerOldCounter != player.counter)
         {
             playerOldCounter = player.counter;
             ExecuteCommand();
+        }
+
+        if (ClickHandler.checkUpdate == 2)
+        {
+            if (ClickHandler.isUpdated == 0)
+            {
+                ExecuteEvents.Execute<IUpdateSubCMDChoice>(ClickHandler.subCommandToBeChanged.gameObject, null, (x, y) => x.FinaliseSubCMDChoice(ClickHandler.subCommandToBeChanged.subCommandRef.myCode));
+                ClickHandler.subCommandToBeChanged = null;
+            }
+            ClickHandler.checkUpdate -= 1;
+        }
+
+        if (Input.GetMouseButtonUp(0) && ClickHandler.subCommandToBeChanged)
+        {
+            ClickHandler.checkUpdate += 1;
         }
 
     }

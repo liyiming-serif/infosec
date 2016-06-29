@@ -258,5 +258,20 @@ public class ChallengeFour : CodingChallengeTemplate
             ExecuteCommand();
          }
 
+        if (ClickHandler.checkUpdate == 2)
+        {
+            if (ClickHandler.isUpdated == 0)
+            {
+                ExecuteEvents.Execute<IUpdateSubCMDChoice>(ClickHandler.subCommandToBeChanged.gameObject, null, (x, y) => x.FinaliseSubCMDChoice(ClickHandler.subCommandToBeChanged.subCommandRef.myCode));
+                ClickHandler.subCommandToBeChanged = null;
+            }
+            ClickHandler.checkUpdate -= 1;
+        }
+
+        if (Input.GetMouseButtonUp(0) && ClickHandler.subCommandToBeChanged)
+        {
+            ClickHandler.checkUpdate += 1;
+        }
+
     }
 }
