@@ -80,7 +80,7 @@ public class CodingChallengeTemplate : MonoBehaviour
         debugPan.SetDebugButtonActive(ButtonCode.Run, false);
     }
 
-    protected void SucceedFeedback(string message, GameObject feedback)
+    protected void SucceedFeedback(string message, GameObject feedback, string challengeName)
     {
         PrepareFeedback(message, feedback, new Color32(90, 174, 122, 212));
         enumPan.ResetRunningState();
@@ -90,6 +90,7 @@ public class CodingChallengeTemplate : MonoBehaviour
         debugPan.SetDebugButtonActive(ButtonCode.Stop, false);
         debugPan.SetDebugButtonActive(ButtonCode.Back, false);
         debugPan.SetDebugButtonActive(ButtonCode.Step, false);
+        StartCoroutine(ToNextChallenge(challengeName));
     }
 
     protected void SetCodingModeActive(bool setting)
@@ -398,6 +399,12 @@ public class CodingChallengeTemplate : MonoBehaviour
         {
             feedback.SetActive(false);
         }
+    }
+
+    protected IEnumerator ToNextChallenge(string stageName)
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(stageName);
     }
 
     protected void AddButtonListener()

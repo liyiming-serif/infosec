@@ -177,7 +177,7 @@ public class ChallengeThree : CodingChallengeTemplate
                         else if (hasSolved == 2 && d.dataStr == "O")
                         {
                             hasSolved = 3;
-                            SucceedFeedback("Well done!", playerFeedback);
+                            SucceedFeedback("Well done!", playerFeedback, "Challenge4");
                         }
                         else if (hasSolved == 1 && d.dataStr == "O")
                         {
@@ -208,7 +208,7 @@ public class ChallengeThree : CodingChallengeTemplate
                         else if (hasSolved == 1 && d.dataStr == "O")
                         {
                             hasSolved = 3;
-                            SucceedFeedback("Well done!", distrustFeedback);
+                            SucceedFeedback("Well done!", distrustFeedback, "Challenge4");
                         }
                     }
                     else
@@ -247,12 +247,7 @@ public class ChallengeThree : CodingChallengeTemplate
             ExecuteCommand();
         }
 
-        if (hasSolved == 3)
-        {
-            SceneManager.LoadScene("Challenge4");
-        }
-
-        if (ClickHandler.checkUpdate == 2)
+       if (ClickHandler.checkUpdate == 2)
         {
             if (ClickHandler.isUpdated == 0)
             {

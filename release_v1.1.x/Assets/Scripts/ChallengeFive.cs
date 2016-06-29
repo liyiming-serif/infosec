@@ -144,7 +144,7 @@ public class ChallengeFive : HackingChallengeTemplate
                         {
                             playerOutbox.AcceptData(d);
                             hasSolved = 2;
-                            SucceedFeedback("Well done!", playerFeedback);
+                            SucceedFeedback("Well done!", playerFeedback, "Challenge6");
                         }
                         else
                         {
@@ -231,13 +231,6 @@ public class ChallengeFive : HackingChallengeTemplate
             distrustPlayerState = RunningState.Ready;
             Invoke("RunPlayerCommand", delaySec);
         }
-
-
-        if (hasSolved == 2)
-        {
-            SceneManager.LoadScene("Challenge6");
-        }
-
 
     }
 }

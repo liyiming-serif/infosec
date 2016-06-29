@@ -105,7 +105,7 @@ public class ChallengeOne : CodingChallengeTemplate
                         else if (hasSolved == 1 && d.dataStr == "K")
                         {
                             hasSolved += 1;
-                            SucceedFeedback("Well done!", playerFeedback);
+                            SucceedFeedback("Well done!", playerFeedback, "Challenge2");
                         }
                     }
                     else
@@ -166,11 +166,6 @@ public class ChallengeOne : CodingChallengeTemplate
         {
             playerOldCounter = player.counter;
             ExecuteCommand();
-        }
-
-        if (hasSolved == 2)
-        {
-            SceneManager.LoadScene("Challenge2");
         }
 
         if (ClickHandler.checkUpdate == 2)

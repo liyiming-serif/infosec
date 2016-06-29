@@ -184,7 +184,7 @@ public class ChallengeFour : CodingChallengeTemplate
                         else if (hasSolved == 1 && d.dataStr == "K")
                         {
                             hasSolved = 2;
-                            SucceedFeedback("Well done!", playerFeedback);
+                            SucceedFeedback("Well done!", playerFeedback, "Challenge5");
                         }
                         else if (hasSolved == 1 && d.dataStr == "O")
                         {
@@ -259,11 +259,7 @@ public class ChallengeFour : CodingChallengeTemplate
             playerOldCounter = player.counter;
             ExecuteCommand();
          }
-        if (hasSolved == 2)
-        {
-            SceneManager.LoadScene("Challenge5");
-        }
-
+       
         if (ClickHandler.checkUpdate == 2)
         {
             if (ClickHandler.isUpdated == 0)

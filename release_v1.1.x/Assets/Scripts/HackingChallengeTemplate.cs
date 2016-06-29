@@ -82,14 +82,24 @@ public class HackingChallengeTemplate : MonoBehaviour {
 		playerState = RunningState.Inactive;
 	}
 
-	protected void SucceedFeedback(string message, GameObject feedback) {
+	protected void SucceedFeedback(string message, GameObject feedback, string challengeName = null) {
 		PrepareFeedback (message, feedback, new Color32(90, 174, 122, 212));
 		enumPan.ResetRunningState ();
 		playerCMDNo = -1;
         playerState = RunningState.Inactive;
+        if (challengeName != null)
+        {
+            StartCoroutine(ToNextChallenge(challengeName));
+        }
 	}
 
-	protected void SetCodingModeActive(bool setting){
+    protected IEnumerator ToNextChallenge(string stageName)
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(stageName);
+    }
+
+    protected void SetCodingModeActive(bool setting){
         commandSelectPan.SetActive(setting);
         foreach (AttackTopCommandSlot s in GameObject.FindObjectsOfType<AttackTopCommandSlot> ()) {
 			s.ActivateEventTrigger (setting);
