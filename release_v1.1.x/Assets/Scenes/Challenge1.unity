@@ -249,6 +249,14 @@ Prefab:
       propertyPath: m_Name
       value: DataBoard (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 21259966, guid: e74deb92af47e474ca3d1d9b0637a0a8, type: 2}
+      propertyPath: m_SortingLayerID
+      value: 2001758063
+      objectReference: {fileID: 0}
+    - target: {fileID: 22341350, guid: e74deb92af47e474ca3d1d9b0637a0a8, type: 2}
+      propertyPath: m_SortingLayerID
+      value: 2001758063
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e74deb92af47e474ca3d1d9b0637a0a8, type: 2}
   m_IsPrefabParent: 0
@@ -1616,7 +1624,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 21259966, guid: e74deb92af47e474ca3d1d9b0637a0a8, type: 2}
+      propertyPath: m_SortingLayerID
+      value: 2001758063
+      objectReference: {fileID: 0}
+    - target: {fileID: 22341350, guid: e74deb92af47e474ca3d1d9b0637a0a8, type: 2}
+      propertyPath: m_SortingLayerID
+      value: 2001758063
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11446388, guid: e74deb92af47e474ca3d1d9b0637a0a8, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: e74deb92af47e474ca3d1d9b0637a0a8, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &889496281
@@ -3075,7 +3092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
