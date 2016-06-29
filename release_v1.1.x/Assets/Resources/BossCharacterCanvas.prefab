@@ -11,6 +11,8 @@ GameObject:
   - 114: {fileID: 11450278}
   - 212: {fileID: 21274556}
   - 95: {fileID: 9564994}
+  - 222: {fileID: 22259898}
+  - 114: {fileID: 11440582}
   m_Layer: 0
   m_Name: BossImage
   m_TagString: Untagged
@@ -68,6 +70,33 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &11440582
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!114 &11450278
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -80,6 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCode: 3
+  animator: {fileID: 0}
 --- !u!212 &21274556
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -110,6 +140,12 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!222 &22259898
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 107784}
 --- !u!223 &22378336
 Canvas:
   m_ObjectHideFlags: 1
@@ -145,7 +181,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 457, y: 140}
+  m_AnchoredPosition: {x: 457, y: 132.5}
   m_SizeDelta: {x: 78, y: 99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22462100
