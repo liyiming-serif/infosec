@@ -50,7 +50,7 @@ public class ChallengeFour : CodingChallengeTemplate
             }
             else if (hasSolved == 1)
             {
-                FailFeedback("You are half-way the goal! \"Load\" \"K\" from the cell storing \"K\".", playerFeedback);
+				FailFeedback("Almost! \"Load\" \"K\" and \"Give\" it to me.", playerFeedback);
             }
             return true;
         }
@@ -160,7 +160,7 @@ public class ChallengeFour : CodingChallengeTemplate
                 }
                 else
                 {
-                    FailFeedback("There is no data on the line. Try \"Give\" what you had to me.", playerFeedback);
+					FailFeedback("There's no more data to \"Take\" off your line.", playerFeedback);
                 }
                 break;
             case TopCommand.Code.Outbox:
@@ -179,7 +179,7 @@ public class ChallengeFour : CodingChallengeTemplate
                         }
                         else if (hasSolved == 0 && d.dataStr == "K")
                         {
-                            FailFeedback("I was expecting to receive \"O\" first. You can \"Store\" \"K\" in a cell first.", playerFeedback);
+                            FailFeedback("I was expecting to receive \"O\" first. Try to \"Store\" \"K\" in a cell first.", playerFeedback);
                         }
                         else if (hasSolved == 1 && d.dataStr == "K")
                         {
@@ -193,7 +193,7 @@ public class ChallengeFour : CodingChallengeTemplate
                     }
                     else
                     {
-                        FailFeedback("No data can you give to me. Please \"Take\" before \"Giving\" me data.", playerFeedback);
+						FailFeedback("You're not holding anything. Please \"Take\" or \"Load\" before \"Giving\" me data.", playerFeedback);
                     }
                 }
                 else if (runTopCommand.subCommandRef.myCode == SubCommand.Code.Distrust)
@@ -205,7 +205,7 @@ public class ChallengeFour : CodingChallengeTemplate
                     }
                     else
                     {
-                        FailFeedback("No data can you give to me. Please \"Take\" before \"Giving\" me data.", playerFeedback);
+                        FailFeedback("Fool. \"Take\" or \"Load\" before \"Giving\" me data.", distrustFeedback);
                     }
                 }
                 break;
@@ -225,7 +225,7 @@ public class ChallengeFour : CodingChallengeTemplate
                 }
                 else
                 {
-                    FailFeedback("No data can be loaded from it.", playerFeedback);
+                    FailFeedback("That cell is empty!", playerFeedback);
                 }
                 break;
             case TopCommand.Code.Store:
@@ -244,7 +244,7 @@ public class ChallengeFour : CodingChallengeTemplate
                 }
                 else
                 {
-                    FailFeedback("No data can you store on the ground.", playerFeedback);
+                    FailFeedback("You're not holding any data to store.", playerFeedback);
                 }
                 break;
 

@@ -32,11 +32,11 @@ public class ChallengeFive : HackingChallengeTemplate
         {
             if (hasSolved == 0)
             {
-                FailFeedback("You can load the actual data of \"?\"", playerFeedback);
+                FailFeedback("You can load the actual data of \"?\".", playerFeedback);
             }
             else if (hasSolved == 1)
             {
-                FailFeedback("You are half-way the goal. The final step is to \"Give\" the value \"Y\" to me.", playerFeedback);
+				FailFeedback("Half-way there! Don't forget to \"Give\" me the secret message.", playerFeedback);
             }
 
             return true;
@@ -133,7 +133,7 @@ public class ChallengeFive : HackingChallengeTemplate
                     }
                     else
                     {
-                        FailFeedback("There is no data on the line. Try \"Give\" what you had to me.", playerFeedback);
+						FailFeedback("There's no more data to \"Take\" off your line.", playerFeedback);
                     }
                     break;
                 case TopCommand.Code.Outbox:
@@ -148,7 +148,7 @@ public class ChallengeFive : HackingChallengeTemplate
                         }
                         else
                         {
-                            FailFeedback("No data can you give to me. Please \"Take\" before \"Giving\" me data.", playerFeedback);
+                            FailFeedback("...You're not holding anything.", playerFeedback);
                         }
                     }
                     else if (runTopCommand.subCommandRef.myCode == SubCommand.Code.Distrust)
@@ -160,7 +160,7 @@ public class ChallengeFive : HackingChallengeTemplate
                         }
                         else
                         {
-                            FailFeedback("No data can you give to me. Please \"Take\" before \"Giving\" me data.", playerFeedback);
+                            FailFeedback("You've nothing to give me?", playerFeedback);
                         }
                     }
                     break;
@@ -177,7 +177,7 @@ public class ChallengeFive : HackingChallengeTemplate
                     }
                     else
                     {
-                        FailFeedback("No data can be loaded from it.", playerFeedback);
+                        FailFeedback("Nothing to load.", playerFeedback);
                     }
                     break;
                 case TopCommand.Code.Store:
@@ -191,7 +191,7 @@ public class ChallengeFive : HackingChallengeTemplate
                     }
                     else
                     {
-                        FailFeedback("No data can you store on the ground.", playerFeedback);
+                        FailFeedback("Nothing to store.", playerFeedback);
                     }
                     break;
             }

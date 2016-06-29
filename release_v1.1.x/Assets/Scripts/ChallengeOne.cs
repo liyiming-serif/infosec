@@ -56,10 +56,10 @@ public class ChallengeOne : CodingChallengeTemplate
             switch (hasSolved)
             {
                 case 0:
-                    FailFeedback("You need to \"Take\" and \"Give\" for every letter. There are 2 sets to be completed.", playerFeedback);
+                    FailFeedback("Error. \"Take\" the letters and \"Give\" them to me.", playerFeedback);
                     break;
                 case 1:
-                    FailFeedback("You are half-way the goal. Maybe redo \"Take\" and \"Give\" again?", playerFeedback);
+                    FailFeedback("Almost. \"Take\" and \"Give\" BOTH letters to me.", playerFeedback);
                     break;
             }
             return true;
@@ -83,7 +83,7 @@ public class ChallengeOne : CodingChallengeTemplate
                 }
                 else
                 {
-                    FailFeedback("There is no data on the line. Try \"Give\" what you had to me.", playerFeedback);
+                    FailFeedback("There's no more data to \"Take\" off your line.", playerFeedback);
                 }
                 break;
             case TopCommand.Code.Outbox:
@@ -100,7 +100,7 @@ public class ChallengeOne : CodingChallengeTemplate
                         }
                         else if (hasSolved == 0 && d.dataStr == "K")
                         {
-                            FailFeedback("You have dropped letter \"O\". Please send both letters to me.", playerFeedback);
+                            FailFeedback("You dropped the letter \"O\". Please send both letters to me.", playerFeedback);
                         }
                         else if (hasSolved == 1 && d.dataStr == "K")
                         {
@@ -110,7 +110,7 @@ public class ChallengeOne : CodingChallengeTemplate
                     }
                     else
                     {
-                        FailFeedback("No data can you give to me. Please \"Take\" before \"Giving\" me data.", playerFeedback);
+                        FailFeedback("You're not holding any information. Please \"Take\" before \"Giving\" me data.", playerFeedback);
                     }
                 }
                 else

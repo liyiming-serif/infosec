@@ -51,7 +51,7 @@ public class ChallengeThree : CodingChallengeTemplate
             }
             else if (hasSolved == 1)
             {
-                FailFeedback("You need to \"Load\" from \"0\" and \"Give\" it to me.", distrustFeedback);
+                FailFeedback("\"Load\" from \"0\" and \"Give\" it to me.", distrustFeedback);
             }
             return true;
         }
@@ -157,7 +157,7 @@ public class ChallengeThree : CodingChallengeTemplate
                 }
                 else
                 {
-                    FailFeedback("There is no data on the line. Try \"Give\" what you had to me.", playerFeedback);
+					FailFeedback("There's no more data to \"Take\" off your line.", playerFeedback);
                 }
                 break;
             case TopCommand.Code.Outbox:
@@ -181,12 +181,12 @@ public class ChallengeThree : CodingChallengeTemplate
                         }
                         else if (hasSolved == 1 && d.dataStr == "O")
                         {
-                            FailFeedback("I was not expecting to receive \"O\" twice.", playerFeedback);
+                            FailFeedback("I was not expecting more letters", playerFeedback);
                         }
                     }
                     else
                     {
-                        FailFeedback("No data can you give to me. Please \"Take\" before \"Giving\" me data.", playerFeedback);
+                        FailFeedback("Hmm? Please \"Load\" before \"Giving\" me data.", playerFeedback);
                     }
                 }
                 else if (runTopCommand.subCommandRef.myCode == SubCommand.Code.Distrust)
@@ -208,12 +208,12 @@ public class ChallengeThree : CodingChallengeTemplate
                         else if (hasSolved == 1 && d.dataStr == "O")
                         {
                             hasSolved = 3;
-                            SucceedFeedback("Well done!", distrustFeedback, "Challenge4");
+                            SucceedFeedback("Nice work.", distrustFeedback, "Challenge4");
                         }
                     }
                     else
                     {
-                        FailFeedback("No data can you give to me. Please \"Take\" before \"Giving\" me data.", playerFeedback);
+                        FailFeedback("You're empty handed? \"Load\" before \"Giving\" me data.", distrustFeedback);
                     }
                 }
                 break;
@@ -233,7 +233,7 @@ public class ChallengeThree : CodingChallengeTemplate
                 }
                 else
                 {
-                    FailFeedback("No data can be loaded from it.", playerFeedback);
+                    FailFeedback("No data to load there!", playerFeedback);
                 }
                 break;
         }
