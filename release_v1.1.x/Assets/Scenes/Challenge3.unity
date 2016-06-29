@@ -1569,7 +1569,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 45.4, y: -26.599998}
+  m_AnchoredPosition: {x: 41.7, y: -26.599998}
   m_SizeDelta: {x: -37.1, y: -65.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &676452466
@@ -5431,7 +5431,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 166106, guid: ec1d1a7618f8a5146b1ea0f93718d637, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22353034, guid: ec1d1a7618f8a5146b1ea0f93718d637, type: 2}
       propertyPath: m_SortingLayerID
@@ -6274,16 +6274,3 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!114 &2098564127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2098564123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0d1e4ac5ad51484b97c990489281d50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myCode: 0
-  animator: {fileID: 0}
