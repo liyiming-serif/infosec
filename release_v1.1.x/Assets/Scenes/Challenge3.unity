@@ -314,11 +314,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22414312, guid: d143d9581042c114da03378aff2862ad, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22414312, guid: d143d9581042c114da03378aff2862ad, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 140
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 22414312, guid: d143d9581042c114da03378aff2862ad, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -363,6 +363,14 @@ Prefab:
     - target: {fileID: 160966, guid: d143d9581042c114da03378aff2862ad, type: 2}
       propertyPath: m_Name
       value: GridPrefab (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 22414312, guid: d143d9581042c114da03378aff2862ad, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.2500002
+      objectReference: {fileID: 0}
+    - target: {fileID: 22414312, guid: d143d9581042c114da03378aff2862ad, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.25
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
@@ -3549,8 +3557,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1561323620}
   - {fileID: 2098564124}
+  - {fileID: 1561323620}
   m_Father: {fileID: 1507891540}
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
@@ -3785,7 +3793,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 149570, guid: ca4eb190fee964ae3b42a39b46c42dbc, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22304100, guid: ca4eb190fee964ae3b42a39b46c42dbc, type: 2}
       propertyPath: m_SortingOrder
@@ -3799,7 +3807,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1561323620}
+    m_TransformParent: {fileID: 2098564124}
     m_Modifications:
     - target: {fileID: 22484556, guid: e74deb92af47e474ca3d1d9b0637a0a8, type: 2}
       propertyPath: m_LocalPosition.x
@@ -4061,11 +4069,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22414312, guid: d143d9581042c114da03378aff2862ad, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22414312, guid: d143d9581042c114da03378aff2862ad, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 45
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 22414312, guid: d143d9581042c114da03378aff2862ad, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -4102,6 +4110,10 @@ Prefab:
     - target: {fileID: 22414312, guid: d143d9581042c114da03378aff2862ad, type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11452166, guid: d143d9581042c114da03378aff2862ad, type: 2}
+      propertyPath: myCode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d143d9581042c114da03378aff2862ad, type: 2}
@@ -6008,5 +6020,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d1e4ac5ad51484b97c990489281d50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myCode: 1
+  myCode: 0
   animator: {fileID: 0}

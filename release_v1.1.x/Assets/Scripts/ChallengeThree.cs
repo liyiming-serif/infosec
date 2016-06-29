@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class ChallengeThree : CodingChallengeTemplate
 {
@@ -244,6 +245,12 @@ public class ChallengeThree : CodingChallengeTemplate
             playerOldCounter = player.counter;
             ExecuteCommand();
         }
+
+        if (hasSolved == 2)
+        {
+            SceneManager.LoadScene("Challenge4");
+        }
+
         if (ClickHandler.checkUpdate == 2)
         {
             if (ClickHandler.isUpdated == 0)
