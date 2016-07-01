@@ -50,7 +50,8 @@ public class TopCommand : MonoBehaviour, IUpdateSubCMDChoice{
 		}
 		subCommandRef.transform.SetParent (transform);
 		subCommandRef.transform.localPosition = new Vector2 (80.0f, 0.0f);
-        subCommandRef.transform.GetChild(0).GetComponent<Image>().gameObject.SetActive(false);
+		foreach(Transform child in subCommandRef.transform)
+        	child.gameObject.SetActive(false);
     }
 
  
