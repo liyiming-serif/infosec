@@ -32,6 +32,7 @@ public class TopCommand : MonoBehaviour, IUpdateSubCMDChoice{
 		}
 	}
 
+	/**End Arg Update*/
 	public void UpdateSubCommand(SubCommand.Code newSubCode) { 
 		DestructSubCMD ();
 		switch (newSubCode) {

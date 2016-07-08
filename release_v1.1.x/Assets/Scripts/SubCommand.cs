@@ -44,6 +44,8 @@ public class SubCommand : MonoBehaviour, IPointerClickHandler{
         }
     }
 
+	/**During arg update.
+	 * Main tether implementation.*/
     void Update()
     {
 		if(tetherHead.activeInHierarchy)
@@ -53,7 +55,7 @@ public class SubCommand : MonoBehaviour, IPointerClickHandler{
 			float angle = Mathf.Atan2(tetherVec.y, tetherVec.x) * Mathf.Rad2Deg;
 			tetherHead.transform.position = tetherPoint;
 			tetherLine.transform.eulerAngles = new Vector3(0,0,angle);
-			tetherLine.transform.localScale = new Vector2(tetherVec.magnitude/18,1);
+			tetherLine.transform.localScale = new Vector2(tetherVec.magnitude/18,1); //18 = hardcoded width of line sprite
 		}
 	}
 }

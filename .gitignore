@@ -8,6 +8,13 @@ release_v1.1.x/Library/
 release_v1.1.x/Settings/
 release_v1.1.x/Assets/AssetStoreTools*
 
+release_v1.2.x/Temp/
+release_v1.2.x/Obj/
+release_v1.2.x/UnityGenerated/
+release_v1.2.x/Library/
+release_v1.2.x/Settings/
+release_v1.2.x/Assets/AssetStoreTools*
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
@@ -21,6 +28,17 @@ release_v1.1.x/*.sln
 release_v1.1.x/*.user
 release_v1.1.x/*.unityproj
 release_v1.1.x/*.booproj
+
+release_v1.2.x/ExportedObj/
+release_v1.2.x/*.svd
+release_v1.2.x/*.userprefs
+release_v1.2.x/*.csproj
+release_v1.2.x/*.pidb
+release_v1.2.x/*.suo
+release_v1.2.x/*.sln
+release_v1.2.x/*.user
+release_v1.2.x/*.unityproj
+release_v1.2.x/*.booproj
 
 # ============ #
 # OS generated #
