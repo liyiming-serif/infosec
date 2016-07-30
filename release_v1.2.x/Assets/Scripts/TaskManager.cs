@@ -7,96 +7,97 @@ public class TaskManager : MonoBehaviour
     [SerializeField]
     TaskBarItem itemPrefab;
 
-    List<TaskBarItem> items;
-    List<Windows> tasks;
+    List<GUI> items;
+    List<GUI> wins;
 
     int nowActive;
 
     public void SetBarItemVisible(object[] paras)
     {
+        SetGUIVisible(paras, items);
         //TODO ensure only ONE task is activated.
+    }
 
-        if(paras.Length != 2)
-        {
-            return;
-        }
-        if(!(paras[0] is int) || !(paras[1] is bool))
-        {
-            return;
-        }
-        int id = (int)paras[0];
-        bool visible = (bool) paras[1];
-        TaskBarItem item = LookUpBarItem(id);
-        if (item)
-        {
-            item.gameObject.SetActive(visible);
-        }
-
+    public void SetWindowsVisible(object[] paras)
+    {
+        SetGUIVisible(paras, wins);
     }
 
     public void KillTask(int id)
     {
-        TaskBarItem item = LookUpBarItem(id);
-        if (item)
-        {
-            Destroy(item.gameObject);
-        }
-
-        Windows task = LookUpWindows(id);
-        if(task)
-        {
-            Destroy(task.gameObject);
-        }
-    }
-
-   public  void AddNewTask(Windows newTask)
-    {
-        tasks.Add(newTask);
-        TaskBarItem newItem = Instantiate(itemPrefab);
-        newItem.transform.SetParent(this.transform);
-        newItem.Register(newTask.id);
-        items.Add(newItem);
-        // TODO set the current active task to inactive
-        nowActive = newTask.id;
-    }
-
-    public TaskBarItem LookUpBarItem(int id)
-    {
-        //Primitive Imp.
-        foreach (TaskBarItem item in items)
-        {
-            if(id == item.id)
-            {
-                return item;
-            }
-        }
-        return null;
+        RemoveGUI(id, wins);
+        RemoveGUI(id, items);
     }
 
     public Windows LookUpWindows(int id)
     {
-        //Primitive Imp.
-        foreach (Windows task in tasks)
+        return (Windows)LookUpGUI(id, wins);
+    }
+
+    public TaskBarItem LookUpTaskBarItem(int id)
+    {
+        return (TaskBarItem)LookUpGUI(id, wins);
+    }
+
+    public void SetGUIVisible(object[] paras, List<GUI> guis)
+    {
+        if (paras.Length != 2)
         {
-            if (id == task.id)
+            return;
+        }
+        else if (!(paras[0] is int) || !(paras[1] is bool))
+        {
+            return;
+        }
+
+        int id = (int)paras[0];
+        bool visible = (bool)paras[1];
+        GUI item = LookUpGUI(id, guis);
+        if (item)
+        {
+            item.SetSelfVisible(visible);
+        }
+    }
+
+    public void RemoveGUI(int id, List<GUI> guis)
+    {
+        GUI g = LookUpGUI(id, guis);
+        if(g)
+        {
+            Destroy(g.gameObject);
+            guis.Remove(g);
+        }
+    }
+
+   public void AddNewTask(Windows newTask)
+    {
+        wins.Add(newTask);
+        TaskBarItem newItem = Instantiate(itemPrefab);
+        newItem.transform.SetParent(this.transform);
+        newItem.Register(newTask.GetID());
+        items.Add(newItem);
+        // TODO set the current active task to inactive
+        nowActive = newTask.GetID();
+    }
+
+    public GUI LookUpGUI(int id, List<GUI> guis)
+    {
+        //Primitive Imp.
+        foreach (GUI g in guis)
+        {
+            if(g.IsTarget(id))
             {
-                return task;
+                return g;
             }
         }
         return null;
     }
 
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
         nowActive = 0;
-        items = new List<TaskBarItem>();
-        items.AddRange(this.GetComponentsInChildren<TaskBarItem>());
-        tasks = new List<Windows>();
+        items = new List<GUI>();
+        wins = new List<GUI>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }

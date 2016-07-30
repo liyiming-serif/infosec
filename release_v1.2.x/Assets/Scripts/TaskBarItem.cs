@@ -3,37 +3,17 @@ using UnityEngine.UI;
 using UnityEngine.Assertions;
 using System.Collections;
 
-public class TaskBarItem : MonoBehaviour
+public class TaskBarItem : GUI
 {
     Button button;
-    public int id;
 
-    TaskManager manager;
-
-    public void Register(int id)
+    void Awake()
     {
-        this.id = id;
-    }
-
-    public bool IsRegistered()
-    {
-        return id != 0;
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-        id = 0;
-        manager = GameObject.FindObjectOfType<TaskManager>();
+        base.Awake();
         button = this.GetComponent<Button>();
-        Assert.IsNotNull(manager);
         Assert.IsNotNull(button);
+        //TODO implement restore
         button.onClick.AddListener(delegate { });
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

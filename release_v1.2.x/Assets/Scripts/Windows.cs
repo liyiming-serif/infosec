@@ -3,37 +3,15 @@ using UnityEngine.UI;
 using UnityEngine.Assertions;
 using System.Collections;
 
-public class Windows : MonoBehaviour
+public class Windows : GUI
 {
-
     // Components 
     Button minise;
     Button close;
-    TaskManager manager;
-    public int id;
 
-    // This must be called before calling other methods
-    public void Register(int id)
+    void Awake()
     {
-        this.id = id;
-
-    }
-
-    public bool IsRegistered()
-    {
-        return id != 0;
-    }
-
-    void SetSelfVisible(bool isVisible)
-    {
-        gameObject.SetActive(isVisible);
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-        id = 0;
-        manager = GameObject.FindObjectOfType<TaskManager>();
+        base.Awake();
         foreach (Button b in this.GetComponentsInChildren<Button>())
         {
             if (b.transform.name == "Minimise")
@@ -45,17 +23,20 @@ public class Windows : MonoBehaviour
                 close = b;
             }
         }
-        Assert.IsNotNull(manager);
         Assert.IsNotNull(minise);
         Assert.IsNotNull(close);
-
         minise.onClick.AddListener(delegate
         {
             SetSelfVisible(false);
-            object[] values = new object[2] {id, false};
+            object[] values = new object[2] { id, false };
             manager.SendMessage("SetBarItemVisible", values);
         });
         close.onClick.AddListener(delegate { Destroy(gameObject); manager.SendMessage("KillTask", id); });
+    }
+
+    void Start()
+    {
+
     }
 
 }
