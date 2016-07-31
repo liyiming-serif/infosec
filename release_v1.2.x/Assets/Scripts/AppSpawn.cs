@@ -32,16 +32,18 @@ public class AppSpawn : MonoBehaviour
         else
         {
             one_click = false; // found a double click, now reset
-            //Start a new App if it's not running
-            //TODO Restore the windows if running
+       
             Windows existed = manager.LookUpWindows(id);
             if (existed)
             {
-                existed.SetSelfVisible(true); // The App is running.
+                manager.SendMessage("SetActiveTask", id);
             }
             else
             {
+                //Start a new App if it's not running
                 Windows newApp = Instantiate(appPrefab);
+                newApp.GetComponent<RectTransform>().sizeDelta = Common.networkSize;
+                newApp.transform.localPosition = Common.networkPos;     
                 try
                 {
                     newApp.transform.SetParent(GetComponentInParent<Canvas>().transform);
@@ -52,7 +54,7 @@ public class AppSpawn : MonoBehaviour
                 }
                 id = newApp.GetHashCode();
                 newApp.Register(id);
-                manager.AddNewTask(newApp);
+                manager.SendMessage("AddNewTask", newApp);
             }
 
         }

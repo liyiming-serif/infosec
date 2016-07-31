@@ -9,6 +9,14 @@ public class Windows : GUI
     Button minise;
     Button close;
 
+    [SerializeField]
+    string title;
+
+    public string GetTitle()
+    {
+        return title;
+    }
+
     void Awake()
     {
         base.Awake();
@@ -27,11 +35,12 @@ public class Windows : GUI
         Assert.IsNotNull(close);
         minise.onClick.AddListener(delegate
         {
-            SetSelfVisible(false);
-            object[] values = new object[2] { id, false };
-            manager.SendMessage("SetBarItemVisible", values);
+            manager.SendMessage("SetInactiveTask", id);
         });
-        close.onClick.AddListener(delegate { Destroy(gameObject); manager.SendMessage("KillTask", id); });
+        close.onClick.AddListener(delegate
+        {
+            Destroy(gameObject); manager.SendMessage("KillTask", id);
+        });
     }
 
     void Start()

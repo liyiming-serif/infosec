@@ -13,7 +13,12 @@ public class TaskBarItem : GUI
         button = this.GetComponent<Button>();
         Assert.IsNotNull(button);
         //TODO implement restore
-        button.onClick.AddListener(delegate { });
+        button.onClick.AddListener(delegate {
+            if (!manager.IsActive(id))
+            {
+                manager.SendMessage("SetActiveTask", id);
+            }
+        });
     }
 
 }

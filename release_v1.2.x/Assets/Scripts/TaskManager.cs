@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,16 +12,23 @@ public class TaskManager : MonoBehaviour
     List<GUI> wins;
 
     int nowActive;
-
-    public void SetBarItemVisible(object[] paras)
+    public bool IsActive(int id)
     {
-        SetGUIVisible(paras, items);
-        //TODO ensure only ONE task is activated.
+        return nowActive == id;
     }
 
-    public void SetWindowsVisible(object[] paras)
+    public void SetActiveTask(int id)
     {
-        SetGUIVisible(paras, wins);
+        SetGUIVisible(id, true, wins);
+        //TODO set taskbarItem active
+        nowActive = id;
+    }
+
+   public void SetInactiveTask(int id)
+    {
+        SetGUIVisible(id, false, wins);
+        //TODO Set TaskBarItem inactive
+        nowActive = 0;
     }
 
     public void KillTask(int id)
@@ -39,19 +47,8 @@ public class TaskManager : MonoBehaviour
         return (TaskBarItem)LookUpGUI(id, wins);
     }
 
-    public void SetGUIVisible(object[] paras, List<GUI> guis)
+    public void SetGUIVisible(int id, bool visible, List<GUI> guis)
     {
-        if (paras.Length != 2)
-        {
-            return;
-        }
-        else if (!(paras[0] is int) || !(paras[1] is bool))
-        {
-            return;
-        }
-
-        int id = (int)paras[0];
-        bool visible = (bool)paras[1];
         GUI item = LookUpGUI(id, guis);
         if (item)
         {
@@ -72,9 +69,12 @@ public class TaskManager : MonoBehaviour
    public void AddNewTask(Windows newTask)
     {
         wins.Add(newTask);
+
         TaskBarItem newItem = Instantiate(itemPrefab);
         newItem.transform.SetParent(this.transform);
         newItem.Register(newTask.GetID());
+        newItem.GetComponentInChildren<Text>().text = newTask.GetTitle();
+
         items.Add(newItem);
         // TODO set the current active task to inactive
         nowActive = newTask.GetID();
