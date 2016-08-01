@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Assertions;
 using System.Collections;
 
-public class Windows : GUI
+public class Windows : GUI, IHasTitle
 {
     // Components 
     Button minise;
@@ -20,7 +20,7 @@ public class Windows : GUI
     void Awake()
     {
         base.Awake();
-        foreach (Button b in this.GetComponentsInChildren<Button>())
+        foreach (Button b in transform.Find("WindowsOp").gameObject.GetComponentsInChildren<Button>())
         {
             if (b.transform.name == "Minimise")
             {
@@ -41,11 +41,6 @@ public class Windows : GUI
         {
             Destroy(gameObject); manager.SendMessage("KillTask", id);
         });
-    }
-
-    void Start()
-    {
-
     }
 
 }

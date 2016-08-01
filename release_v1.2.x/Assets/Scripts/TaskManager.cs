@@ -66,14 +66,14 @@ public class TaskManager : MonoBehaviour
         }
     }
 
-   public void AddNewTask(Windows newTask)
+   public void AddNewTask(GUI newTask)
     {
         wins.Add(newTask);
 
         TaskBarItem newItem = Instantiate(itemPrefab);
         newItem.transform.SetParent(this.transform);
         newItem.Register(newTask.GetID());
-        newItem.GetComponentInChildren<Text>().text = newTask.GetTitle();
+        newItem.GetComponentInChildren<Text>().text = (newTask as IHasTitle).GetTitle();
 
         items.Add(newItem);
         // TODO set the current active task to inactive
@@ -100,4 +100,15 @@ public class TaskManager : MonoBehaviour
         wins = new List<GUI>();
     }
 
+    void Start()
+    {
+        try
+        {
+            AddNewTask(GameObject.FindObjectOfType<Network>());
+        }
+        catch
+        {
+            Debug.Log("Network is not found in this challenge.");
+        }
+    }
 }

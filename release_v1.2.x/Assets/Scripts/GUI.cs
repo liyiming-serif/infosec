@@ -37,6 +37,7 @@ public class GUI : MonoBehaviour {
         id = 0;
         manager = GameObject.FindObjectOfType<TaskManager>();
         Assert.IsNotNull(manager);
+
     }
 
 }

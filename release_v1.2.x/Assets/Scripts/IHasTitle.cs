@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Common{
-   
+interface IHasTitle {
+    string GetTitle();
 }

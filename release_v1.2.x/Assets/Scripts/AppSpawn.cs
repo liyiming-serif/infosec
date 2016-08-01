@@ -9,6 +9,10 @@ public class AppSpawn : MonoBehaviour
 
     [SerializeField]
     Windows appPrefab;
+    [SerializeField]
+    Vector2 sizeDelta;
+    [SerializeField]
+    Vector2 localPos;
 
     TaskManager manager;
     int id;
@@ -42,13 +46,13 @@ public class AppSpawn : MonoBehaviour
             {
                 //Start a new App if it's not running
                 Windows newApp = Instantiate(appPrefab);
-                newApp.GetComponent<RectTransform>().sizeDelta = Common.networkSize;
-                newApp.transform.localPosition = Common.networkPos;     
+                newApp.GetComponent<RectTransform>().sizeDelta = sizeDelta;
+                newApp.transform.localPosition = localPos;     
                 try
                 {
                     newApp.transform.SetParent(GetComponentInParent<Canvas>().transform);
                 }
-                catch (Exception e)
+                catch
                 {
                     Debug.Log("Canvas is not found.");
                 }
