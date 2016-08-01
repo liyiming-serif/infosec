@@ -58,4 +58,13 @@ public class SubCommand : MonoBehaviour, IPointerClickHandler{
 			tetherLine.transform.localScale = new Vector2(tetherVec.magnitude/18,1); //18 = hardcoded width of line sprite
 		}
 	}
+
+	public int testthis(int a)
+	{
+		for(int i = 0; i < 10; i++)
+		{
+			a += i;
+		}
+		return a;
+	}
 }
