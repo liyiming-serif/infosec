@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class TaskManager : MonoBehaviour
 {
+
     [SerializeField]
     TaskBarItem itemPrefab;
 
@@ -96,7 +97,7 @@ public class TaskManager : MonoBehaviour
     public void SendMail(string choice)
     {
         Debug.Log(choice);
-        //TODO Triger animation on Network
+        wins[0].SendMessage("SendVictimTo", choice);        
     }
 
     void Awake()

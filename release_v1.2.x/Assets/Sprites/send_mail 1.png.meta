@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: 026a852e467cacf46b24949299b43eed
-timeCreated: 1470112532
+guid: f193fba0976302f4db47448a1725f365
+timeCreated: 1470112506
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: target_walk_0
-    21300002: target_walk_1
-    21300004: target_walk_2
-    21300006: target_walk_3
+    21300000: send_mail 1_0
+    21300002: send_mail 1_1
+    21300004: send_mail 1_2
+    21300006: send_mail 1_3
+    21300008: send_mail 1_4
+    21300010: send_mail 1_5
+    21300012: send_mail 1_6
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -34,7 +37,7 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: 0
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -45,102 +48,70 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 1
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 0.75
+  spritePixelsToUnits: 0.5
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: target_walk_0
+    - name: send_mail 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 40
-        height: 55
+        width: 30
+        height: 22
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 0, y: -25}
-        - {x: 0, y: -44}
-        - {x: 11, y: -55}
-        - {x: 28, y: -55}
-        - {x: 40, y: -45}
-        - {x: 40, y: -25}
-        - {x: 30, y: -3}
-        - {x: 14, y: -3}
-        - {x: 5, y: -7}
-    - name: target_walk_1
+      outline: []
+    - name: send_mail 1_1
       rect:
         serializedVersion: 2
-        x: 40
+        x: 30
         y: 0
-        width: 40
-        height: 55
+        width: 30
+        height: 22
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 8, y: -3}
-        - {x: 3, y: -4}
-        - {x: 0, y: -10}
-        - {x: 0, y: -51}
-        - {x: 27, y: -51}
-        - {x: 40, y: -45}
-        - {x: 40, y: -17}
-        - {x: 35, y: -3}
-    - name: target_walk_2
+      outline: []
+    - name: send_mail 1_2
       rect:
         serializedVersion: 2
-        x: 80
+        x: 60
         y: 0
-        width: 40
-        height: 55
+        width: 30
+        height: 22
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 0, y: -43}
-        - {x: 7, y: -55}
-        - {x: 26, y: -55}
-        - {x: 40, y: -46}
-        - {x: 40, y: -6}
-        - {x: 39, y: -3}
-        - {x: 4, y: -3}
-        - {x: 0, y: -13}
-    - name: target_walk_3
+      outline: []
+    - name: send_mail 1_3
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 0
+        width: 30
+        height: 22
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: send_mail 1_4
       rect:
         serializedVersion: 2
         x: 120
         y: 0
-        width: 40
-        height: 55
+        width: 30
+        height: 22
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 14, y: -3}
-        - {x: 4, y: -6}
-        - {x: 0, y: -24}
-        - {x: 0, y: -36}
-        - {x: 5, y: -36}
-        - {x: 3, y: -37}
-        - {x: 1, y: -39}
-        - {x: 1, y: -42}
-        - {x: 4, y: -45}
-        - {x: 8, y: -45}
-        - {x: 12, y: -42}
-        - {x: 14, y: -46}
-        - {x: 18, y: -51}
-        - {x: 25, y: -51}
-        - {x: 29, y: -49}
-        - {x: 40, y: -43}
-        - {x: 40, y: -8}
-        - {x: 39, y: -3}
+      outline: []
     outline: []
   spritePackingTag: 
   userData: 

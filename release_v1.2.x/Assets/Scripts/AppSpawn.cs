@@ -15,6 +15,7 @@ public class AppSpawn : MonoBehaviour
     Vector2 localPos;
 
     TaskManager manager;
+    public Animator animator;
     int id;
 
     bool one_click;
@@ -45,6 +46,7 @@ public class AppSpawn : MonoBehaviour
             else
             {
                 //Start a new App if it's not running
+                animator.Stop();
                 Windows newApp = Instantiate(appPrefab);
                 newApp.GetComponent<RectTransform>().sizeDelta = sizeDelta;
                 newApp.transform.localPosition = localPos;     
@@ -68,6 +70,7 @@ public class AppSpawn : MonoBehaviour
     {
         manager = GameObject.FindObjectOfType<TaskManager>();
         Assert.IsNotNull(manager);
+        animator = GetComponent<Animator>();
         id = 0;
         timer_for_double_click = Time.time;
         one_click = false;
