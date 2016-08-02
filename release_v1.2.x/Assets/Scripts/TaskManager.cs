@@ -93,6 +93,12 @@ public class TaskManager : MonoBehaviour
         return null;
     }
 
+    public void SendMail(string choice)
+    {
+        Debug.Log(choice);
+        //TODO Triger animation on Network
+    }
+
     void Awake()
     {
         nowActive = 0;

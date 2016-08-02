@@ -32,6 +32,11 @@ public class GUI : MonoBehaviour {
         gameObject.SetActive(isVisible);
     }
 
+    public TaskManager ReturnTaskManager()
+    {
+        return manager;
+    }
+
     protected void Awake()
     {
         id = 0;
