@@ -1,16 +1,13 @@
 fileFormatVersion: 2
-guid: f193fba0976302f4db47448a1725f365
-timeCreated: 1470112506
+guid: f736706b24e95384ba64aa7c878ceeec
+timeCreated: 1470686118
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: send_mail 1_0
-    21300002: send_mail 1_1
-    21300004: send_mail 1_2
-    21300006: send_mail 1_3
-    21300008: send_mail 1_4
-    21300010: send_mail 1_5
-    21300012: send_mail 1_6
+    21300000: server_plain_0
+    21300002: server_plain_1
+    21300004: server_plain_2
+    21300006: server_plain_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -57,57 +54,46 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: send_mail 1_0
+    - name: server_plain_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 30
-        height: 22
+        width: 31
+        height: 39
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: send_mail 1_1
+    - name: server_plain_1
       rect:
         serializedVersion: 2
-        x: 30
+        x: 31
         y: 0
-        width: 30
-        height: 22
+        width: 31
+        height: 39
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: send_mail 1_2
+    - name: server_plain_2
       rect:
         serializedVersion: 2
-        x: 60
+        x: 62
         y: 0
-        width: 30
-        height: 22
+        width: 31
+        height: 39
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: send_mail 1_3
+    - name: server_plain_3
       rect:
         serializedVersion: 2
-        x: 90
+        x: 93
         y: 0
-        width: 30
-        height: 22
-      alignment: 1
-      pivot: {x: 0, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: send_mail 1_4
-      rect:
-        serializedVersion: 2
-        x: 120
-        y: 0
-        width: 30
-        height: 22
+        width: 31
+        height: 39
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
