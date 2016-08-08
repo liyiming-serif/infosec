@@ -94,10 +94,10 @@ public class TaskManager : MonoBehaviour
         return null;
     }
 
-    public void SendMail(string choice)
+    public void SendMail(List<string> choices)
     {
-        Debug.Log(choice);
-        wins[0].SendMessage("SendVictimTo", choice);        
+        Debug.Log(choices[0]);//TODO check through all choices
+        wins[0].SendMessage("SendVictimTo", choices[0]); //TODO send complete choices        
     }
 
     void Awake()

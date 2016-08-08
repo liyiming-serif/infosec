@@ -5,7 +5,12 @@ using System;
 
 public class Slot : MonoBehaviour, IDropHandler {
 
-    Domain holding;
+    private Domain holding;
+
+    public Domain GetDomain()
+    {
+        return holding;
+    }
 
     void IDropHandler.OnDrop(PointerEventData eventData)
     {

@@ -4,6 +4,18 @@ using System.Collections;
 public class Domain : MonoBehaviour {
 
     [SerializeField]
-    public string name;
+    private string domainName;
+
+    public string dName
+    {
+        get
+        {
+            return domainName;
+        }
+        set
+        {
+            domainName = value;
+        }
+    }
 
 }
