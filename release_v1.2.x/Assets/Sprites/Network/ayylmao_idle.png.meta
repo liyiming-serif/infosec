@@ -1,19 +1,17 @@
 fileFormatVersion: 2
-guid: 8412ef73f112cff4084de1ffe3aed279
-timeCreated: 1470685969
+guid: 98a304be505bd33418563313bfeeb759
+timeCreated: 1470782611
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: ayylmao_0
-    21300002: ayylmao_1
-    21300004: ayylmao_2
-    21300006: ayylmao_3
-    21300008: ayylmao_4
-    21300010: ayylmao_5
+    21300000: ayylmao_idle_0
+    21300002: ayylmao_idle_1
+    21300004: ayylmao_idle_2
+    21300006: ayylmao_idle_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -36,7 +34,7 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: 0
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -56,70 +54,48 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: ayylmao_0
+    - name: ayylmao_idle_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 16
-        height: 36
+        height: 34
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: ayylmao_1
+    - name: ayylmao_idle_1
       rect:
         serializedVersion: 2
         x: 16
         y: 0
         width: 16
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: ayylmao_2
+    - name: ayylmao_idle_2
       rect:
         serializedVersion: 2
         x: 32
         y: 0
         width: 16
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: ayylmao_3
+    - name: ayylmao_idle_3
       rect:
         serializedVersion: 2
         x: 48
         y: 0
         width: 16
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: ayylmao_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: ayylmao_5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 34
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     outline: []

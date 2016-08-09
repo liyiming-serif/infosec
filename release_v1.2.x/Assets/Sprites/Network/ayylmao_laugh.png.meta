@@ -1,9 +1,11 @@
 fileFormatVersion: 2
-guid: d6ffe8693c04d3d45869494a667adaac
-timeCreated: 1468963705
+guid: 93a9a52b4bda4f34f8482b359f9c6b16
+timeCreated: 1470782590
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: ayylmao_laugh_0
+    21300002: ayylmao_laugh_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -38,10 +40,10 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 1
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 0.5
@@ -49,7 +51,29 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: ayylmao_laugh_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: ayylmao_laugh_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
     outline: []
   spritePackingTag: 
   userData: 
