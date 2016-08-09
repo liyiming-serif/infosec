@@ -94,10 +94,9 @@ public class TaskManager : MonoBehaviour
         return null;
     }
 
-    public void SendMail(List<string> choices)
+    public void SendMail(List<Domain> choices)
     {
-        Debug.Log(choices[0]);//TODO check through all choices
-        wins[0].SendMessage("SendVictimTo", choices[0]); //TODO send complete choices        
+        wins[0].SendMessage("SendVictimTo", choices); //TODO send complete choices        
     }
 
     void Awake()
@@ -111,7 +110,7 @@ public class TaskManager : MonoBehaviour
     {
         try
         {
-            AddNewTask(GameObject.FindObjectOfType<Network>());
+            AddNewTask(GameObject.FindObjectOfType<NetworkWindows>());
         }
         catch
         {
