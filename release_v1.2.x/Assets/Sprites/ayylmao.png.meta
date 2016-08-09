@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 8412ef73f112cff4084de1ffe3aed279
-timeCreated: 1470685969
+timeCreated: 1470770069
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -52,11 +52,14 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 0.5
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: ayylmao_0
+    - serializedVersion: 2
+      name: ayylmao_0
       rect:
         serializedVersion: 2
         x: 0
@@ -67,61 +70,72 @@ TextureImporter:
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: ayylmao_1
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: ayylmao_1
       rect:
         serializedVersion: 2
         x: 16
         y: 0
         width: 16
         height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: ayylmao_2
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: ayylmao_2
       rect:
         serializedVersion: 2
         x: 32
         y: 0
         width: 16
         height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: ayylmao_3
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: ayylmao_3
       rect:
         serializedVersion: 2
         x: 48
         y: 0
         width: 16
         height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: ayylmao_4
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: ayylmao_4
       rect:
         serializedVersion: 2
         x: 64
         y: 0
         width: 16
         height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: ayylmao_5
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: ayylmao_5
       rect:
         serializedVersion: 2
         x: 80
         y: 0
         width: 16
         height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: 
   userData: 
