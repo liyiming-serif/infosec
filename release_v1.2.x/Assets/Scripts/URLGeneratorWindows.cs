@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Assertions;
 using System.Collections.Generic;
 
-public class URLGenerator : MonoBehaviour {
+public class URLGeneratorWindows : MonoBehaviour {
 
     Button sendButton;
     [SerializeField]

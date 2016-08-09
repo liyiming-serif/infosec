@@ -59,7 +59,7 @@ public class AnimatorController : MonoBehaviour
         else if (animator.enabled)
         {
             //TODO Tell TaskManager that it's there.
-            GetComponentInParent<Network>().SendMessage("Result");
+            GetComponentInParent<NetworkWindows>().SendMessage("Result");
             animator.enabled = false;
         }
 

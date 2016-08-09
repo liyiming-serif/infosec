@@ -1,19 +1,21 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
 public class NetworkWindows : GUI, IHasTitle {
 
-    AnimatorController victim;
+    AnimatorController victimController;
+    List<Domain> urlString;
     
-    //TODO without frontend modification
     [SerializeField]
-    Animator animator;
+    Animator victimAnimator;
     [SerializeField]
     GameObject urlPanel;
+    [SerializeField]
+    List<Domain> servers;
     
-
     public string GetTitle()
     {
         return "Network";
@@ -23,23 +25,32 @@ public class NetworkWindows : GUI, IHasTitle {
     {
         base.Awake();
         this.Register(this.GetHashCode());
-        victim = GetComponentInChildren<AnimatorController>();
+        urlString = new List<Domain>();
+    }
+
+    private void Start()
+    {
+        victimController =  victimAnimator.GetComponent<AnimatorController>();
     }
 
     public void SendVictimTo(List<Domain> url)
     {
         foreach(Domain dname in url)
         {
-            Instantiate(dname, urlPanel.transform); // deep clone to network
+            Object dclone = Instantiate(dname, urlPanel.transform); // deep clone to network
+            urlString.Add((Domain) dclone);
         }
+        //TODO fully working colouring.
+        urlString[0].GetComponent<Image>().color = Color.green;
+        servers[0].GetComponent<Image>().color = Color.green;
         string choice = ".clti"; //TODO decides layer by layer
         if (choice == ".clti")
         {
-            victim.SetEndPosition(new Vector2(-447, -70));
+            victimController.SetEndPosition(new Vector2(-447, -70));
         }
         else
         {
-            victim.SetEndPosition(new Vector2(-126, -70));
+            victimController.SetEndPosition(new Vector2(-126, -70));
         }
     }
 
@@ -51,8 +62,8 @@ public class NetworkWindows : GUI, IHasTitle {
             EditorUtility.DisplayDialog("Success!","The victim gave in her username and password.","Continue");
         }else
         {
-            victim.ResetAnimator();
-            animator.Rebind();
+            victimController.ResetAnimator();
+            victimAnimator.Rebind();
         }
     }
 }

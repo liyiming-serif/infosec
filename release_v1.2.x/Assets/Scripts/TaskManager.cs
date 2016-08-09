@@ -42,7 +42,7 @@ public class TaskManager : MonoBehaviour
     {
         return (Windows)LookUpGUI(id, wins);
     }
-
+     
     public TaskBarItem LookUpTaskBarItem(int id)
     {
         return (TaskBarItem)LookUpGUI(id, wins);
