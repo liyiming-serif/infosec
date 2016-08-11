@@ -6,6 +6,7 @@ using System;
 public class Slot : MonoBehaviour, IDropHandler {
 
     private Domain holding;
+    private int id;
 
     public Domain GetDomain()
     {
@@ -18,6 +19,7 @@ public class Slot : MonoBehaviour, IDropHandler {
         {
             holding = DragHandler.domainBeingDragged;
             holding.transform.SetParent(this.transform);
+            ExecuteEvents.ExecuteHierarchy<ISlotUpdated>(this, null, (x, y) => x.);
             GameObject.FindObjectOfType<TaskManager>().wins[0].GetComponentInChildren<Domain>(true).gameObject.SetActive(true);
         }
     }

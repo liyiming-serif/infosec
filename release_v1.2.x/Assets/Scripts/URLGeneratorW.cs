@@ -2,8 +2,9 @@
 using UnityEngine.UI;
 using UnityEngine.Assertions;
 using System.Collections.Generic;
+using System;
 
-public class URLGeneratorW : MonoBehaviour {
+public class URLGeneratorW : MonoBehaviour, ISlotUpdated {
 
     Button sendButton;
     Windows parent;
@@ -38,4 +39,8 @@ public class URLGeneratorW : MonoBehaviour {
         });
     }
 
+    public void NoticeNetworkURLBoard(Domain d, int id)
+    {
+        Debug.Log(d.dName);
+    }
 }

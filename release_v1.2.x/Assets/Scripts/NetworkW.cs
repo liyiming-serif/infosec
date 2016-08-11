@@ -39,7 +39,7 @@ public class NetworkW : GUI, IHasTitle {
     {
         if(!url[0])
         {
-            ReturnTaskManager().appSpawn.animator.Rebind();
+            ReturnTaskManager().apps.animator.Rebind();
             return;
         }
 

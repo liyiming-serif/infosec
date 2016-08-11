@@ -5,16 +5,19 @@ using System.Collections.Generic;
 
 public class TaskManager : MonoBehaviour
 {
-
     [SerializeField]
-    TaskBarItem itemPrefab;
+    List<AppSpawn> apps;
 
-    public AppSpawn appSpawn;
-
-    public List<GUI> items;
-    public List<GUI> wins; //TODO Change back to private
+    List<GUI> items;
+    List<GUI> wins;
 
     int nowActive;
+
+    public List<AppSpawn> ReturnApps()
+    {
+        return apps;
+    }
+
     public bool IsActive(int id)
     {
         return nowActive == id;
@@ -73,8 +76,7 @@ public class TaskManager : MonoBehaviour
     {
         wins.Add(newTask);
 
-        TaskBarItem newItem = Instantiate(itemPrefab);
-        newItem.transform.SetParent(this.transform);
+        TaskBarItem newItem = Instantiate(Resources.Load("TaskBarItem"), transform) as TaskBarItem;
         newItem.Register(newTask.GetID());
         newItem.GetComponentInChildren<Text>().text = (newTask as IHasTitle).GetTitle();
 

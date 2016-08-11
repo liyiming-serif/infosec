@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Assertions;
+
 using System;
 using UnityEngine.EventSystems;
 using System.Collections;
@@ -14,8 +15,7 @@ public class AppSpawn : MonoBehaviour
     [SerializeField]
     Vector2 localPos;
 
-    TaskManager manager;
-    public Animator animator;
+    Animator animator;
     int id;
 
     bool one_click;
@@ -23,7 +23,13 @@ public class AppSpawn : MonoBehaviour
     float timer_for_double_click;
 
     //this is how long in seconds to allow for a double click
+    [SerializeField]
     float delay = 1f;
+
+    public void PlayAnimation(string stateName)
+    {
+        animator.Play(stateName);
+    }
 
     void OnMouseDown()
     {
@@ -38,15 +44,18 @@ public class AppSpawn : MonoBehaviour
         {
             one_click = false; // found a double click, now reset
        
-            Windows existed = manager.LookUpWindows(id);
+            Windows existed = Common.ReturnTManager().LookUpWindows(id);
             if (existed)
             {
-                manager.SendMessage("SetActiveTask", id);
+                Common.SendMSGTManager("SetActiveTask", id);
             }
             else
             {
                 //Start a new App if it's not running
-                animator.Stop();
+                if (animator)
+                {
+                    animator.Stop(); //TODO Replace it with TriggerState
+                }
                 Windows newApp = Instantiate(appPrefab);
                 newApp.GetComponent<RectTransform>().sizeDelta = sizeDelta;
                 newApp.transform.localPosition = localPos;     
@@ -60,7 +69,7 @@ public class AppSpawn : MonoBehaviour
                 }
                 id = newApp.GetHashCode();
                 newApp.Register(id);
-                manager.SendMessage("AddNewTask", newApp);
+                Common.SendMSGTManager("AddNewTask", newApp);
             }
 
         }
@@ -68,8 +77,6 @@ public class AppSpawn : MonoBehaviour
 
     void Awake()
     {
-        manager = GameObject.FindObjectOfType<TaskManager>();
-        Assert.IsNotNull(manager);
         animator = GetComponent<Animator>();
         id = 0;
         timer_for_double_click = Time.time;
