@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AnimatorController : MonoBehaviour
+public class AlienController : MonoBehaviour
 {
 
     protected Animator animator;

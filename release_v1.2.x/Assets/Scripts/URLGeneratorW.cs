@@ -3,18 +3,19 @@ using UnityEngine.UI;
 using UnityEngine.Assertions;
 using System.Collections.Generic;
 
-public class URLGeneratorWindows : MonoBehaviour {
+public class URLGeneratorW : MonoBehaviour {
 
     Button sendButton;
+    Windows parent;
+
     [SerializeField]
     List<Slot> slots;
-    Windows parent;
 
     void Awake()
     {
         parent = GetComponentInParent<Windows>();
-        Assert.IsNotNull(parent);
         sendButton = GetComponentInChildren<Button>();
+        Assert.IsNotNull(parent);
         Assert.IsNotNull(sendButton);
     }
 
@@ -37,8 +38,4 @@ public class URLGeneratorWindows : MonoBehaviour {
         });
     }
 
-    // Update is called once per frame
-    void Update () {
-	
-	}
 }

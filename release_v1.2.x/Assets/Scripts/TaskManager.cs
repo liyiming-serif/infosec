@@ -94,9 +94,9 @@ public class TaskManager : MonoBehaviour
         return null;
     }
 
-    public void SendMail(List<Domain> choices)
+    public void SendURLString(List<Domain> urlString)
     {
-        wins[0].SendMessage("SendVictimTo", choices); //TODO send complete choices        
+        wins[0].SendMessage("SendVictimTo", urlString);
     }
 
     void Awake()

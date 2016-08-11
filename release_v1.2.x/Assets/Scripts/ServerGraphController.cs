@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ServerAnimatorsController : MonoBehaviour {
+public class ServersGraphController : MonoBehaviour {
 
     [SerializeField]
     List<Image> dnames;
