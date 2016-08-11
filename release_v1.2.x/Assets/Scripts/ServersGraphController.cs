@@ -33,7 +33,7 @@ public class ServersGraphController : MonoBehaviour {
     IEnumerator StartWalking()
     {
         yield return new WaitForSeconds(1);
-        GetComponentInParent<NetworkW>().alienC.SetEndPosition(new Vector2(-292, 140));
+        GetComponentInParent<NetworkW>().alienC.SetEndPosition(new Vector2(-283, 62));
     }
 
     IEnumerator Explode()

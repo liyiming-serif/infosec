@@ -1,4 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEditor;
+using System.Collections;
+using System.Collections.Generic;
 
 public class AlienController : MonoBehaviour
 {
@@ -10,19 +14,21 @@ public class AlienController : MonoBehaviour
     protected Vector2 initPosition;
     public Vector2 endPosition;
     public Vector2 startPosition;
+	bool isMoving;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
-        animator.enabled = false;
+		animator.SetTrigger("stopwalk");
         initPosition = animator.transform.position;
         endPosition = initPosition;
         startPosition = endPosition;
+		isMoving = false;
     }
 
     public void ResetAnimator()
     {
-        animator.enabled = false;
+		animator.SetTrigger("stopwalk");
         animator.transform.position = initPosition;
         endPosition = initPosition;
     }
@@ -34,11 +40,12 @@ public class AlienController : MonoBehaviour
 
     public void SetEndPosition(Vector2 destination)
     {
-        animator.enabled = true;
+		animator.SetTrigger("startwalk");
         if (Vector2.Distance(endPosition, destination) > .1f)
         {
             startPosition = endPosition;
             endPosition = destination;
+			isMoving = true;
         }
     }
 
@@ -48,6 +55,12 @@ public class AlienController : MonoBehaviour
         endPosition = oldPosition;
     }
 
+	IEnumerator Done()
+	{
+		yield return new WaitForSeconds(2f);
+		gameObject.SetActive(false);
+	}
+
     void Update()
     {
         float step = speed * Time.deltaTime;
@@ -56,11 +69,14 @@ public class AlienController : MonoBehaviour
         {
             animator.transform.position = Vector2.MoveTowards(animator.transform.position, endPosition, step);
         }
-        else if (animator.enabled)
+		else if (isMoving)
         {
             //TODO Tell TaskManager that it's there.
-            GetComponentInParent<NetworkW>().SendMessage("Result");
-            animator.enabled = false;
+            //GetComponentInParent<NetworkW>().SendMessage("Result");
+			animator.SetTrigger("triggervirus");
+			StartCoroutine(Done());
+			isMoving = false;
+
         }
 
     }

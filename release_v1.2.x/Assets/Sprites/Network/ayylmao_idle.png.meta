@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 98a304be505bd33418563313bfeeb759
-timeCreated: 1470782611
+timeCreated: 1470927049
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -50,54 +50,64 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 0.5
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: ayylmao_idle_0
+    - serializedVersion: 2
+      name: ayylmao_idle_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 16
         height: 34
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: ayylmao_idle_1
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ayylmao_idle_1
       rect:
         serializedVersion: 2
         x: 16
         y: 0
         width: 16
         height: 34
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: ayylmao_idle_2
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ayylmao_idle_2
       rect:
         serializedVersion: 2
         x: 32
         y: 0
         width: 16
         height: 34
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: ayylmao_idle_3
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ayylmao_idle_3
       rect:
         serializedVersion: 2
         x: 48
         y: 0
         width: 16
         height: 34
-      alignment: 1
-      pivot: {x: 0, y: 1}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      tessellationDetail: 0
     outline: []
   spritePackingTag: 
   userData: 
