@@ -9,6 +9,8 @@ public class TaskManager : MonoBehaviour
     [SerializeField]
     TaskBarItem itemPrefab;
 
+    public AppSpawn appSpawn;
+
     List<GUI> items;
     List<GUI> wins;
 
@@ -110,7 +112,7 @@ public class TaskManager : MonoBehaviour
     {
         try
         {
-            AddNewTask(GameObject.FindObjectOfType<NetworkWindows>());
+            AddNewTask(GameObject.FindObjectOfType<NetworkW>());
         }
         catch
         {

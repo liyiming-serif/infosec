@@ -33,7 +33,7 @@ public class URLGeneratorW : MonoBehaviour {
     {
         sendButton.onClick.AddListener(delegate
         {
-            parent.ReturnTaskManager().SendMessage("SendMail", constuctDName());
+            parent.ReturnTaskManager().SendMessage("SendURLString", constuctDName());
             parent.ReturnTaskManager().SendMessage("KillTask", parent.GetID());
         });
     }

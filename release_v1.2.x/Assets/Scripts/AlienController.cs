@@ -59,7 +59,7 @@ public class AlienController : MonoBehaviour
         else if (animator.enabled)
         {
             //TODO Tell TaskManager that it's there.
-            GetComponentInParent<NetworkWindows>().SendMessage("Result");
+            GetComponentInParent<NetworkW>().SendMessage("Result");
             animator.enabled = false;
         }
 
