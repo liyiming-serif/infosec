@@ -11,8 +11,8 @@ public class TaskManager : MonoBehaviour
 
     public AppSpawn appSpawn;
 
-    List<GUI> items;
-    List<GUI> wins;
+    public List<GUI> items;
+    public List<GUI> wins; //TODO Change back to private
 
     int nowActive;
     public bool IsActive(int id)

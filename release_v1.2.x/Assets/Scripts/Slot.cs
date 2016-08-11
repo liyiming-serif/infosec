@@ -18,6 +18,7 @@ public class Slot : MonoBehaviour, IDropHandler {
         {
             holding = DragHandler.domainBeingDragged;
             holding.transform.SetParent(this.transform);
+            GameObject.FindObjectOfType<TaskManager>().wins[0].GetComponentInChildren<Domain>(true).gameObject.SetActive(true);
         }
     }
 }

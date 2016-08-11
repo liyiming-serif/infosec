@@ -43,10 +43,10 @@ public class NetworkW : GUI, IHasTitle {
             return;
         }
 
-        foreach(Domain dname in url)
+        foreach(Domain dname in urlSPanel.GetComponentsInChildren<Domain>())
         {
-            Object dclone = Instantiate(dname, urlSPanel.transform); // deep clone to network
-            urlString.Add((Domain) dclone);
+            //Object dclone = Instantiate(dname, urlSPanel.transform); // deep clone to network
+            urlString.Add((Domain) dname);
         }
 
         urlString[0].GetComponent<Image>().color = Color.green;
@@ -59,11 +59,13 @@ public class NetworkW : GUI, IHasTitle {
         dnames[0].GetComponent<Image>().color = Color.green;
         serversC.ToNextServer(1);
     }
+
     IEnumerator Done()
     {
         yield return new WaitForSeconds(0.5f);
         alienA.gameObject.SetActive(false);
     }
+
     public void Explode()
     {
         GameObject o = Instantiate(Resources.Load("Explosion"), alienA.transform) as GameObject;
