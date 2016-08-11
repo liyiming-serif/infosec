@@ -8,10 +8,17 @@ public class TaskManager : MonoBehaviour
     [SerializeField]
     List<AppSpawn> apps;
 
+    NetworkW _network;
+
     List<GUI> items;
     List<GUI> wins;
 
     int nowActive;
+
+    public NetworkW ReturnNetwork()
+    {
+        return _network;
+    }
 
     public List<AppSpawn> ReturnApps()
     {
@@ -100,7 +107,7 @@ public class TaskManager : MonoBehaviour
 
     public void SendURLString(List<Domain> urlString)
     {
-        wins[0].SendMessage("SendVictimTo", urlString);
+       _network.SendMessage("SendVictimTo", urlString);
     }
 
     void Awake()
@@ -114,7 +121,7 @@ public class TaskManager : MonoBehaviour
     {
         try
         {
-            AddNewTask(GameObject.FindObjectOfType<NetworkW>());
+           _network = GameObject.FindObjectOfType<NetworkW>();
         }
         catch
         {

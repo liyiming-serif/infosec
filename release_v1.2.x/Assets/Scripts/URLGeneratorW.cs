@@ -37,10 +37,14 @@ public class URLGeneratorW : MonoBehaviour, ISlotUpdated {
             parent.ReturnTaskManager().SendMessage("SendURLString", constuctDName());
             parent.ReturnTaskManager().SendMessage("KillTask", parent.GetID());
         });
+        for(int i = 0; i < slots.Count; i++)
+        {
+            slots[i].id = i;
+        }
     }
 
     public void NoticeNetworkURLBoard(Domain d, int id)
     {
-        Debug.Log(d.dName);
+        Debug.Log(id);
     }
 }
