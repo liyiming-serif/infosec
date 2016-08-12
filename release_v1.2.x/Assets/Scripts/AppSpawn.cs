@@ -15,6 +15,14 @@ public class AppSpawn : MonoBehaviour
     [SerializeField]
     Vector2 localPos;
 
+    public string appName
+    {
+        get
+        {
+            return transform.name;
+        }
+    }
+
     Animator animator;
     int id;
 
@@ -29,6 +37,11 @@ public class AppSpawn : MonoBehaviour
     public void PlayAnimation(string stateName)
     {
         animator.Play(stateName);
+    }
+
+    public int GetID()
+    {
+        return id;
     }
 
     void OnMouseDown()
@@ -47,7 +60,7 @@ public class AppSpawn : MonoBehaviour
             Windows existed = Common.ReturnTManager().LookUpWindows(id);
             if (existed)
             {
-                Common.SendMSGTManager("SetActiveTask", id);
+                Common.ReturnTManager().SetActiveTask(id);
             }
             else
             {
@@ -69,7 +82,7 @@ public class AppSpawn : MonoBehaviour
                 }
                 id = newApp.GetHashCode();
                 newApp.Register(id);
-                Common.SendMSGTManager("AddNewTask", newApp);
+                Common.ReturnTManager().AddNewTask(newApp);
             }
 
         }

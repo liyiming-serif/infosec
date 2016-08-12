@@ -4,7 +4,7 @@ using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
-public class AlienController : MonoBehaviour
+public class AlienC : MonoBehaviour
 {
 
     protected Animator animator;

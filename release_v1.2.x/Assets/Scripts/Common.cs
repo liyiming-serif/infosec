@@ -7,8 +7,4 @@ public static class Common{
     {
         return manager;
     }
-    public static void SendMSGTManager(string methodName, object value = null, SendMessageOptions options = SendMessageOptions.RequireReceiver)
-    {
-        manager.SendMessage(methodName, value, options);
-    }
 }

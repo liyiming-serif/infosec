@@ -5,7 +5,6 @@ using UnityEngine.Assertions;
 public class GUI : MonoBehaviour {
 
     protected int id;
-    protected TaskManager manager;
 
     public void Register(int newid)
     {
@@ -32,17 +31,9 @@ public class GUI : MonoBehaviour {
         gameObject.SetActive(isVisible);
     }
 
-    public TaskManager ReturnTaskManager()
-    {
-        return manager;
-    }
-
     protected void Awake()
     {
         id = 0;
-        manager = GameObject.FindObjectOfType<TaskManager>();
-        Assert.IsNotNull(manager);
-
     }
 
 }

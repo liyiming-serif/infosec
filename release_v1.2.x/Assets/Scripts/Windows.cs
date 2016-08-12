@@ -20,7 +20,7 @@ public class Windows : GUI, IHasTitle
     void Awake()
     {
         base.Awake();
-        foreach (Button b in transform.Find("WindowsOp").gameObject.GetComponentsInChildren<Button>())
+        foreach (Button b in transform.Find("WindowsOp").GetComponentsInChildren<Button>())
         {
             if (b.transform.name == "Minimise")
             {
@@ -35,11 +35,12 @@ public class Windows : GUI, IHasTitle
         Assert.IsNotNull(close);
         minise.onClick.AddListener(delegate
         {
-            manager.SendMessage("SetInactiveTask", id);
+            Common.ReturnTManager().SetInactiveTask(id);
         });
         close.onClick.AddListener(delegate
         {
-            Destroy(gameObject); manager.SendMessage("KillTask", id);
+            Destroy(gameObject);
+            Common.ReturnTManager().KillTask(id);
         });
     }
 

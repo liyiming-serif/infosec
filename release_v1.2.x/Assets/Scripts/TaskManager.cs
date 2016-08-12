@@ -8,21 +8,22 @@ public class TaskManager : MonoBehaviour
     [SerializeField]
     List<AppSpawn> apps;
 
-    NetworkW _network;
+    NetworkWindows _network;
 
     List<GUI> items;
     List<GUI> wins;
 
     int nowActive;
 
-    public NetworkW ReturnNetwork()
+
+    public void AlienGo()
     {
-        return _network;
+        _network.AlienGo();
     }
 
-    public List<AppSpawn> ReturnApps()
+    public void updateNetworkURL(Domain d, int id)
     {
-        return apps;
+        _network.updateNetworkURL(d, id);
     }
 
     public bool IsActive(int id)
@@ -50,14 +51,26 @@ public class TaskManager : MonoBehaviour
         RemoveGUI(id, items);
     }
 
+    public Windows LookUpWindows(string name)
+    {
+        Windows result = null;
+        foreach (AppSpawn a in apps)
+        {
+            if(a.appName == name)
+            {
+                result = LookUpWindows(a.GetID());
+            }
+        }
+        return result;
+    }
     public Windows LookUpWindows(int id)
     {
-        return (Windows)LookUpGUI(id, wins);
+        return LookUpGUI(id, wins) as Windows;
     }
      
     public TaskBarItem LookUpTaskBarItem(int id)
     {
-        return (TaskBarItem)LookUpGUI(id, wins);
+        return LookUpGUI(id, wins) as TaskBarItem;
     }
 
     public void SetGUIVisible(int id, bool visible, List<GUI> guis)
@@ -82,19 +95,18 @@ public class TaskManager : MonoBehaviour
    public void AddNewTask(GUI newTask)
     {
         wins.Add(newTask);
-
+        int id = newTask.GetID();
         TaskBarItem newItem = Instantiate(Resources.Load("TaskBarItem"), transform) as TaskBarItem;
-        newItem.Register(newTask.GetID());
+        newItem.Register(id);
         newItem.GetComponentInChildren<Text>().text = (newTask as IHasTitle).GetTitle();
 
         items.Add(newItem);
         // TODO set the current active task to inactive
-        nowActive = newTask.GetID();
+        nowActive = id;
     }
 
     public GUI LookUpGUI(int id, List<GUI> guis)
     {
-        //Primitive Imp.
         foreach (GUI g in guis)
         {
             if(g.IsTarget(id))
@@ -103,11 +115,6 @@ public class TaskManager : MonoBehaviour
             }
         }
         return null;
-    }
-
-    public void SendURLString(List<Domain> urlString)
-    {
-       _network.SendMessage("SendVictimTo", urlString);
     }
 
     void Awake()
@@ -121,7 +128,7 @@ public class TaskManager : MonoBehaviour
     {
         try
         {
-           _network = GameObject.FindObjectOfType<NetworkW>();
+           _network = GameObject.FindObjectOfType<NetworkWindows>();
         }
         catch
         {

@@ -14,9 +14,9 @@ public class TaskBarItem : GUI
         Assert.IsNotNull(button);
         //TODO implement restore
         button.onClick.AddListener(delegate {
-            if (!manager.IsActive(id))
+            if (!Common.ReturnTManager().IsActive(id))
             {
-                manager.SendMessage("SetActiveTask", id);
+                Common.ReturnTManager().SetActiveTask(id);
             }
         });
     }
