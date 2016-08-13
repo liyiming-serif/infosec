@@ -11,6 +11,9 @@ public class AppSpawn : MonoBehaviour
     Vector2 localPos;
     [SerializeField]
     float delay = 1f; //this is how long in seconds to allow for a double click
+    bool one_click;
+    bool timer_running;
+    float timer_for_double_click;
 
     public string appName
     {
@@ -23,9 +26,6 @@ public class AppSpawn : MonoBehaviour
     Animator animator;
     int id;
 
-    bool one_click;
-    bool timer_running;
-    float timer_for_double_click;
 
     public int GetID()
     {

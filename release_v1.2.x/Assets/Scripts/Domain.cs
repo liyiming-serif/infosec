@@ -1,19 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Domain : MonoBehaviour {
-
-    [SerializeField]
-    private string domainName;
 
     public string dName
     {
         get
         {
-            return domainName;
+            return GetComponentInChildren<Text>().text;
         }
         set
         {
-            domainName = value;
+            GetComponentInChildren<Text>().text = value;
         }
     }
 

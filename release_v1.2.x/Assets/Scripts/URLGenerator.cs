@@ -7,14 +7,15 @@ using UnityEngine.EventSystems;
 public class URLGenerator : MonoBehaviour, IEventSystemHandler {
 
     Button sendButton;
-
-    [SerializeField]
     List<Slot> slots;
 
     void Awake()
     {
         sendButton = GetComponentInChildren<Button>();
         Assert.IsNotNull(sendButton);
+        slots = new List<Slot>();
+        slots.AddRange(GetComponentsInChildren<Slot>());
+        Debug.Log("Number of slots found: " + slots.Count);
     }
 
     void Start()

@@ -8,14 +8,14 @@ public class NetworkWindows : GUI, IHasTitle, IEventSystemHandler {
 
     
     [SerializeField]
-    List<Slot> urlString;
-    [SerializeField]
-    List<string> answer; //Answer needs to have a struct
+    GameObject urlString;
 
     public static NetworkWindows instance;
 
     AlienC alienC;
     ServersGraphC serversC;
+
+    List<Slot> slots;
     int nowAt;
     
     public string GetTitle()
@@ -27,6 +27,8 @@ public class NetworkWindows : GUI, IHasTitle, IEventSystemHandler {
     {
         base.Awake();
         this.Register(this.GetHashCode());
+        slots = new List<Slot>();
+        slots.AddRange(urlString.GetComponentsInChildren<Slot>());
         nowAt = -1;
         instance = this;
     }
@@ -41,7 +43,7 @@ public class NetworkWindows : GUI, IHasTitle, IEventSystemHandler {
     {
         if(nowAt == -1)
         {
-            urlString[nowAt + 1].holding.GetComponent<Image>().color = Color.green;
+            slots[nowAt + 1].holding.GetComponent<Image>().color = Color.green;
             serversC.LightupDomainName(nowAt + 1);
             serversC.ActivatePath(nowAt + 1, true);
             alienC.SetEndPosition(serversC.GetLandingPos(nowAt + 1));
@@ -56,12 +58,12 @@ public class NetworkWindows : GUI, IHasTitle, IEventSystemHandler {
 
     public void updateNetworkURL(Domain d, int id)
     {
-        Domain tobeDestroyed = urlString[id].holding;
+        Domain tobeDestroyed = slots[id].holding;
         if(tobeDestroyed)
         {
             Destroy(tobeDestroyed);
         }
-        Instantiate(d, urlString[id].transform);
+        Instantiate(d, slots[id].transform);
     }
 
 }
