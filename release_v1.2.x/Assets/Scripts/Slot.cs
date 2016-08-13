@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections;
-using System;
 
 public class Slot : MonoBehaviour, IDropHandler {
 
-    private Domain _holding;
-    private int _id;
+    Domain _holding;
+    int _id;
 
     public int id
     {
@@ -37,7 +35,7 @@ public class Slot : MonoBehaviour, IDropHandler {
         if (!holding)
         {
             holding = DragHandler.domainBeingDragged;
-            ExecuteEvents.ExecuteHierarchy<ISlotUpdated>(this.gameObject, null, (x, y) => x.NoticeNetworkURLBoard(holding,_id));
+            ExecuteEvents.ExecuteHierarchy<URLGenerator>(this.gameObject, null, (x, y) => x.NoticeNetworkURLBoard(holding,_id));
         }
     }
     

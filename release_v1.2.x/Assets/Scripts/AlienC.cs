@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 public class AlienC : MonoBehaviour
 {
 
-    
     [SerializeField]
     float speed = 150.0f;
 
@@ -17,7 +16,6 @@ public class AlienC : MonoBehaviour
     void Awake()
     {
         animator = GetComponent<Animator>();
-		animator.SetTrigger("stopwalk");
         initPosition = animator.transform.position;
         endPosition = initPosition;
         startMoving = false;

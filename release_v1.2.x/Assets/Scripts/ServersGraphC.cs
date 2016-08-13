@@ -22,11 +22,6 @@ public class ServersGraphC : MonoBehaviour {
         inpaths[id].enabled = isActive;
     }
 
-    public void ActivateServer(int id, bool isActive)
-    {
-        servers[id].enabled = isActive;
-    }
-
     public Vector2 GetLandingPos(int id)
     {
         Vector2 result = servers[id].transform.position;
@@ -37,10 +32,6 @@ public class ServersGraphC : MonoBehaviour {
 
     void Start()
     {
-        foreach(Animator a in servers)
-        {
-            a.enabled = false;
-        }
         foreach(Animator a in inpaths)
         {
             a.enabled = false;

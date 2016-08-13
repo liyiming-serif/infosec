@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 using UnityEngine.Assertions;
 using System.Collections.Generic;
-using System;
+using UnityEngine.EventSystems;
 
-public class URLGenerator : MonoBehaviour, ISlotUpdated {
+public class URLGenerator : MonoBehaviour, IEventSystemHandler {
 
     Button sendButton;
 

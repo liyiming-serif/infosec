@@ -1,6 +1,3 @@
-﻿using UnityEngine;
-using System.Collections;
-
-interface IHasTitle {
+﻿interface IHasTitle {
     string GetTitle();
 }

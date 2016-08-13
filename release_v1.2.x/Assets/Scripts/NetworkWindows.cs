@@ -47,7 +47,6 @@ public class NetworkWindows : GUI, IHasTitle, IEventSystemHandler {
         else if(nowAt == 0)
         {
             serversC.ActivatePath(nowAt, false);
-            serversC.ActivateServer(nowAt, true);
             alienC.GetExploded();
         }
     }

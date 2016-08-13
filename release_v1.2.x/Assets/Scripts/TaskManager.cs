@@ -24,6 +24,7 @@ public class TaskManager : MonoBehaviour
 
     public void updateNetworkURL(Domain d, int id)
     {
+        _network.SetSelfVisible(true);
         _network.updateNetworkURL(d, id);
     }
 
@@ -130,7 +131,8 @@ public class TaskManager : MonoBehaviour
     {
         try
         {
-           _network = GameObject.FindObjectOfType<NetworkWindows>();
+            _network = GameObject.FindObjectOfType<NetworkWindows>();
+            _network.SetSelfVisible(false);
         }
         catch
         {
