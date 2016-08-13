@@ -5,9 +5,9 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 {
     public static Domain domainBeingDragged;
 
-    private Transform originalParent;
-    private Vector2 originalPos;
-    private Canvas desktop;
+    Transform originalParent;
+    Vector2 originalPos;
+    Canvas desktop;
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {

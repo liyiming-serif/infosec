@@ -9,6 +9,8 @@ public class AppSpawn : MonoBehaviour
     Vector2 sizeDelta;
     [SerializeField]
     Vector2 localPos;
+    [SerializeField]
+    float delay = 1f; //this is how long in seconds to allow for a double click
 
     public string appName
     {
@@ -24,10 +26,6 @@ public class AppSpawn : MonoBehaviour
     bool one_click;
     bool timer_running;
     float timer_for_double_click;
-
-    //this is how long in seconds to allow for a double click
-    [SerializeField]
-    float delay = 1f;
 
     public void PlayAnimation(string stateName)
     {
@@ -52,10 +50,10 @@ public class AppSpawn : MonoBehaviour
         {
             one_click = false; // found a double click, now reset
        
-            Windows existed = Common.ReturnTManager().LookUpWindows(id);
+            Windows existed = TaskManager.instance.LookUpWindows(id);
             if (existed)
             {
-                Common.ReturnTManager().SetActiveTask(id);
+                TaskManager.instance.SetActiveTask(id);
             }
             else
             {
@@ -77,7 +75,7 @@ public class AppSpawn : MonoBehaviour
                 }
                 id = newApp.GetHashCode();
                 newApp.Register(id);
-                Common.ReturnTManager().AddNewTask(newApp);
+                TaskManager.instance.AddNewTask(newApp);
             }
 
         }

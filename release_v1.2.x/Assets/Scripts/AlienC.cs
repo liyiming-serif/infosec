@@ -5,14 +5,14 @@ using UnityEngine.EventSystems;
 public class AlienC : MonoBehaviour
 {
 
-    protected Animator animator;
-
+    
     [SerializeField]
-    float speed = 200.0f;
-    protected Vector2 initPosition;
-    public Vector2 endPosition;
-    public Vector2 startPosition;
-    public bool startMoving;
+    float speed = 150.0f;
+
+    Animator animator;
+    Vector2 initPosition;
+    Vector2 endPosition;
+    bool startMoving;
 
     void Awake()
     {
@@ -20,7 +20,6 @@ public class AlienC : MonoBehaviour
 		animator.SetTrigger("stopwalk");
         initPosition = animator.transform.position;
         endPosition = initPosition;
-        startPosition = endPosition;
         startMoving = false;
     }
 
@@ -35,7 +34,6 @@ public class AlienC : MonoBehaviour
         {
             startMoving = true;
             animator.SetTrigger("startwalk");
-            startPosition = endPosition;
             endPosition = destination;
         }
     }

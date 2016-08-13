@@ -6,13 +6,14 @@ using UnityEngine.EventSystems;
 
 public class NetworkWindows : GUI, IHasTitle, IEventSystemHandler {
 
-    AlienC alienC;
-    ServersGraphC serversC;
+    
     [SerializeField]
     List<Slot> urlString;
     [SerializeField]
     List<string> answer; //Answer needs to have a struct
 
+    AlienC alienC;
+    ServersGraphC serversC;
     int nowAt;
     
     public string GetTitle()
@@ -40,7 +41,6 @@ public class NetworkWindows : GUI, IHasTitle, IEventSystemHandler {
             urlString[nowAt + 1].holding.GetComponent<Image>().color = Color.green;
             serversC.LightupDomainName(nowAt + 1);
             serversC.ActivatePath(nowAt + 1, true);
-            Debug.Log(serversC.GetLandingPos(nowAt + 1));
             alienC.SetEndPosition(serversC.GetLandingPos(nowAt + 1));
             nowAt += 1;
         }

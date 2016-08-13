@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class TaskManager : MonoBehaviour
 {
+    public static TaskManager instance;
+
     [SerializeField]
     List<AppSpawn> apps;
 
@@ -14,7 +16,6 @@ public class TaskManager : MonoBehaviour
     List<GUI> wins;
 
     int nowActive;
-
 
     public void AlienGo()
     {
@@ -122,6 +123,7 @@ public class TaskManager : MonoBehaviour
         nowActive = 0;
         items = new List<GUI>();
         wins = new List<GUI>();
+        instance = this;
     }
 
     void Start()

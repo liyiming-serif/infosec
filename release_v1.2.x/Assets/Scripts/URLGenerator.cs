@@ -21,8 +21,8 @@ public class URLGenerator : MonoBehaviour, ISlotUpdated {
     {
         sendButton.onClick.AddListener(delegate
         {
-            Common.ReturnTManager().AlienGo();
-            Common.ReturnTManager().KillTask(GetComponentInParent<GUI>().GetID());
+            TaskManager.instance.AlienGo();
+            TaskManager.instance.KillTask(GetComponentInParent<GUI>().GetID());
         });
         for(int i = 0; i < slots.Count; i++)
         {
@@ -32,6 +32,6 @@ public class URLGenerator : MonoBehaviour, ISlotUpdated {
 
     public void NoticeNetworkURLBoard(Domain d, int id)
     {
-        Common.ReturnTManager().updateNetworkURL(d, id);
+        TaskManager.instance.updateNetworkURL(d, id);
     }
 }

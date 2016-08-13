@@ -35,12 +35,12 @@ public class Windows : GUI, IHasTitle
         Assert.IsNotNull(close);
         minise.onClick.AddListener(delegate
         {
-            Common.ReturnTManager().SetInactiveTask(id);
+            TaskManager.instance.SetInactiveTask(id);
         });
         close.onClick.AddListener(delegate
         {
             Destroy(gameObject);
-            Common.ReturnTManager().KillTask(id);
+            TaskManager.instance.KillTask(id);
         });
     }
 
