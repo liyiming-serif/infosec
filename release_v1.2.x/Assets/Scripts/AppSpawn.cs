@@ -27,11 +27,6 @@ public class AppSpawn : MonoBehaviour
     bool timer_running;
     float timer_for_double_click;
 
-    public void PlayAnimation(string stateName)
-    {
-        animator.Play(stateName);
-    }
-
     public int GetID()
     {
         return id;
@@ -58,10 +53,7 @@ public class AppSpawn : MonoBehaviour
             else
             {
                 //Start a new App if it's not running
-                if (animator)
-                {
-                    animator.Stop(); //TODO Replace it with TriggerState
-                }
+                animator.SetTrigger("freeze");
                 Windows newApp = Instantiate(appPrefab);
                 newApp.GetComponent<RectTransform>().sizeDelta = sizeDelta;
                 newApp.transform.localPosition = localPos;     
@@ -84,6 +76,7 @@ public class AppSpawn : MonoBehaviour
     void Awake()
     {
         animator = GetComponent<Animator>();
+        animator.SetTrigger("dance");
         id = 0;
         timer_for_double_click = Time.time;
         one_click = false;

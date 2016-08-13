@@ -12,6 +12,8 @@ public class NetworkWindows : GUI, IHasTitle, IEventSystemHandler {
     [SerializeField]
     List<string> answer; //Answer needs to have a struct
 
+    public static NetworkWindows instance;
+
     AlienC alienC;
     ServersGraphC serversC;
     int nowAt;
@@ -26,6 +28,7 @@ public class NetworkWindows : GUI, IHasTitle, IEventSystemHandler {
         base.Awake();
         this.Register(this.GetHashCode());
         nowAt = -1;
+        instance = this;
     }
 
     private void Start()

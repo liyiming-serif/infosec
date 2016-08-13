@@ -40,7 +40,7 @@ public class TaskManager : MonoBehaviour
         nowActive = id;
     }
 
-   public void SetInactiveTask(int id)
+    public void SetInactiveTask(int id)
     {
         SetGUIVisible(id, false, wins);
         //TODO Set TaskBarItem inactive
@@ -58,7 +58,7 @@ public class TaskManager : MonoBehaviour
         Windows result = null;
         foreach (AppSpawn a in apps)
         {
-            if(a.appName == name)
+            if (a.appName == name)
             {
                 result = LookUpWindows(a.GetID());
             }
@@ -69,7 +69,7 @@ public class TaskManager : MonoBehaviour
     {
         return LookUpGUI(id, wins) as Windows;
     }
-     
+
     public TaskBarItem LookUpTaskBarItem(int id)
     {
         return LookUpGUI(id, wins) as TaskBarItem;
@@ -87,14 +87,14 @@ public class TaskManager : MonoBehaviour
     public void RemoveGUI(int id, List<GUI> guis)
     {
         GUI g = LookUpGUI(id, guis);
-        if(g)
+        if (g)
         {
             Destroy(g.gameObject);
             guis.Remove(g);
         }
     }
 
-   public void AddNewTask(GUI newTask)
+    public void AddNewTask(GUI newTask)
     {
         wins.Add(newTask);
         int id = newTask.GetID();
@@ -111,7 +111,7 @@ public class TaskManager : MonoBehaviour
     {
         foreach (GUI g in guis)
         {
-            if(g.IsTarget(id))
+            if (g.IsTarget(id))
             {
                 return g;
             }
@@ -129,14 +129,7 @@ public class TaskManager : MonoBehaviour
 
     void Start()
     {
-        try
-        {
-            _network = GameObject.FindObjectOfType<NetworkWindows>();
-            _network.SetSelfVisible(false);
-        }
-        catch
-        {
-            Debug.Log("Network is not found in this challenge.");
-        }
+        _network = NetworkWindows.instance;
+        _network.SetSelfVisible(false);
     }
 }
