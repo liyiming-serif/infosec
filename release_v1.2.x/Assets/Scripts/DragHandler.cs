@@ -1,16 +1,13 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System.Collections;
-using System;
 
 public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public static Domain domainBeingDragged;
 
-    private Transform originalParent;
-    private Vector2 originalPos;
-    private Canvas desktop;
+    Transform originalParent;
+    Vector2 originalPos;
+    Canvas desktop;
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {

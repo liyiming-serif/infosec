@@ -5,7 +5,7 @@ using System;
 
 public class Slot : MonoBehaviour, IDropHandler {
 
-    private Domain holding;
+    private Domain _holding;
     private int _id;
 
     public int id
@@ -20,17 +20,23 @@ public class Slot : MonoBehaviour, IDropHandler {
         }
     }
 
-    public Domain GetDomain()
+    public Domain holding
     {
-        return holding;
+        get
+        {
+            return GetComponentInChildren<Domain>();
+        }
+        set
+        {
+            value.transform.SetParent(this.transform);
+        }
     }
-
+    
     void IDropHandler.OnDrop(PointerEventData eventData)
     {
         if (!holding)
         {
             holding = DragHandler.domainBeingDragged;
-            holding.transform.SetParent(this.transform);
             ExecuteEvents.ExecuteHierarchy<ISlotUpdated>(this.gameObject, null, (x, y) => x.NoticeNetworkURLBoard(holding,_id));
         }
     }
@@ -38,6 +44,5 @@ public class Slot : MonoBehaviour, IDropHandler {
     void Awake()
     {
         _id = -1;
-        holding = null;
     }
 }

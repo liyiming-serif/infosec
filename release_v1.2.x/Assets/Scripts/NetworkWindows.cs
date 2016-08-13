@@ -1,18 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
-public class NetworkWindows : GUI, IHasTitle {
+public class NetworkWindows : GUI, IHasTitle, IEventSystemHandler {
 
-    public AlienC alienC;
-    public ServersGraphC serversC;
-
-    [SerializeField]
-    Animator alienA;
+    
     [SerializeField]
     List<Slot> urlString;
+    [SerializeField]
+    List<string> answer; //Answer needs to have a struct
+
+    AlienC alienC;
+    ServersGraphC serversC;
+    int nowAt;
     
     public string GetTitle()
     {
@@ -23,46 +25,41 @@ public class NetworkWindows : GUI, IHasTitle {
     {
         base.Awake();
         this.Register(this.GetHashCode());
+        nowAt = -1;
     }
 
     private void Start()
     {
         serversC = this.GetComponentInChildren<ServersGraphC>();
-        alienC =  alienA.GetComponent<AlienC>();
+        alienC = this.GetComponentInChildren<AlienC>();
     }
 
     public void AlienGo()
     {
-        //TODO Tell serverC.
-        //StartCoroutine(FindThePath(1));
+        if(nowAt == -1)
+        {
+            urlString[nowAt + 1].holding.GetComponent<Image>().color = Color.green;
+            serversC.LightupDomainName(nowAt + 1);
+            serversC.ActivatePath(nowAt + 1, true);
+            alienC.SetEndPosition(serversC.GetLandingPos(nowAt + 1));
+            nowAt += 1;
+        }
+        else if(nowAt == 0)
+        {
+            serversC.ActivatePath(nowAt, false);
+            serversC.ActivateServer(nowAt, true);
+            alienC.GetExploded();
+        }
     }
 
     public void updateNetworkURL(Domain d, int id)
     {
+        Domain tobeDestroyed = urlString[id].holding;
+        if(tobeDestroyed)
+        {
+            Destroy(tobeDestroyed);
+        }
         Instantiate(d, urlString[id].transform);
     }
 
-    //IEnumerator FindThePath(int id)
-    //{
-    //    yield return new WaitForSeconds(1);
-
-    //    serversC.ToNextServer(1);
-    //}
-
-    //IEnumerator Done()
-    //{
-    //    yield return new WaitForSeconds(0.5f);
-    //    alienA.gameObject.SetActive(false);
-    //}
-
-    //public void Explode()
-    //{
-    //    GameObject o = Instantiate(Resources.Load("Explosion"), alienA.transform) as GameObject;
-    //    o.transform.localPosition = new Vector2(-50, 35);
-    //    StartCoroutine(Done());
-    //}
-    //public void Result()
-    //{
-    //    serversC.ArriveNextServer();
-    //}
 }

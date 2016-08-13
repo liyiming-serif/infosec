@@ -1,7 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 using UnityEngine.Assertions;
-using System.Collections;
 
 public class TaskBarItem : GUI
 {
@@ -14,9 +12,9 @@ public class TaskBarItem : GUI
         Assert.IsNotNull(button);
         //TODO implement restore
         button.onClick.AddListener(delegate {
-            if (!Common.ReturnTManager().IsActive(id))
+            if (!TaskManager.instance.IsActive(id))
             {
-                Common.ReturnTManager().SetActiveTask(id);
+                TaskManager.instance.SetActiveTask(id);
             }
         });
     }

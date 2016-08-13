@@ -1,20 +1,18 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEditor;
 using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public class AlienC : MonoBehaviour
 {
 
-    protected Animator animator;
-
+    
     [SerializeField]
-    float speed = 200.0f;
-    protected Vector2 initPosition;
-    public Vector2 endPosition;
-    public Vector2 startPosition;
-	bool isMoving;
+    float speed = 150.0f;
+
+    Animator animator;
+    Vector2 initPosition;
+    Vector2 endPosition;
+    bool startMoving;
 
     void Awake()
     {
@@ -22,15 +20,7 @@ public class AlienC : MonoBehaviour
 		animator.SetTrigger("stopwalk");
         initPosition = animator.transform.position;
         endPosition = initPosition;
-        startPosition = endPosition;
-		isMoving = false;
-    }
-
-    public void ResetAnimator()
-    {
-		animator.SetTrigger("stopwalk");
-        animator.transform.position = initPosition;
-        endPosition = initPosition;
+        startMoving = false;
     }
 
     public void SetInitPosition(Vector2 newPosition)
@@ -40,12 +30,11 @@ public class AlienC : MonoBehaviour
 
     public void SetEndPosition(Vector2 destination)
     {
-		animator.SetTrigger("startwalk");
         if (Vector2.Distance(endPosition, destination) > .1f)
         {
-            startPosition = endPosition;
+            startMoving = true;
+            animator.SetTrigger("startwalk");
             endPosition = destination;
-			isMoving = true;
         }
     }
 
@@ -55,11 +44,22 @@ public class AlienC : MonoBehaviour
         endPosition = oldPosition;
     }
 
-	IEnumerator Done()
+    public void ResetAnimator()
+    {
+        SetEndPosition(initPosition);
+    }
+
+    IEnumerator DeactiveItself()
 	{
-		yield return new WaitForSeconds(2f);
+		yield return new WaitForSeconds(1.5f);
 		gameObject.SetActive(false);
 	}
+
+    public void GetExploded()
+    {
+        animator.SetTrigger("triggervirus");
+        StartCoroutine(DeactiveItself());
+    }
 
     void Update()
     {
@@ -69,14 +69,10 @@ public class AlienC : MonoBehaviour
         {
             animator.transform.position = Vector2.MoveTowards(animator.transform.position, endPosition, step);
         }
-		else if (isMoving)
+        else if(startMoving)
         {
-            //TODO Tell TaskManager that it's there.
-            //GetComponentInParent<NetworkW>().SendMessage("Result");
-			animator.SetTrigger("triggervirus");
-			StartCoroutine(Done());
-			isMoving = false;
-
+            startMoving = false;
+            ExecuteEvents.ExecuteHierarchy<NetworkWindows>(this.gameObject, null, (x, y) => x.AlienGo());
         }
 
     }
