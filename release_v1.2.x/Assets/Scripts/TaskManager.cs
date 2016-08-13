@@ -96,7 +96,7 @@ public class TaskManager : MonoBehaviour
     {
         wins.Add(newTask);
         int id = newTask.GetID();
-        TaskBarItem newItem = Instantiate(Resources.Load("TaskBarItem"), transform) as TaskBarItem;
+        TaskBarItem newItem = (Instantiate(Resources.Load("TaskBarItem"), transform) as GameObject).GetComponent<TaskBarItem>();
         newItem.Register(id);
         newItem.GetComponentInChildren<Text>().text = (newTask as IHasTitle).GetTitle();
 

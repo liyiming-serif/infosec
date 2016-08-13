@@ -1,9 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Assertions;
-
-using System;
-using UnityEngine.EventSystems;
-using System.Collections;
 
 public class AppSpawn : MonoBehaviour
 {
