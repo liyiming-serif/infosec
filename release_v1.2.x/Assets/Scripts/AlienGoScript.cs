@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class AlienGoScript : MonoBehaviour {
 
-    protected int nowAt;
+    protected int step;
+    protected Domain d;
 
     public virtual void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots)
     {
@@ -13,6 +14,7 @@ public class AlienGoScript : MonoBehaviour {
 
     void Awake()
     {
-        nowAt = -1;
+        step = -1;
+        d = null;
     }
 }

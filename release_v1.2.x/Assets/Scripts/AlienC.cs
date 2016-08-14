@@ -59,6 +59,11 @@ public class AlienC : MonoBehaviour
         StartCoroutine(DeactiveItself());
     }
 
+    public void GetConfused()
+    {
+        animator.SetTrigger("throwerror");
+    }
+
     void Update()
     {
         float step = speed * Time.deltaTime;
@@ -70,6 +75,7 @@ public class AlienC : MonoBehaviour
         else if(startMoving)
         {
             startMoving = false;
+            animator.SetTrigger("stopwalk");
             ExecuteEvents.ExecuteHierarchy<NetworkWindows>(this.gameObject, null, (x, y) => x.AlienGo());
         }
 
