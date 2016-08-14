@@ -4,56 +4,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
-public class NetworkWindows : GUI, IHasTitle, IEventSystemHandler {
-
+public class NetworkWindows : GUI, IEventSystemHandler
+{
+    public static NetworkWindows instance;
     
     [SerializeField]
     GameObject urlString;
 
-    public static NetworkWindows instance;
-
+    AlienGoScript alienGo; 
     AlienC alienC;
     ServersGraphC serversC;
-
     List<Slot> slots;
-    int nowAt;
     
-    public string GetTitle()
-    {
-        return "Network";
-    }
-
-    protected void Awake()
+    new void Awake()
     {
         base.Awake();
-        this.Register(this.GetHashCode());
+        Register(GetHashCode());
         slots = new List<Slot>();
         slots.AddRange(urlString.GetComponentsInChildren<Slot>());
-        nowAt = -1;
         instance = this;
     }
 
-    private void Start()
+    void Start()
     {
-        serversC = this.GetComponentInChildren<ServersGraphC>();
-        alienC = this.GetComponentInChildren<AlienC>();
+        serversC = GetComponentInChildren<ServersGraphC>();
+        alienC = GetComponentInChildren<AlienC>();
+        alienGo = GetComponent<AlienGoScript>();
     }
 
     public void AlienGo()
     {
-        if(nowAt == -1)
-        {
-            slots[nowAt + 1].holding.GetComponent<Image>().color = Color.green;
-            serversC.LightupDomainName(nowAt + 1);
-            serversC.ActivatePath(nowAt + 1, true);
-            alienC.SetEndPosition(serversC.GetLandingPos(nowAt + 1));
-            nowAt += 1;
-        }
-        else if(nowAt == 0)
-        {
-            serversC.ActivatePath(nowAt, false);
-            alienC.GetExploded();
-        }
+        alienGo.Run(alienC, serversC, slots);
     }
 
     public void updateNetworkURL(Domain d, int id)

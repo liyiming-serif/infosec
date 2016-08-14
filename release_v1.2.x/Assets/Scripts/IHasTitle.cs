@@ -1,3 +1,0 @@
-﻿interface IHasTitle {
-    string GetTitle();
-}

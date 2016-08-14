@@ -10,7 +10,7 @@ public class TaskManager : MonoBehaviour
     [SerializeField]
     List<AppSpawn> apps;
 
-    NetworkWindows _network;
+    NetworkWindows network;
 
     List<GUI> items;
     List<GUI> wins;
@@ -19,13 +19,12 @@ public class TaskManager : MonoBehaviour
 
     public void AlienGo()
     {
-        _network.AlienGo();
+        network.AlienGo();
     }
 
     public void updateNetworkURL(Domain d, int id)
     {
-        _network.SetSelfVisible(true);
-        _network.updateNetworkURL(d, id);
+        network.updateNetworkURL(d, id);
     }
 
     public bool IsActive(int id)
@@ -94,13 +93,13 @@ public class TaskManager : MonoBehaviour
         }
     }
 
-    public void AddNewTask(GUI newTask)
+    public void AddNewTask(GUI newTask, string titleName)
     {
         wins.Add(newTask);
         int id = newTask.GetID();
         TaskBarItem newItem = (Instantiate(Resources.Load("TaskBarItem"), transform) as GameObject).GetComponent<TaskBarItem>();
         newItem.Register(id);
-        newItem.GetComponentInChildren<Text>().text = (newTask as IHasTitle).GetTitle();
+        newItem.GetComponentInChildren<Text>().text = titleName;
 
         items.Add(newItem);
         // TODO set the current active task to inactive
@@ -129,7 +128,6 @@ public class TaskManager : MonoBehaviour
 
     void Start()
     {
-        _network = NetworkWindows.instance;
-        _network.SetSelfVisible(false);
+        network = NetworkWindows.instance; 
     }
 }

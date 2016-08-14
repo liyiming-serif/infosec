@@ -5,7 +5,7 @@ public class TaskBarItem : GUI
 {
     Button button;
 
-    void Awake()
+    new void Awake()
     {
         base.Awake();
         button = this.GetComponent<Button>();

@@ -11,10 +11,11 @@ public class AppSpawn : MonoBehaviour
     Vector2 localPos;
     [SerializeField]
     float delay = 1f; //this is how long in seconds to allow for a double click
+
     bool one_click;
     bool timer_running;
     float timer_for_double_click;
-
+    
     public string appName
     {
         get
@@ -25,7 +26,6 @@ public class AppSpawn : MonoBehaviour
 
     Animator animator;
     int id;
-
 
     public int GetID()
     {
@@ -67,7 +67,7 @@ public class AppSpawn : MonoBehaviour
                 }
                 id = newApp.GetHashCode();
                 newApp.Register(id);
-                TaskManager.instance.AddNewTask(newApp);
+                TaskManager.instance.AddNewTask(newApp, appName);
             }
 
         }

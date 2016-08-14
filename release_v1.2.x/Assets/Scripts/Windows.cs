@@ -3,21 +3,13 @@ using UnityEngine.UI;
 using UnityEngine.Assertions;
 using System.Collections;
 
-public class Windows : GUI, IHasTitle
+public class Windows : GUI
 {
     // Components 
     Button minise;
     Button close;
 
-    [SerializeField]
-    string title;
-
-    public string GetTitle()
-    {
-        return title;
-    }
-
-    void Awake()
+    new void Awake()
     {
         base.Awake();
         foreach (Button b in transform.Find("WindowsOp").GetComponentsInChildren<Button>())
