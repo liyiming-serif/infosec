@@ -14,14 +14,14 @@ public class AlienGoSecond : AlienGoScript {
             d = slots[step + 1].holding;
             if (d.dName == "CITI")
             {
-                //alienC.GetConfused();
+                alienC.GetConfused();
             }
             else // "COM"
             {
                 d.GetComponent<Image>().color = Color.green;
-                serversC.LightupDomainName(step + 1);
-                serversC.ActivatePath(step + 1, true);
-                alienC.SetEndPosition(serversC.GetLandingPos(step + 1));
+                serversC.LightupDomainName("COM");
+                serversC.ActivatePath("COM", true);
+                alienC.SetEndPosition(serversC.GetLandingPos("COM"));
                 step += 1;
             }
         }
@@ -30,20 +30,20 @@ public class AlienGoSecond : AlienGoScript {
             d = slots[step + 1].holding;
             if (d.dName == "COM")
             {
-                //alienC.GetConfused();
+                alienC.GetConfused();
             }
             else // "CITI"
             {
                 d.GetComponent<Image>().color = Color.green;
-                serversC.LightupDomainName(step + 1);
-                serversC.ActivatePath(step + 1, true);
-                alienC.SetEndPosition(serversC.GetLandingPos(step + 1));
+                serversC.LightupDomainName("CITI");
+                serversC.ActivatePath("CITI", true);
+                alienC.SetEndPosition(serversC.GetLandingPos("CITI"));
                 step += 1;
             }
         }
         else if (step == 1)
         {
-            serversC.ActivatePath(step, false);
+            serversC.ActivatePath("CITI", false);
             alienC.GetExploded();
         }
     }

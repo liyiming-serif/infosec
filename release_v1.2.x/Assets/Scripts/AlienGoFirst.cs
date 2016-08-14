@@ -9,14 +9,14 @@ public class AlienGoFirst : AlienGoScript {
         if (step == -1)
         {
             slots[step + 1].holding.GetComponent<Image>().color = Color.green;
-            serversC.LightupDomainName(step + 1);
-            serversC.ActivatePath(step + 1, true);
-            alienC.SetEndPosition(serversC.GetLandingPos(step + 1));
+            serversC.LightupDomainName("COM");
+            serversC.ActivatePath("COM", true);
+            alienC.SetEndPosition(serversC.GetLandingPos("COM"));
             step += 1;
         }
         else if (step == 0)
         {
-            serversC.ActivatePath(step, false);
+            serversC.ActivatePath("COM", false);
             alienC.GetExploded();
         }
     }

@@ -16,62 +16,41 @@ public class AlienGoThird : AlienGoScript
                 d = slots[step + 1].holding;
                 if (d.dName == "COM")
                 {
-                    d.GetComponent<Image>().color = Color.green;
-                    serversC.LightupDomainName(0);
-                    serversC.ActivatePath(0, true);
-                    alienC.SetEndPosition(serversC.GetLandingPos(0));
-                    step += 1;
+                    Animate(alienC, serversC);
                 }
                 else
                 {
-                    // Invalid 
                     alienC.GetConfused();
-                    slots.Reverse(); //Enable sync.
                 }
                 break;
             case 0:
-                serversC.ActivatePath(0, false);
+                serversC.ActivatePath(d.dName, false);
                 d = slots[step + 1].holding;
-                if (d.dName == "CITI")
+                if (d.dName == "CITI" || d.dName == "BANK")
                 {
-                    d.GetComponent<Image>().color = Color.green;
-                    serversC.LightupDomainName(1);
-                    serversC.ActivatePath(1, true);
-                    alienC.SetEndPosition(serversC.GetLandingPos(1));
-                    step += 1;
-                }
-                else if (d.dName == "BANK")
-                {
-                    d.GetComponent<Image>().color = Color.green;
-                    serversC.LightupDomainName(2);
-                    serversC.ActivatePath(2, true);
-                    alienC.SetEndPosition(serversC.GetLandingPos(2));
-                    step += 1;
+                    Animate(alienC, serversC);
                 }
                 else
                 {
                     alienC.GetConfused();
-                    slots.Reverse(); //Enable sync.
                 }
                 break;
             case 1:
+                serversC.ActivatePath(d.dName, false);
                 if (d.dName == "CITI")
                 {
-                    serversC.ActivatePath(1, false);
                     alienC.GetExploded();
 
                 }
                 else if (d.dName == "BANK")
                 {
 
-                    serversC.ActivatePath(2, false);
                     alienC.GetConfused();
                 }
                 else
                 {
                     alienC.GetConfused();
                 }
-                slots.Reverse(); //Enable sync.
                 break;
         }
     }

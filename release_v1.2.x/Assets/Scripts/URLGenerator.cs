@@ -15,7 +15,6 @@ public class URLGenerator : MonoBehaviour, IEventSystemHandler {
         Assert.IsNotNull(sendButton);
         slots = new List<Slot>();
         slots.AddRange(GetComponentsInChildren<Slot>());
-        Debug.Log("Number of slots found: " + slots.Count);
     }
 
     void Start()

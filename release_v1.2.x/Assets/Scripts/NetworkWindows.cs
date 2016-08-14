@@ -32,6 +32,11 @@ public class NetworkWindows : GUI, IEventSystemHandler
         alienGo = GetComponent<AlienGoScript>();
     }
 
+    public void ResetAlienGo()
+    {
+        alienGo.Reset(slots);
+    }
+
     public void AlienGo()
     {
         alienGo.Run(alienC, serversC, slots);
