@@ -26,6 +26,7 @@ public class AlienGoThird : AlienGoScript
                 {
                     // Invalid 
                     alienC.GetConfused();
+                    slots.Reverse(); //Enable sync.
                 }
                 break;
             case 0:
@@ -50,14 +51,15 @@ public class AlienGoThird : AlienGoScript
                 else
                 {
                     alienC.GetConfused();
+                    slots.Reverse(); //Enable sync.
                 }
                 break;
             case 1:
                 if (d.dName == "CITI")
                 {
                     serversC.ActivatePath(1, false);
-                    Debug.Log("Shouldn't have reached here.");
                     alienC.GetExploded();
+
                 }
                 else if (d.dName == "BANK")
                 {
@@ -69,6 +71,7 @@ public class AlienGoThird : AlienGoScript
                 {
                     alienC.GetConfused();
                 }
+                slots.Reverse(); //Enable sync.
                 break;
         }
     }

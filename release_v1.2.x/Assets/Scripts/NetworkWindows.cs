@@ -42,7 +42,7 @@ public class NetworkWindows : GUI, IEventSystemHandler
         Domain tobeDestroyed = slots[id].holding;
         if(tobeDestroyed)
         {
-            Destroy(tobeDestroyed);
+            Destroy(tobeDestroyed.gameObject);
         }
         Instantiate(d, slots[id].transform);
     }

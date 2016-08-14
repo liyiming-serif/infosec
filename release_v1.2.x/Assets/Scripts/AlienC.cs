@@ -49,7 +49,7 @@ public class AlienC : MonoBehaviour
 
     IEnumerator DeactiveItself()
 	{
-		yield return new WaitForSeconds(1.5f);
+		yield return new WaitForSeconds(2f);
 		gameObject.SetActive(false);
 	}
 

@@ -32,11 +32,12 @@ public class Slot : MonoBehaviour, IDropHandler {
     
     void IDropHandler.OnDrop(PointerEventData eventData)
     {
-        if (!holding)
+        if(holding)
         {
-            holding = DragHandler.domainBeingDragged;
-            ExecuteEvents.ExecuteHierarchy<URLGenerator>(this.gameObject, null, (x, y) => x.NoticeNetworkURLBoard(holding,_id));
+            Destroy(holding.gameObject);
         }
+        holding = DragHandler.domainBeingDragged;
+        ExecuteEvents.ExecuteHierarchy<URLGenerator>(this.gameObject, null, (x, y) => x.NoticeNetworkURLBoard(DragHandler.domainBeingDragged, _id));
     }
     
     void Awake()
