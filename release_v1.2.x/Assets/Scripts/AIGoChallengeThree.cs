@@ -3,10 +3,10 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class AlienGoThird : AlienGoScript
+public class AIGoChallengeThree : AIGoScript
 {
     // Three choices: COM, CITI and BANK.
-    public override void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots, bool isForward)
+    public override void Run(CivilianC civilian, ServersGraphC serversC, List<Slot> slots, bool isForward)
     {
         if (isForward)
         {
@@ -17,11 +17,11 @@ public class AlienGoThird : AlienGoScript
                     d = slots[step + 1].holding;
                     if (d.dName == "COM")
                     {
-                        Animate(alienC, serversC, true);
+                        Animate(civilian, serversC, true);
                     }
                     else
                     {
-                        alienC.GetConfused();
+                        civilian.GetConfused();
                     }
                     break;
                 case 0:
@@ -29,30 +29,30 @@ public class AlienGoThird : AlienGoScript
                     d = slots[step + 1].holding;
                     if (d.dName == "CITI" || d.dName == "BANK")
                     {
-                        Animate(alienC, serversC, true);
+                        Animate(civilian, serversC, true);
                     }
                     else
                     {
-                        alienC.GetConfused();
+                        civilian.GetConfused();
                     }
                     break;
                 case 1:
                     serversC.ActivatePath(d.dName, false);
                     if (d.dName == "CITI")
                     {
-                        alienC.GetExploded(delegate { Feedback.instance.popUp(true, "Challenge4"); });
+                        civilian.BecomeSafe(delegate { Feedback.instance.popUp(true, "Challenge4"); });
                     }
                     else if (d.dName == "BANK")
                     {
-                        alienC.GetConfused();
+                        civilian.GetConfused();
                     }
                     else
                     {
-                        alienC.GetConfused();
+                        civilian.GetConfused();
                     }
                     break;
                 default:
-                    Debug.Log("Shouldn't reach here.@AlienGoThird");
+                    Debug.Log("Shouldn't reach here.@AIGoChallengeThree");
                     break;
             }
         }
@@ -61,16 +61,16 @@ public class AlienGoThird : AlienGoScript
             if (step > 0)
             {
                 d = slots[step - 1].holding;
-                Animate(alienC, serversC, false);
+                Animate(civilian, serversC, false);
             }
             else if(step == 0)
             {
-                Animate(alienC, serversC, false);
+                Animate(civilian, serversC, false);
             }
             else
             {
                 //Reached the launchpad.
-                alienC.isForward = true;
+                civilian.isForward = true;
                 slots.Reverse(); //Enable sync.
             }
         }

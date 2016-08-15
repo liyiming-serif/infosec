@@ -2,12 +2,11 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class AlienC : AIController
+public class CivilianC : AIController
 {
-
-    public void GetRevenge(CallbackFunct func)
+    public void BecomeSafe(CallbackFunct func)
     {
-        animator.SetTrigger("alienwins");
+        animator.SetTrigger("civilsafe");
         StartCoroutine(AfterAnimation(1f, func));
     }
 
