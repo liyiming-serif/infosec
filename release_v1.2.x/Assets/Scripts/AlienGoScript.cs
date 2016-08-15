@@ -8,32 +8,50 @@ public class AlienGoScript : MonoBehaviour {
     protected int step;
     protected Domain d;
 
-    public virtual void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots)
+    public virtual void Hint()
+    {
+        Debug.Log("Shake the app spawn icon.");
+    }
+
+    public virtual void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots, bool isForward)
     {
         Debug.Log("Control the Alien phase.");
     }
 
-    public void Reset(List<Slot> slots)
+    public void Animate(AlienC alienC, ServersGraphC serversC, bool isForward)
     {
-        if(step >= 0)
+        serversC.ActivatePath(d.dName, true);
+        if (isForward)
         {
-            step = -1;
-            slots.Reverse(); //Enable sync.
+            serversC.LightupDomainName(d.dName, Color.green);
+            d.GetComponent<Image>().color = Color.green;
+            alienC.SetEndPosition(serversC.GetLandingPos(d.dName));
+            step += 1;
         }
+        else
+        {
+            if(step == 0)
+            {
+                //ToLaunchPad
+                alienC.ReturnToInitPosition();
+            }
+            else
+            {
+                alienC.SetEndPosition(serversC.GetLandingPos(d.dName));
+            }
+            step -= 1;
+        }
+        
     }
 
-    public void Animate(AlienC alienC, ServersGraphC serversC)
+    public void Reset()
     {
-        d.GetComponent<Image>().color = Color.green;
-        serversC.LightupDomainName(d.dName);
-        serversC.ActivatePath(d.dName, true);
-        alienC.SetEndPosition(serversC.GetLandingPos(d.dName));
-        step += 1;
+        step = -1;
+        d = null;
     }
 
     void Awake()
     {
-        step = -1;
-        d = null;
+        Reset();
     }
 }

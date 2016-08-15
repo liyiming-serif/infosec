@@ -32,6 +32,16 @@ public class AppSpawn : MonoBehaviour
         return id;
     }
 
+    public void Dance()
+    {
+        animator.SetTrigger("dance");
+    }
+
+    public void Freeze()
+    {
+        animator.SetTrigger("freeze");
+    }
+
     void OnMouseDown()
     {
         if (!one_click) // first click no previous clicks

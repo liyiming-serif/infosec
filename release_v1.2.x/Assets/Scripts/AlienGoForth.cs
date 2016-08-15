@@ -2,10 +2,17 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public class AlienGoForth : AlienGoScript {
+
+    public override void Hint()
+    {
+        TaskManager.instance.LookUpAppSpawn("Ping!").Dance();
+    }
+
     //TODO Change the Run method
-    public override void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots)
+    public override void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots, bool isForward)
     {
         Domain d;
         if (step == -1)
@@ -19,7 +26,7 @@ public class AlienGoForth : AlienGoScript {
             else // "COM"
             {
                 d.GetComponent<Image>().color = Color.green;
-                serversC.LightupDomainName(d.dName);
+                serversC.LightupDomainName(d.dName, Color.green);
                 serversC.ActivatePath(d.dName, true);
                 alienC.SetEndPosition(serversC.GetLandingPos(d.dName));
                 step += 1;
@@ -32,10 +39,10 @@ public class AlienGoForth : AlienGoScript {
             {
                 //alienC.GetConfused();
             }
-            else if(d.dName == "C1TI") // "CITI"
+            else if(d.dName == "CITI") // "CITI"
             {
                 d.GetComponent<Image>().color = Color.green;
-                serversC.LightupDomainName(d.dName);
+                serversC.LightupDomainName(d.dName, Color.green);
                 serversC.ActivatePath(d.dName, true);
                 alienC.SetEndPosition(serversC.GetLandingPos(d.dName));
                 step += 1;
@@ -45,7 +52,7 @@ public class AlienGoForth : AlienGoScript {
         {
             d = slots[step].holding;
             serversC.ActivatePath(d.dName, false);
-            alienC.GetExploded();
+            alienC.GetExploded(delegate { GetComponent<NetworkWindows>().NextAI(delegate { Feedback.instance.popUp(true, "Challenge4"); }); });
         }
     }
 }
