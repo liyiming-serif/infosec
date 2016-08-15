@@ -76,7 +76,6 @@ public class AlienC : MonoBehaviour
     public void GetExploded(CallbackFunct func)
     {
         animator.SetTrigger("triggervirus");
-        func = delegate { gameObject.SetActive(false); } + func;
         StartCoroutine(AfterAnimation(2f, func));
     }
 
@@ -84,7 +83,6 @@ public class AlienC : MonoBehaviour
     public void GetRevenge(CallbackFunct func)
     {
         animator.SetTrigger("alienwins");
-        func = func;
         StartCoroutine(AfterAnimation(1f, func));
     }
     public void GetConfused()

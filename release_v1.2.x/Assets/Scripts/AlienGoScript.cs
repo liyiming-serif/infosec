@@ -8,6 +8,11 @@ public class AlienGoScript : MonoBehaviour {
     protected int step;
     protected Domain d;
 
+    public virtual void Hint()
+    {
+        Debug.Log("Shake the app spawn icon.");
+    }
+
     public virtual void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots, bool isForward)
     {
         Debug.Log("Control the Alien phase.");
@@ -39,9 +44,14 @@ public class AlienGoScript : MonoBehaviour {
         
     }
 
-    void Awake()
+    public void Reset()
     {
         step = -1;
         d = null;
+    }
+
+    void Awake()
+    {
+        Reset();
     }
 }

@@ -2,8 +2,15 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public class AlienGoForth : AlienGoScript {
+
+    public override void Hint()
+    {
+        TaskManager.instance.LookUpAppSpawn("Ping!").Dance();
+    }
+
     //TODO Change the Run method
     public override void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots, bool isForward)
     {
@@ -45,7 +52,7 @@ public class AlienGoForth : AlienGoScript {
         {
             d = slots[step].holding;
             serversC.ActivatePath(d.dName, false);
-            alienC.GetRevenge(delegate { Feedback.instance.popUp(false, "Challenge4"); });
+            alienC.GetExploded(delegate { GetComponent<NetworkWindows>().NextAI(delegate { Feedback.instance.popUp(true, "Challenge4"); }); });
         }
     }
 }

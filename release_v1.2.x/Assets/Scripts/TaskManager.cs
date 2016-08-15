@@ -52,15 +52,26 @@ public class TaskManager : MonoBehaviour
         RemoveGUI(id, items);
     }
 
-    public Windows LookUpWindows(string name)
+    public AppSpawn LookUpAppSpawn(string name)
     {
-        Windows result = null;
+        AppSpawn result = null;
         foreach (AppSpawn a in apps)
         {
             if (a.appName == name)
             {
-                result = LookUpWindows(a.GetID());
+                result = a;
             }
+        }
+        return result;
+    }
+
+    public Windows LookUpWindows(string name)
+    {
+        Windows result = null;
+        AppSpawn foundSpawn = LookUpAppSpawn(name);
+        if (foundSpawn)
+        {
+            result = LookUpWindows(foundSpawn.GetID());
         }
         return result;
     }
