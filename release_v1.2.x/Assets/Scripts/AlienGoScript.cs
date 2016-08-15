@@ -8,7 +8,7 @@ public class AlienGoScript : MonoBehaviour {
     protected int step;
     protected Domain d;
 
-    public virtual void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots)
+    public virtual void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots, bool isForward)
     {
         Debug.Log("Control the Alien phase.");
     }

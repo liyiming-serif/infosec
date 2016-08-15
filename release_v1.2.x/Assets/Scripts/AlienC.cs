@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 public class AlienC : MonoBehaviour
 {
 
+    public delegate void CallbackFunct();
+
     [SerializeField]
     float speed = 150.0f;
 
@@ -12,6 +14,7 @@ public class AlienC : MonoBehaviour
     Vector2 initPosition;
     Vector2 endPosition;
     bool startMoving;
+    bool isForward;
 
     void Awake()
     {
@@ -19,6 +22,7 @@ public class AlienC : MonoBehaviour
         initPosition = animator.transform.position;
         endPosition = initPosition;
         startMoving = false;
+        isForward = true;
     }
 
     public void SetInitPosition(Vector2 newPosition)
@@ -47,21 +51,24 @@ public class AlienC : MonoBehaviour
         SetEndPosition(initPosition);
     }
 
-    IEnumerator DeactiveItself()
+    IEnumerator AfterAnimation(float sec, CallbackFunct func)
 	{
-		yield return new WaitForSeconds(2f);
-		gameObject.SetActive(false);
+		yield return new WaitForSeconds(sec);
+        func();
 	}
 
-    public void GetExploded()
+    public void GetExploded(CallbackFunct func)
     {
         animator.SetTrigger("triggervirus");
-        StartCoroutine(DeactiveItself());
+        func = delegate { gameObject.SetActive(false); } + func;
+        StartCoroutine(AfterAnimation(2f, func));
     }
 
     public void GetConfused()
     {
         animator.SetTrigger("throwerror");
+        isForward = false; //Return to the launchpad
+        AfterAnimation(2f, delegate { ExecuteEvents.ExecuteHierarchy<NetworkWindows>(this.gameObject, null, (x, y) => x.AlienGo(isForward)); });
     }
 
     void Update()
@@ -76,7 +83,7 @@ public class AlienC : MonoBehaviour
         {
             startMoving = false;
             animator.SetTrigger("stopwalk");
-            ExecuteEvents.ExecuteHierarchy<NetworkWindows>(this.gameObject, null, (x, y) => x.AlienGo());
+            ExecuteEvents.ExecuteHierarchy<NetworkWindows>(this.gameObject, null, (x, y) => x.AlienGo(isForward));
         }
 
     }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class AlienGoSecond : AlienGoScript {
 
-    public override void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots)
+    public override void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots, bool isForward)
     {
         Domain d;
         if (step == -1)
@@ -44,7 +44,7 @@ public class AlienGoSecond : AlienGoScript {
         else if (step == 1)
         {
             serversC.ActivatePath("CITI", false);
-            alienC.GetExploded();
+            alienC.GetExploded(delegate { });
         }
     }
 }

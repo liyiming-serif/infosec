@@ -20,7 +20,7 @@ public class TaskManager : MonoBehaviour
     public void AlienGo()
     {
         network.ResetAlienGo();
-        network.AlienGo();
+        network.AlienGo(true);
     }
 
     public void updateNetworkURL(Domain d, int id)

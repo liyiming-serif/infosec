@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class AlienGoFirst : AlienGoScript {
 
-    public override void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots)
+    public override void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots, bool isForward)
     {
         if (step == -1)
         {
@@ -17,7 +17,7 @@ public class AlienGoFirst : AlienGoScript {
         else if (step == 0)
         {
             serversC.ActivatePath("COM", false);
-            alienC.GetExploded();
+            alienC.GetExploded(delegate { });
         }
     }
 

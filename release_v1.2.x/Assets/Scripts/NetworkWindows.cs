@@ -37,9 +37,9 @@ public class NetworkWindows : GUI, IEventSystemHandler
         alienGo.Reset(slots);
     }
 
-    public void AlienGo()
+    public void AlienGo(bool isForward)
     {
-        alienGo.Run(alienC, serversC, slots);
+        alienGo.Run(alienC, serversC, slots, isForward);
     }
 
     public void updateNetworkURL(Domain d, int id)

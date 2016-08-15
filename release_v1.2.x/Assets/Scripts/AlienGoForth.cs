@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class AlienGoForth : AlienGoScript {
     //TODO Change the Run method
-    public override void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots)
+    public override void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots, bool isForward)
     {
         Domain d;
         if (step == -1)
@@ -45,7 +45,7 @@ public class AlienGoForth : AlienGoScript {
         {
             d = slots[step].holding;
             serversC.ActivatePath(d.dName, false);
-            alienC.GetExploded();
+            alienC.GetExploded(delegate { });
         }
     }
 }
