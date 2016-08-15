@@ -83,7 +83,7 @@ public class AIController : MonoBehaviour
     public void GetConfused()
     {
         animator.SetTrigger("throwerror");
-        _isForward = false; //Return to the launchpad
+        isForward = false; //Return to the launchpad
         StartCoroutine(AfterAnimation(1f, delegate { ExecuteEvents.ExecuteHierarchy<NetworkWindows>(this.gameObject, null, (x, y) => x.AlienGo(_isForward)); }));
     }
 

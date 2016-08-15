@@ -27,11 +27,11 @@ public class AIGoScript : MonoBehaviour {
     {
         if (aiC is AlienC)
         {
-            Run((aiC as AlienC), serversC, slots, true);
+            Run((aiC as AlienC), serversC, slots, isForward);
         }
         else
         {
-            Run((aiC as CivilianC), serversC, slots, true);
+            Run((aiC as CivilianC), serversC, slots, isForward);
         }
     }
 

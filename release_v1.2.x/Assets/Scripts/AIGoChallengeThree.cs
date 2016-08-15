@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class AlienGoThird : AIGoScript
+public class AIGoChallengeThree : AIGoScript
 {
     // Three choices: COM, CITI and BANK.
     public override void Run(CivilianC civilian, ServersGraphC serversC, List<Slot> slots, bool isForward)
@@ -40,7 +40,7 @@ public class AlienGoThird : AIGoScript
                     serversC.ActivatePath(d.dName, false);
                     if (d.dName == "CITI")
                     {
-                        civilian.GetExploded(delegate { Feedback.instance.popUp(true, "Challenge4"); });
+                        civilian.BecomeSafe(delegate { Feedback.instance.popUp(true, "Challenge4"); });
                     }
                     else if (d.dName == "BANK")
                     {
@@ -52,7 +52,7 @@ public class AlienGoThird : AIGoScript
                     }
                     break;
                 default:
-                    Debug.Log("Shouldn't reach here.@AlienGoThird");
+                    Debug.Log("Shouldn't reach here.@AIGoChallengeThree");
                     break;
             }
         }
