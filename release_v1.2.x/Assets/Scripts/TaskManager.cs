@@ -19,6 +19,7 @@ public class TaskManager : MonoBehaviour
 
     public void AlienGo()
     {
+        network.ResetAlienGo();
         network.AlienGo();
     }
 

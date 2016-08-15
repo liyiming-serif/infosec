@@ -8,42 +8,42 @@ public class AlienGoSecond : AlienGoScript {
     public override void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots)
     {
         Domain d;
-        if (nowAt == -1)
+        if (step == -1)
         {
             slots.Reverse();
-            d = slots[nowAt + 1].holding;
+            d = slots[step + 1].holding;
             if (d.dName == "CITI")
             {
-                //alienC.GetConfused();
+                alienC.GetConfused();
             }
             else // "COM"
             {
                 d.GetComponent<Image>().color = Color.green;
-                serversC.LightupDomainName(nowAt + 1);
-                serversC.ActivatePath(nowAt + 1, true);
-                alienC.SetEndPosition(serversC.GetLandingPos(nowAt + 1));
-                nowAt += 1;
+                serversC.LightupDomainName("COM");
+                serversC.ActivatePath("COM", true);
+                alienC.SetEndPosition(serversC.GetLandingPos("COM"));
+                step += 1;
             }
         }
-        else if (nowAt == 0)
+        else if (step == 0)
         {
-            d = slots[nowAt + 1].holding;
+            d = slots[step + 1].holding;
             if (d.dName == "COM")
             {
-                //alienC.GetConfused();
+                alienC.GetConfused();
             }
             else // "CITI"
             {
                 d.GetComponent<Image>().color = Color.green;
-                serversC.LightupDomainName(nowAt + 1);
-                serversC.ActivatePath(nowAt + 1, true);
-                alienC.SetEndPosition(serversC.GetLandingPos(nowAt + 1));
-                nowAt += 1;
+                serversC.LightupDomainName("CITI");
+                serversC.ActivatePath("CITI", true);
+                alienC.SetEndPosition(serversC.GetLandingPos("CITI"));
+                step += 1;
             }
         }
-        else if (nowAt == 1)
+        else if (step == 1)
         {
-            serversC.ActivatePath(nowAt, false);
+            serversC.ActivatePath("CITI", false);
             alienC.GetExploded();
         }
     }

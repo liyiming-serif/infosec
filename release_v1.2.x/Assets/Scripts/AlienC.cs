@@ -49,7 +49,7 @@ public class AlienC : MonoBehaviour
 
     IEnumerator DeactiveItself()
 	{
-		yield return new WaitForSeconds(1.5f);
+		yield return new WaitForSeconds(2f);
 		gameObject.SetActive(false);
 	}
 
@@ -57,6 +57,11 @@ public class AlienC : MonoBehaviour
     {
         animator.SetTrigger("triggervirus");
         StartCoroutine(DeactiveItself());
+    }
+
+    public void GetConfused()
+    {
+        animator.SetTrigger("throwerror");
     }
 
     void Update()
@@ -70,6 +75,7 @@ public class AlienC : MonoBehaviour
         else if(startMoving)
         {
             startMoving = false;
+            animator.SetTrigger("stopwalk");
             ExecuteEvents.ExecuteHierarchy<NetworkWindows>(this.gameObject, null, (x, y) => x.AlienGo());
         }
 

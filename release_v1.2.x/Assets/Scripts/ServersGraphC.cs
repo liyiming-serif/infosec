@@ -10,21 +10,25 @@ public class ServersGraphC : MonoBehaviour {
     List<Animator> servers;
     [SerializeField]
     List<Image> dnames;
+    [SerializeField]
+    List<string> keys;
 
-    public void LightupDomainName(int id)
+    Dictionary<string, int> mapID;
+
+    public void LightupDomainName(string key)
     {
         //The dname id starts from 1, 0 is reserved for the launch pad.
-        dnames[id].color = Color.green;
+        dnames[mapID[key]].color = Color.green;
     }
 
-    public void ActivatePath(int id, bool isActive)
+    public void ActivatePath(string key, bool isActive)
     {
-        inpaths[id].enabled = isActive;
+        inpaths[mapID[key]].enabled = isActive;
     }
 
-    public Vector2 GetLandingPos(int id)
+    public Vector2 GetLandingPos(string key)
     {
-        Vector2 result = servers[id].transform.position;
+        Vector2 result = servers[mapID[key]].transform.position;
         result.x += 30;
         result.y -= 30;
         return result;
@@ -35,6 +39,11 @@ public class ServersGraphC : MonoBehaviour {
         foreach(Animator a in inpaths)
         {
             a.enabled = false;
+        }
+        mapID = new Dictionary<string, int>();
+        for(int i = 0; i < keys.Count; i++)
+        {
+            mapID.Add(keys[i], i);
         }
     }
 }
