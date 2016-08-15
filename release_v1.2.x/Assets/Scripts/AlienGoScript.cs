@@ -13,22 +13,30 @@ public class AlienGoScript : MonoBehaviour {
         Debug.Log("Control the Alien phase.");
     }
 
-    public void Reset(List<Slot> slots)
+    public void Animate(AlienC alienC, ServersGraphC serversC, bool isForward)
     {
-        if(step >= 0)
-        {
-            step = -1;
-            slots.Reverse(); //Enable sync.
-        }
-    }
-
-    public void Animate(AlienC alienC, ServersGraphC serversC)
-    {
-        d.GetComponent<Image>().color = Color.green;
-        serversC.LightupDomainName(d.dName);
         serversC.ActivatePath(d.dName, true);
-        alienC.SetEndPosition(serversC.GetLandingPos(d.dName));
-        step += 1;
+        if (isForward)
+        {
+            serversC.LightupDomainName(d.dName, Color.green);
+            d.GetComponent<Image>().color = Color.green;
+            alienC.SetEndPosition(serversC.GetLandingPos(d.dName));
+            step += 1;
+        }
+        else
+        {
+            if(step == 0)
+            {
+                //ToLaunchPad
+                alienC.ReturnToInitPosition();
+            }
+            else
+            {
+                alienC.SetEndPosition(serversC.GetLandingPos(d.dName));
+            }
+            step -= 1;
+        }
+        
     }
 
     void Awake()

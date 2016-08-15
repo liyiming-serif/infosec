@@ -13,6 +13,7 @@ public class URLGenerator : MonoBehaviour, IEventSystemHandler {
     {
         sendButton = GetComponentInChildren<Button>();
         Assert.IsNotNull(sendButton);
+        sendButton.interactable = false;
         slots = new List<Slot>();
         slots.AddRange(GetComponentsInChildren<Slot>());
     }
@@ -33,5 +34,19 @@ public class URLGenerator : MonoBehaviour, IEventSystemHandler {
     public void NoticeNetworkURLBoard(Domain d, int id)
     {
         TaskManager.instance.updateNetworkURL(d, id);
+        bool isReady = true;
+        foreach(Slot s in slots)
+        {
+            //TODO primtive approach
+            if (!s.holding)
+            {
+                isReady = false;
+                break;
+            }
+        }
+        if (isReady)
+        {
+            sendButton.interactable = true;
+        }
     }
 }

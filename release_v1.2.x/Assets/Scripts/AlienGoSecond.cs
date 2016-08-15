@@ -19,7 +19,7 @@ public class AlienGoSecond : AlienGoScript {
             else // "COM"
             {
                 d.GetComponent<Image>().color = Color.green;
-                serversC.LightupDomainName("COM");
+                serversC.LightupDomainName("COM", Color.green);
                 serversC.ActivatePath("COM", true);
                 alienC.SetEndPosition(serversC.GetLandingPos("COM"));
                 step += 1;
@@ -35,7 +35,7 @@ public class AlienGoSecond : AlienGoScript {
             else // "CITI"
             {
                 d.GetComponent<Image>().color = Color.green;
-                serversC.LightupDomainName("CITI");
+                serversC.LightupDomainName("CITI", Color.green);
                 serversC.ActivatePath("CITI", true);
                 alienC.SetEndPosition(serversC.GetLandingPos("CITI"));
                 step += 1;

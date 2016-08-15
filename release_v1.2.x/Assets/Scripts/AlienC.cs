@@ -14,20 +14,36 @@ public class AlienC : MonoBehaviour
     Vector2 initPosition;
     Vector2 endPosition;
     bool startMoving;
-    bool isForward;
+    bool _isForward;
 
+    public bool isForward
+    {
+        get
+        {
+            return _isForward;
+        }
+        set
+        {
+            _isForward = value;
+        }
+    }
     void Awake()
     {
         animator = GetComponent<Animator>();
         initPosition = animator.transform.position;
         endPosition = initPosition;
         startMoving = false;
-        isForward = true;
+        _isForward = true;
     }
 
     public void SetInitPosition(Vector2 newPosition)
     {
         initPosition = newPosition;
+    }
+
+    public void ReturnToInitPosition()
+    {
+        SetEndPosition(initPosition);
     }
 
     public void SetEndPosition(Vector2 destination)
@@ -64,11 +80,18 @@ public class AlienC : MonoBehaviour
         StartCoroutine(AfterAnimation(2f, func));
     }
 
+
+    public void GetRevenge(CallbackFunct func)
+    {
+        animator.SetTrigger("alienwins");
+        func = func;
+        StartCoroutine(AfterAnimation(1f, func));
+    }
     public void GetConfused()
     {
         animator.SetTrigger("throwerror");
-        isForward = false; //Return to the launchpad
-        AfterAnimation(2f, delegate { ExecuteEvents.ExecuteHierarchy<NetworkWindows>(this.gameObject, null, (x, y) => x.AlienGo(isForward)); });
+        _isForward = false; //Return to the launchpad
+        StartCoroutine(AfterAnimation(1f, delegate { ExecuteEvents.ExecuteHierarchy<NetworkWindows>(this.gameObject, null, (x, y) => x.AlienGo(_isForward)); }));
     }
 
     void Update()
@@ -83,7 +106,7 @@ public class AlienC : MonoBehaviour
         {
             startMoving = false;
             animator.SetTrigger("stopwalk");
-            ExecuteEvents.ExecuteHierarchy<NetworkWindows>(this.gameObject, null, (x, y) => x.AlienGo(isForward));
+            ExecuteEvents.ExecuteHierarchy<NetworkWindows>(this.gameObject, null, (x, y) => x.AlienGo(_isForward));
         }
 
     }

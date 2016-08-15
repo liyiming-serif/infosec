@@ -19,7 +19,7 @@ public class AlienGoForth : AlienGoScript {
             else // "COM"
             {
                 d.GetComponent<Image>().color = Color.green;
-                serversC.LightupDomainName(d.dName);
+                serversC.LightupDomainName(d.dName, Color.green);
                 serversC.ActivatePath(d.dName, true);
                 alienC.SetEndPosition(serversC.GetLandingPos(d.dName));
                 step += 1;
@@ -32,10 +32,10 @@ public class AlienGoForth : AlienGoScript {
             {
                 //alienC.GetConfused();
             }
-            else if(d.dName == "C1TI") // "CITI"
+            else if(d.dName == "CITI") // "CITI"
             {
                 d.GetComponent<Image>().color = Color.green;
-                serversC.LightupDomainName(d.dName);
+                serversC.LightupDomainName(d.dName, Color.green);
                 serversC.ActivatePath(d.dName, true);
                 alienC.SetEndPosition(serversC.GetLandingPos(d.dName));
                 step += 1;
@@ -45,7 +45,7 @@ public class AlienGoForth : AlienGoScript {
         {
             d = slots[step].holding;
             serversC.ActivatePath(d.dName, false);
-            alienC.GetExploded(delegate { });
+            alienC.GetRevenge(delegate { Feedback.instance.popUp(false, "Challenge4"); });
         }
     }
 }

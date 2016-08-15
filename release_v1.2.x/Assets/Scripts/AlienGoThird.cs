@@ -17,7 +17,7 @@ public class AlienGoThird : AlienGoScript
                     d = slots[step + 1].holding;
                     if (d.dName == "COM")
                     {
-                        Animate(alienC, serversC);
+                        Animate(alienC, serversC, true);
                     }
                     else
                     {
@@ -29,7 +29,7 @@ public class AlienGoThird : AlienGoScript
                     d = slots[step + 1].holding;
                     if (d.dName == "CITI" || d.dName == "BANK")
                     {
-                        Animate(alienC, serversC);
+                        Animate(alienC, serversC, true);
                     }
                     else
                     {
@@ -58,18 +58,20 @@ public class AlienGoThird : AlienGoScript
         }
         else
         {
-            switch (step)
+            if (step > 0)
             {
-                case 1:
-                    Debug.Log("hello");
-                    break;
-                case 0:
-                    break;
-                case -1:
-                    break;
-                default:
-                    Debug.Log("Shouldn't reach here.@AlienGoThird");
-                    break;
+                d = slots[step - 1].holding;
+                Animate(alienC, serversC, false);
+            }
+            else if(step == 0)
+            {
+                Animate(alienC, serversC, false);
+            }
+            else
+            {
+                //Reached the launchpad.
+                alienC.isForward = true;
+                slots.Reverse(); //Enable sync.
             }
         }
 

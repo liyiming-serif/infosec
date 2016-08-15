@@ -32,14 +32,23 @@ public class NetworkWindows : GUI, IEventSystemHandler
         alienGo = GetComponent<AlienGoScript>();
     }
 
-    public void ResetAlienGo()
-    {
-        alienGo.Reset(slots);
-    }
-
     public void AlienGo(bool isForward)
     {
-        alienGo.Run(alienC, serversC, slots, isForward);
+        if (isForward)
+        {
+            alienGo.Run(alienC, serversC, slots, true);
+        }
+        else
+        {
+            foreach (Slot s in slots)
+            {
+                Domain d = s.holding;
+                serversC.LightupDomainName(d.dName, Color.white);
+                d.GetComponent<Image>().color = Color.white;
+            }
+            alienGo.Run(alienC, serversC, slots, false);
+        }
+
     }
 
     public void updateNetworkURL(Domain d, int id)

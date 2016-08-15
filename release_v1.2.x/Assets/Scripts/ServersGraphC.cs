@@ -15,10 +15,9 @@ public class ServersGraphC : MonoBehaviour {
 
     Dictionary<string, int> mapID;
 
-    public void LightupDomainName(string key)
+    public void LightupDomainName(string key, Color c)
     {
-        //The dname id starts from 1, 0 is reserved for the launch pad.
-        dnames[mapID[key]].color = Color.green;
+        dnames[mapID[key]].color = c;
     }
 
     public void ActivatePath(string key, bool isActive)
