@@ -77,6 +77,7 @@ public class AIController : MonoBehaviour
     public void GetExploded(CallbackFunct func)
     {
         animator.SetTrigger("triggervirus");
+        func = delegate { Destroy(animator.gameObject); } + func;
         StartCoroutine(AfterAnimation(2f, func));
     }
 

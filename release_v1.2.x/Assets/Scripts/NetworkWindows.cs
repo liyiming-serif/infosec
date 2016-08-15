@@ -60,7 +60,6 @@ public class NetworkWindows : GUI, IEventSystemHandler
 
     public void NextAI(AIController.CallbackFunct func)
     {
-        Destroy(_activeAI.gameObject);
         _activeAI = null;
         if(AIs.Count > 0)
         {

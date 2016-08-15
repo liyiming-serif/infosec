@@ -4,55 +4,150 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
-public class AlienGoForth : AIGoScript {
+public class AIGoChallengeFour : AIGoScript {
 
     public override void Hint()
     {
         TaskManager.instance.LookUpAppSpawn("Ping!").Dance();
     }
 
-    //TODO Change the Run method
-    public override void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots, bool isForward)
+    public override void Run(CivilianC civilian, ServersGraphC serversC, List<Slot> slots, bool isForward)
     {
-        Domain d;
-        if (step == -1)
+        if (isForward)
         {
-            slots.Reverse();
-            d = slots[step + 1].holding;
-            if (d.dName == "C1TI")
+            switch (step)
             {
-                //alienC.GetConfused();
-            }
-            else // "COM"
-            {
-                d.GetComponent<Image>().color = Color.green;
-                serversC.LightupDomainName(d.dName, Color.green);
-                serversC.ActivatePath(d.dName, true);
-                alienC.SetEndPosition(serversC.GetLandingPos(d.dName));
-                step += 1;
+                case -1:
+                    slots.Reverse();//Read from the end.
+                    d = slots[step + 1].holding;
+                    if (d.dName == "COM")
+                    {
+                        Animate(civilian, serversC, true);
+                    }
+                    else
+                    {
+                        civilian.GetConfused();
+                    }
+                    break;
+                case 0:
+                    serversC.ActivatePath(d.dName, false);
+                    d = slots[step + 1].holding;
+                    if (d.dName == "CITI" || d.dName == "BANK" || d.dName == "C1TI")
+                    {
+                        Animate(civilian, serversC, true);
+                    }
+                    else
+                    {
+                        civilian.GetConfused();
+                    }
+                    break;
+                case 1:
+                    serversC.ActivatePath(d.dName, false);
+                    if (d.dName == "CITI")
+                    {
+                        civilian.BecomeSafe(delegate { GetComponent<NetworkWindows>().NextAI(delegate { }); });
+                    }
+                    else if (d.dName == "C1TI")
+                    {
+                        civilian.GetExploded(delegate { Feedback.instance.popUp(false, "Challenge4"); });
+                    }
+                    else
+                    {
+                        civilian.GetConfused();
+                    }
+                    break;
+                default:
+                    Debug.Log("Shouldn't reach here.@AIGoChallengeFour");
+                    break;
             }
         }
-        else if (step == 0)
+        else
         {
-            d = slots[step + 1].holding;
-            if (d.dName == "COM")
+            if (step > 0)
             {
-                //alienC.GetConfused();
+                d = slots[step - 1].holding;
+                Animate(civilian, serversC, false);
             }
-            else if(d.dName == "CITI") // "CITI"
+            else if (step == 0)
             {
-                d.GetComponent<Image>().color = Color.green;
-                serversC.LightupDomainName(d.dName, Color.green);
-                serversC.ActivatePath(d.dName, true);
-                alienC.SetEndPosition(serversC.GetLandingPos(d.dName));
-                step += 1;
+                Animate(civilian, serversC, false);
+            }
+            else
+            {
+                //Reached the launchpad.
+                civilian.isForward = true;
+                slots.Reverse(); //Enable sync.
             }
         }
-        else if (step == 1)
+    }
+    
+    public override void Run(AlienC alien, ServersGraphC serversC, List<Slot> slots, bool isForward)
+    {
+        if (isForward)
         {
-            d = slots[step].holding;
-            serversC.ActivatePath(d.dName, false);
-            alienC.GetExploded(delegate { GetComponent<NetworkWindows>().NextAI(delegate { Feedback.instance.popUp(true, "Challenge4"); }); });
+            switch (step)
+            {
+                case -1:
+                    slots.Reverse();//Read from the end.
+                    d = slots[step + 1].holding;
+                    if (d.dName == "COM")
+                    {
+                        Animate(alien, serversC, true);
+                    }
+                    else
+                    {
+                        alien.GetConfused();
+                    }
+                    break;
+                case 0:
+                    serversC.ActivatePath(d.dName, false);
+                    d = slots[step + 1].holding;
+                    if (d.dName == "CITI" || d.dName == "BANK" || d.dName == "C1TI")
+                    {
+                        Animate(alien, serversC, true);
+                    }
+                    else
+                    {
+                        alien.GetConfused();
+                    }
+                    break;
+                case 1:
+                    serversC.ActivatePath(d.dName, false);
+                    if (d.dName == "CITI")
+                    {
+                        alien.GetRevenge(delegate { Feedback.instance.popUp(false, "Challenge4"); });
+                    }
+                    else if (d.dName == "C1TI")
+                    {
+                        alien.GetExploded(delegate { Feedback.instance.popUp(true, "Challenge4"); });
+                    }
+                    else
+                    {
+                        alien.GetConfused();
+                    }
+                    break;
+                default:
+                    Debug.Log("Shouldn't reach here.@AIGoChallengeFour");
+                    break;
+            }
+        }
+        else
+        {
+            if (step > 0)
+            {
+                d = slots[step - 1].holding;
+                Animate(alien, serversC, false);
+            }
+            else if (step == 0)
+            {
+                Animate(alien, serversC, false);
+            }
+            else
+            {
+                //Reached the launchpad.
+                alien.isForward = true;
+                slots.Reverse(); //Enable sync.
+            }
         }
     }
 }
