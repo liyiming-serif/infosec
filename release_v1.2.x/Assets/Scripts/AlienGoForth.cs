@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
-public class AlienGoForth : AlienGoScript {
+public class AlienGoForth : AIGoScript {
 
     public override void Hint()
     {

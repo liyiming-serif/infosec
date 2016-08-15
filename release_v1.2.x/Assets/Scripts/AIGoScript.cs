@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
-public class AlienGoScript : MonoBehaviour {
+public class AIGoScript : MonoBehaviour {
 
     protected int step;
     protected Domain d;
@@ -18,14 +18,31 @@ public class AlienGoScript : MonoBehaviour {
         Debug.Log("Control the Alien phase.");
     }
 
-    public void Animate(AlienC alienC, ServersGraphC serversC, bool isForward)
+    public virtual void Run(CivilianC alienC, ServersGraphC serversC, List<Slot> slots, bool isForward)
+    {
+        Debug.Log("Control the civilian phase.");
+    }
+
+    public void Run(AIController aiC, ServersGraphC serversC, List<Slot> slots, bool isForward)
+    {
+        if (aiC is AlienC)
+        {
+            Run((aiC as AlienC), serversC, slots, true);
+        }
+        else
+        {
+            Run((aiC as CivilianC), serversC, slots, true);
+        }
+    }
+
+    public void Animate(AIController ai, ServersGraphC serversC, bool isForward)
     {
         serversC.ActivatePath(d.dName, true);
         if (isForward)
         {
             serversC.LightupDomainName(d.dName, Color.green);
             d.GetComponent<Image>().color = Color.green;
-            alienC.SetEndPosition(serversC.GetLandingPos(d.dName));
+            ai.SetEndPosition(serversC.GetLandingPos(d.dName));
             step += 1;
         }
         else
@@ -33,11 +50,11 @@ public class AlienGoScript : MonoBehaviour {
             if(step == 0)
             {
                 //ToLaunchPad
-                alienC.ReturnToInitPosition();
+                ai.ReturnToInitPosition();
             }
             else
             {
-                alienC.SetEndPosition(serversC.GetLandingPos(d.dName));
+                ai.SetEndPosition(serversC.GetLandingPos(d.dName));
             }
             step -= 1;
         }

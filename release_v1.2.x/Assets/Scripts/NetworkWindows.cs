@@ -11,17 +11,17 @@ public class NetworkWindows : GUI, IEventSystemHandler
     [SerializeField]
     GameObject urlString;
 
-    AlienGoScript alienGo; 
-    Queue<AlienC> aliensC;
+    AIGoScript AIGo; 
+    Queue<AIController> AIs;
+    AIController _activeAI;
     ServersGraphC serversC;
     List<Slot> slots;
-    AlienC _activeAlienC;
-    
-    public AlienC activeAlienC
+
+    public AIController activeAI
     {
         get
         {
-            return _activeAlienC;
+            return _activeAI;
         }
     }
 
@@ -30,7 +30,7 @@ public class NetworkWindows : GUI, IEventSystemHandler
         base.Awake();
         Register(GetHashCode());
         slots = new List<Slot>();
-        aliensC = new Queue<AlienC>();
+        AIs = new Queue<AIController>();
         slots.AddRange(urlString.GetComponentsInChildren<Slot>());
         instance = this;
     }
@@ -38,12 +38,12 @@ public class NetworkWindows : GUI, IEventSystemHandler
     void Start()
     {
         serversC = GetComponentInChildren<ServersGraphC>();
-        foreach(AlienC ac in GetComponentsInChildren<AlienC>())
+        foreach(AIController AI in GetComponentsInChildren<AIController>())
         {
-            aliensC.Enqueue(ac);
+            AIs.Enqueue(AI);
         }
-        alienGo = GetComponent<AlienGoScript>();
-        _activeAlienC = aliensC.Dequeue();
+        AIGo = GetComponent<AIGoScript>();
+        _activeAI = AIs.Dequeue();
     }
 
     public void Reset()
@@ -55,17 +55,18 @@ public class NetworkWindows : GUI, IEventSystemHandler
             serversC.LightupDomainName(d.dName, Color.white);
             Destroy(d.gameObject);
         }
-        alienGo.Reset();
+        AIGo.Reset();
     }
-    public void NextAI(AlienC.CallbackFunct func)
+
+    public void NextAI(AIController.CallbackFunct func)
     {
-        Destroy(_activeAlienC.gameObject);
-        _activeAlienC = null;
-        if(aliensC.Count > 0)
+        Destroy(_activeAI.gameObject);
+        _activeAI = null;
+        if(AIs.Count > 0)
         {
-            _activeAlienC = aliensC.Dequeue();
+            _activeAI = AIs.Dequeue();
             Reset();
-            alienGo.Hint();
+            AIGo.Hint();
         }
         else
         {
@@ -75,21 +76,17 @@ public class NetworkWindows : GUI, IEventSystemHandler
 
     public void AlienGo(bool isForward)
     {
-        if (isForward)
+        if(!isForward)
         {
-            alienGo.Run(_activeAlienC, serversC, slots, true);
-        }
-        else
-        {
+            //Reset ServersControlGraph since the AI returns to launchpad
             foreach (Slot s in slots)
             {
                 Domain d = s.holding;
                 serversC.LightupDomainName(d.dName, Color.white);
                 d.GetComponent<Image>().color = Color.white;
             }
-            alienGo.Run(_activeAlienC, serversC, slots, false);
         }
-
+        AIGo.Run(_activeAI, serversC, slots, isForward);
     }
 
     public void updateNetworkURL(Domain d, int id)
