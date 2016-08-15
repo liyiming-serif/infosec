@@ -1,13 +1,17 @@
 fileFormatVersion: 2
-guid: baef038678fed8341a6b9a2d659ee33e
-timeCreated: 1471237255
+guid: 7afb837f4b095594bba09e8e6161623b
+timeCreated: 1471289172
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: civilian_safe1_0
-    21300002: civilian_safe1_1
-    21300004: civilian_safe1_2
-    21300006: civilian_safe1_3
+    21300000: civilian_shrug_0
+    21300002: civilian_shrug_1
+    21300004: civilian_shrug_2
+    21300006: civilian_shrug_3
+    21300008: civilian_shrug_4
+    21300010: civilian_shrug_5
+    21300012: civilian_shrug_6
+    21300014: civilian_shrug_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -45,7 +49,7 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
+  alignment: 7
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 0.5
@@ -57,52 +61,104 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: civilian_safe1_0
+      name: civilian_shrug_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 36
+        width: 30
+        height: 41
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: civilian_safe1_1
+      name: civilian_shrug_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 30
         y: 0
-        width: 32
-        height: 36
+        width: 30
+        height: 41
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: civilian_safe1_2
+      name: civilian_shrug_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 60
         y: 0
-        width: 32
-        height: 36
+        width: 30
+        height: 41
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: civilian_safe1_3
+      name: civilian_shrug_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 90
         y: 0
-        width: 32
-        height: 36
+        width: 30
+        height: 41
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: civilian_shrug_4
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 30
+        height: 41
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: civilian_shrug_5
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 30
+        height: 41
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: civilian_shrug_6
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 30
+        height: 41
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: civilian_shrug_7
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 0
+        width: 30
+        height: 41
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
