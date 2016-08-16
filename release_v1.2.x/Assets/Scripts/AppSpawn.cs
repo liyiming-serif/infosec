@@ -9,13 +9,7 @@ public class AppSpawn : MonoBehaviour
     Vector2 sizeDelta;
     [SerializeField]
     Vector2 localPos;
-    [SerializeField]
-    float delay = 1f; //this is how long in seconds to allow for a double click
 
-    bool one_click;
-    bool timer_running;
-    float timer_for_double_click;
-    
     public string appName
     {
         get
@@ -25,13 +19,19 @@ public class AppSpawn : MonoBehaviour
     }
 
     Animator animator;
-    int id;
+    int _id;
 
-    public int GetID()
+    public int id
     {
-        return id;
+        get
+        {
+            return _id;
+        }
+        set
+        {
+            _id = value;
+        }
     }
-
     public void Dance()
     {
         animator.SetTrigger("dance");
@@ -44,63 +44,40 @@ public class AppSpawn : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (!one_click) // first click no previous clicks
+        Windows existed = TaskManager.instance.LookUpWindows(id);
+        if (existed)
         {
-            one_click = true;
-
-            timer_for_double_click = Time.time; // save the current time
-                                                // do one click things;
+            TaskManager.instance.SetActiveTask(id);
         }
         else
         {
-            one_click = false; // found a double click, now reset
-       
-            Windows existed = TaskManager.instance.LookUpWindows(id);
-            if (existed)
-            {
-                TaskManager.instance.SetActiveTask(id);
-            }
-            else
-            {
-                //Start a new App if it's not running
-                animator.SetTrigger("freeze");
-                Windows newApp = Instantiate(appPrefab);
-                newApp.GetComponent<RectTransform>().sizeDelta = sizeDelta;
-                newApp.transform.localPosition = localPos;     
-                try
-                {
-                    newApp.transform.SetParent(GetComponentInParent<Canvas>().transform);
-                }
-                catch
-                {
-                    Debug.Log("Canvas is not found.");
-                }
-                id = newApp.GetHashCode();
-                newApp.Register(id);
-                TaskManager.instance.AddNewTask(newApp, appName);
-            }
-
+            //Start a new App if it's not running
+            Freeze();
+            Launch();
         }
+    }
+
+    public void Launch()
+    {
+        Windows newApp = Instantiate(appPrefab);
+        newApp.GetComponent<RectTransform>().sizeDelta = sizeDelta;
+        newApp.transform.localPosition = localPos;
+        try
+        {
+            newApp.transform.SetParent(GetComponentInParent<Canvas>().transform);
+        }
+        catch
+        {
+            Debug.Log("Canvas is not found.");
+        }
+        _id = newApp.GetHashCode();
+        newApp.Register(_id);
+        TaskManager.instance.AddNewTask(newApp, appName);
     }
 
     void Awake()
     {
         animator = GetComponent<Animator>();
-        animator.SetTrigger("dance");
-        id = 0;
-        timer_for_double_click = Time.time;
-        one_click = false;
-    }
-
-    void Update()
-    {
-        if (one_click)
-        {
-            // if the time now is delay seconds more than when the first click started. 
-            if ((Time.time - timer_for_double_click) > delay)
-            {
-                one_click = false; // basically if thats true its been too long and we want to reset so the next click is simply a single click and not a double click.
-            }
-        }
+        _id = 0;
     }
 }

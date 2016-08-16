@@ -52,9 +52,9 @@ public class NetworkWindows : GUI, IEventSystemHandler
         foreach(Slot s in slots)
         {
             Domain d = s.holding;
-            serversC.LightupDomainName(d.dName, Color.white);
             Destroy(d.gameObject);
         }
+        serversC.Reset();
         AIGo.Reset();
     }
 
@@ -81,9 +81,9 @@ public class NetworkWindows : GUI, IEventSystemHandler
             foreach (Slot s in slots)
             {
                 Domain d = s.holding;
-                serversC.LightupDomainName(d.dName, Color.white);
                 d.GetComponent<Image>().color = Color.white;
             }
+            serversC.ResetAllDomains();
         }
         AIGo.Run(_activeAI, serversC, slots, isForward);
     }

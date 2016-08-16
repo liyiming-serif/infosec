@@ -2,47 +2,74 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class ServersGraphC : MonoBehaviour {
+public class ServersGraphC : MonoBehaviour
+{
 
-    [SerializeField]
-    List<Animator> inpaths;
-    [SerializeField]
-    List<Animator> servers;
-    [SerializeField]
-    List<Image> dnames;
-    [SerializeField]
-    List<string> keys;
+    public Server root;
 
-    Dictionary<string, int> mapID;
+    Server _goingTo;
 
-    public void LightupDomainName(string key, Color c)
+    public Server goingTo
     {
-        dnames[mapID[key]].color = c;
+        get
+        {
+            return _goingTo;
+        }
+        set
+        {
+            _goingTo = value;
+        }
     }
 
-    public void ActivatePath(string key, bool isActive)
+    Server _nowAt;
+
+    public Server nowAt
     {
-        inpaths[mapID[key]].enabled = isActive;
+        get
+        {
+            return _nowAt;
+        }
+        set
+        {
+            _nowAt = value;
+        }
     }
 
-    public Vector2 GetLandingPos(string key)
+    public Color GetLightedColour()
     {
-        Vector2 result = servers[mapID[key]].transform.position;
-        result.x += 30;
-        result.y -= 30;
-        return result;
+        Color lighted = Color.green;
+        lighted.a = 0.5f;
+        return lighted;
+    }
+
+    public Color GetDefaultColour()
+    {
+        Color original = Color.white;
+        original.a = 0.5f;
+        return original;
+    }
+
+    public void SetNewLocation(Server newServer)
+    {
+        goingTo = newServer;
+    }
+
+    public void ResetAllDomains()
+    {
+        root.SetAllDomainsColour(GetDefaultColour());
+    }
+
+    
+    public void Reset()
+    {
+        goingTo = root;
+        nowAt = null;
+        ResetAllDomains();
     }
 
     void Start()
     {
-        foreach(Animator a in inpaths)
-        {
-            a.enabled = false;
-        }
-        mapID = new Dictionary<string, int>();
-        for(int i = 0; i < keys.Count; i++)
-        {
-            mapID.Add(keys[i], i);
-        }
+        Reset();
     }
+
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour, IDropHandler
+public class DragSlot : MonoBehaviour, IDropHandler
 {
 
     Domain _holding;
@@ -34,12 +34,10 @@ public class Slot : MonoBehaviour, IDropHandler
     
     void IDropHandler.OnDrop(PointerEventData eventData)
     {
-        if(holding)
+        if(!holding)
         {
-            Destroy(holding.gameObject);
+            holding = DragHandler.domainBeingDragged;
         }
-        holding = DragHandler.domainBeingDragged;
-        ExecuteEvents.ExecuteHierarchy<URLGenerator>(this.gameObject, null, (x, y) => x.NoticeNetworkURLBoard(DragHandler.domainBeingDragged, _id));
     }
     
     void Awake()

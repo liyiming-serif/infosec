@@ -1,8 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.EventSystems;
-
-public class CivilianC : AIController
+﻿public class CivilianC : AIController
 {
     public void BecomeSafe(CallbackFunct func)
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class AIGoChallengeTwo : AIGoScript {
 
-    public override void Run(CivilianC civilian, ServersGraphC serversC, List<Slot> slots, bool isForward)
+    public override void Run(AlienC alien, ServersGraphC serversC, List<Slot> slots, bool isForward)
     {
         if (isForward)
         {
@@ -14,29 +14,33 @@ public class AIGoChallengeTwo : AIGoScript {
                 case -1:
                     slots.Reverse();//Read from the end.
                     d = slots[step + 1].holding;
-                    if (d.dName == "COM")
+                    if (d.myName == "COM")
                     {
-                        Animate(civilian, serversC, true);
+                        Animate(alien, serversC, true);
                     }
                     else
                     {
-                        civilian.GetConfused();
+                        alien.GetConfused();
                     }
                     break;
                 case 0:
-                    serversC.ActivatePath(d.dName, false);
+                    serversC.nowAt = serversC.goingTo;
+                    serversC.nowAt.BucklePath(false);
                     d = slots[step + 1].holding;
-                    if (d.dName == "CITI")
+                    if (d.myName == "ONLINE")
                     {
-                        Animate(civilian, serversC, true);
+                        serversC.goingTo = serversC.nowAt.ReturnChild(d.myName);
+                        Animate(alien, serversC, true);
                     }
                     else
                     {
-                        civilian.GetConfused();
+                        alien.GetConfused();
                     }
                     break;
                 case 1:
-                    civilian.BecomeSafe(delegate { Feedback.instance.popUp(true, "Challenge3"); });
+                    serversC.nowAt = serversC.goingTo;
+                    serversC.nowAt.BucklePath(false);
+                    alien.GetExploded(delegate { Feedback.instance.popUp(true, "Challenge3"); });
                     break;
                 default:
                     Debug.Log("Shouldn't reach here.@AIGoChallengeTwo");
@@ -48,17 +52,23 @@ public class AIGoChallengeTwo : AIGoScript {
             if (step > 0)
             {
                 d = slots[step - 1].holding;
-                Animate(civilian, serversC, false);
+                serversC.goingTo = serversC.nowAt.ReturnParent();
+                Animate(alien, serversC, false);
             }
             else if (step == 0)
             {
-                Animate(civilian, serversC, false);
+                serversC.nowAt = serversC.goingTo;
+                serversC.goingTo = serversC.nowAt.ReturnParent();
+                Animate(alien, serversC, false);
             }
             else
             {
                 //Reached the launchpad.
-                civilian.isForward = true;
+                serversC.nowAt = serversC.goingTo;
+                serversC.goingTo = serversC.root;
+                alien.isForward = true;
                 slots.Reverse(); //Enable sync.
+                Hint();
             }
         }
     }

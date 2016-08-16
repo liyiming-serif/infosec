@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class Domain : MonoBehaviour {
 
-    public string dName
+    public string myName
     {
         get
         {
@@ -15,4 +15,11 @@ public class Domain : MonoBehaviour {
         }
     }
 
+    public Image myImage
+    {
+        get
+        {
+            return GetComponent<Image>();
+        }
+    }
 }

@@ -9,5 +9,6 @@ public class TutorialOne : MonoBehaviour {
         {
             NetworkWindows.instance.SetSelfVisible(false);
         }
+        TaskManager.instance.LookUpAppSpawn("Ping!").Dance();
 	}
 }

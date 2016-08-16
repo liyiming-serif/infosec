@@ -78,7 +78,7 @@ public class AIController : MonoBehaviour
     {
         animator.SetTrigger("triggervirus");
         func = delegate { Destroy(animator.gameObject); } + func;
-        StartCoroutine(AfterAnimation(2f, func));
+        StartCoroutine(AfterAnimation(1.6f, func));
     }
 
     public void GetConfused()

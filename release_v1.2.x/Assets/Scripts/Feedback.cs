@@ -17,12 +17,12 @@ public class Feedback : MonoBehaviour
     {
         if (isSucceded)
         {
-            response.GetComponentInChildren<Text>().text = "Next";
-            feedback.text = "More Customers";
+            response.GetComponentInChildren<Text>().text = "Challenge!";
+            feedback.text = "Alien Exterminated";
         }
         else
         {
-            response.GetComponentInChildren<Text>().text = "Try Again";
+            response.GetComponentInChildren<Text>().text = "Try Again!";
             feedback.text = "Game Over";
         }
         gameObject.SetActive(true);

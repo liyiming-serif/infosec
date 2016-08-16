@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using System.Collections.Generic;
 
 public class TaskManager : MonoBehaviour
@@ -71,7 +70,7 @@ public class TaskManager : MonoBehaviour
         AppSpawn foundSpawn = LookUpAppSpawn(name);
         if (foundSpawn)
         {
-            result = LookUpWindows(foundSpawn.GetID());
+            result = LookUpWindows(foundSpawn.id);
         }
         return result;
     }

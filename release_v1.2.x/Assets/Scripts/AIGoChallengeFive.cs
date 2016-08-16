@@ -2,10 +2,11 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
-public class AIGoChallengeThree : AIGoScript
+public class AIGoChallengeFive : AIGoScript
 {
-    // Three choices: COM, CITI and BANK.
+
     public override void Run(AlienC alien, ServersGraphC serversC, List<Slot> slots, bool isForward)
     {
         if (isForward)
@@ -28,7 +29,7 @@ public class AIGoChallengeThree : AIGoScript
                     serversC.nowAt = serversC.goingTo;
                     serversC.nowAt.BucklePath(false);
                     d = slots[step + 1].holding;
-                    if (d.myName == "CITI" || d.myName == "C1TI")
+                    if (d.myName == "CITI" || d.myName == "ONLINE")
                     {
                         serversC.goingTo = serversC.nowAt.ReturnChild(d.myName);
                         Animate(alien, serversC, true);
@@ -41,21 +42,35 @@ public class AIGoChallengeThree : AIGoScript
                 case 1:
                     serversC.nowAt = serversC.goingTo;
                     serversC.nowAt.BucklePath(false);
-                    if (d.myName == "CITI")
+                    d = slots[step + 1].holding;
+                    if (d.myName == "CITI" || d.myName == "ONLINE")
                     {
-                        alien.GetRevenge(delegate { Feedback.instance.popUp(false, "Challenge3"); });
-                    }
-                    else if (d.myName == "C1TI")
-                    {
-                        alien.GetExploded(delegate { Feedback.instance.popUp(true, "Challenge5"); });
+                        serversC.goingTo = serversC.nowAt.ReturnChild(d.myName);
+                        Animate(alien, serversC, true);
                     }
                     else
                     {
-                        Debug.Log("Shouldn't reach here.@AIGoChallengeThree");
+                        alien.GetConfused();
+                    }
+                    break;
+                case 2:
+                    serversC.nowAt = serversC.goingTo;
+                    serversC.nowAt.BucklePath(false);
+                    if (d.myName == "CITI")
+                    {
+                        alien.GetExploded(delegate { GetComponent<NetworkWindows>().NextAI(delegate { Feedback.instance.popUp(true, "Challenge5"); }); });
+                    }
+                    else if (d.myName == "ONLINE")
+                    {
+                        alien.GetRevenge(delegate { Feedback.instance.popUp(false, "Challenge5"); });
+                    }
+                    else
+                    {
+                        alien.GetConfused();
                     }
                     break;
                 default:
-                    Debug.Log("Shouldn't reach here.@AIGoChallengeThree");
+                    Debug.Log("Shouldn't reach here.@AIGoChallengeFour");
                     break;
             }
         }
@@ -83,6 +98,5 @@ public class AIGoChallengeThree : AIGoScript
                 Hint();
             }
         }
-
     }
 }

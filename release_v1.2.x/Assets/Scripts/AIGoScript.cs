@@ -10,7 +10,7 @@ public class AIGoScript : MonoBehaviour {
 
     public virtual void Hint()
     {
-        Debug.Log("Shake the app spawn icon.");
+        TaskManager.instance.LookUpAppSpawn("Ping!").Dance();
     }
 
     public virtual void Run(AlienC alienC, ServersGraphC serversC, List<Slot> slots, bool isForward)
@@ -37,12 +37,12 @@ public class AIGoScript : MonoBehaviour {
 
     public void Animate(AIController ai, ServersGraphC serversC, bool isForward)
     {
-        serversC.ActivatePath(d.dName, true);
         if (isForward)
         {
-            serversC.LightupDomainName(d.dName, Color.green);
+            serversC.goingTo.BucklePath(true);
+            serversC.goingTo.SetDomainColour(serversC.GetLightedColour());
             d.GetComponent<Image>().color = Color.green;
-            ai.SetEndPosition(serversC.GetLandingPos(d.dName));
+            ai.SetEndPosition(serversC.goingTo.GetLandingPos());
             step += 1;
         }
         else
@@ -54,11 +54,11 @@ public class AIGoScript : MonoBehaviour {
             }
             else
             {
-                ai.SetEndPosition(serversC.GetLandingPos(d.dName));
+                serversC.goingTo.BucklePath(true);
+                ai.SetEndPosition(serversC.goingTo.GetLandingPos());
             }
             step -= 1;
         }
-        
     }
 
     public void Reset()
@@ -67,8 +67,13 @@ public class AIGoScript : MonoBehaviour {
         d = null;
     }
 
-    void Awake()
+    protected void Awake()
     {
         Reset();
+    }
+
+    protected void Start()
+    {
+        TaskManager.instance.LookUpAppSpawn("Ping!").Launch();
     }
 }

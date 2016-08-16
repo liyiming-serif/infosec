@@ -4,22 +4,26 @@ using System.Collections.Generic;
 
 public class AIGoChallengeOne : AIGoScript {
 
-    public override void Run(CivilianC civilian, ServersGraphC serversC, List<Slot> slots, bool isForward)
+    public override void Run(AlienC alien, ServersGraphC serversC, List<Slot> slots, bool isForward)
     {
         switch (step)
         {
             case -1:
-                slots[step + 1].holding.GetComponent<Image>().color = Color.green;
-                serversC.LightupDomainName("COM", Color.green);
-                serversC.ActivatePath("COM", true);
-                civilian.SetEndPosition(serversC.GetLandingPos("COM"));
-                step += 1;
+                slots[step + 1].holding.myImage.color = Color.green;
+                d = slots[step + 1].holding;
+                Animate(alien, serversC, true);
                 break;
             case 0:
-                serversC.ActivatePath("COM", false);
-                civilian.BecomeSafe(delegate { Feedback.instance.popUp(true, "Challenge2"); });
+                serversC.nowAt = serversC.goingTo;
+                serversC.nowAt.BucklePath(false);
+                alien.GetExploded(delegate { Feedback.instance.popUp(true, "Challenge2"); });
                 break;
         }
+    }
+
+    new void Start()
+    {
+
     }
 
 }
